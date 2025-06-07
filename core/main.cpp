@@ -1,8 +1,8 @@
 #include <iostream>
 #include <QApplication>
 #include <QPushButton>
-#include "MainWindow.h"
-
+#include <QFont>
+#include "Editor.h"
 #ifdef NDEBUG
 #define QT_NO_DEBUG_OUTPUT
 #endif
@@ -10,7 +10,7 @@
 
 int main(int argc, char** argv) {
   QApplication app(argc, argv);
-  MainWindow window;
+  Editor window;
   window.show();
   return app.exec();
 }

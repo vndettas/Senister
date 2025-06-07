@@ -251,7 +251,7 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/Veditor_autogen/TAC5DW
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/Piece.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.h \
   C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QDebug \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QList \
@@ -394,6 +394,7 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/Veditor_autogen/TAC5DW
   D:/Qt/6.8.2/mingw_64/include/QtGui/QPainter \
   D:/Qt/6.8.2/mingw_64/include/QtGui/QTextLayout \
   D:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/Qpen \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qaction.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qbitmap.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qbrush.h \

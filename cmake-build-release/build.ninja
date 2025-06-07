@@ -65,17 +65,9 @@ build CMakeFiles/Veditor.dir/core/main.cpp.obj: CXX_COMPILER__Veditor_unscanned_
   OBJECT_DIR = CMakeFiles\Veditor.dir
   OBJECT_FILE_DIR = CMakeFiles\Veditor.dir\core
 
-build CMakeFiles/Veditor.dir/core/CodeEditor.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.cpp || cmake_object_order_depends_target_Veditor
+build CMakeFiles/Veditor.dir/core/Editor.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp || cmake_object_order_depends_target_Veditor
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\Veditor.dir\core\CodeEditor.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -isystem C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/include -isystem D:/Qt/6.8.2/mingw_64/include/QtCore -isystem D:/Qt/6.8.2/mingw_64/include -isystem D:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.8.2/mingw_64/include/QtGui -isystem D:/Vulkan/Include -isystem D:/Qt/6.8.2/mingw_64/include/QtWidgets
-  OBJECT_DIR = CMakeFiles\Veditor.dir
-  OBJECT_FILE_DIR = CMakeFiles\Veditor.dir\core
-
-build CMakeFiles/Veditor.dir/core/MainWindow.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/MainWindow.cpp || cmake_object_order_depends_target_Veditor
-  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\Veditor.dir\core\MainWindow.cpp.obj.d
+  DEP_FILE = CMakeFiles\Veditor.dir\core\Editor.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -isystem C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/include -isystem D:/Qt/6.8.2/mingw_64/include/QtCore -isystem D:/Qt/6.8.2/mingw_64/include -isystem D:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.8.2/mingw_64/include/QtGui -isystem D:/Vulkan/Include -isystem D:/Qt/6.8.2/mingw_64/include/QtWidgets
   OBJECT_DIR = CMakeFiles\Veditor.dir
@@ -89,9 +81,17 @@ build CMakeFiles/Veditor.dir/core/PieceOfTable.cpp.obj: CXX_COMPILER__Veditor_un
   OBJECT_DIR = CMakeFiles\Veditor.dir
   OBJECT_FILE_DIR = CMakeFiles\Veditor.dir\core
 
-build CMakeFiles/Veditor.dir/core/Piece.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/Piece.cpp || cmake_object_order_depends_target_Veditor
+build CMakeFiles/Veditor.dir/core/ScrollBar.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp || cmake_object_order_depends_target_Veditor
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\Veditor.dir\core\Piece.cpp.obj.d
+  DEP_FILE = CMakeFiles\Veditor.dir\core\ScrollBar.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/include -isystem D:/Qt/6.8.2/mingw_64/include/QtCore -isystem D:/Qt/6.8.2/mingw_64/include -isystem D:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.8.2/mingw_64/include/QtGui -isystem D:/Vulkan/Include -isystem D:/Qt/6.8.2/mingw_64/include/QtWidgets
+  OBJECT_DIR = CMakeFiles\Veditor.dir
+  OBJECT_FILE_DIR = CMakeFiles\Veditor.dir\core
+
+build CMakeFiles/Veditor.dir/core/LineNumerator.cpp.obj: CXX_COMPILER__Veditor_unscanned_Release C$:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp || cmake_object_order_depends_target_Veditor
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Veditor.dir\core\LineNumerator.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -isystem C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/include -isystem D:/Qt/6.8.2/mingw_64/include/QtCore -isystem D:/Qt/6.8.2/mingw_64/include -isystem D:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.8.2/mingw_64/include/QtGui -isystem D:/Vulkan/Include -isystem D:/Qt/6.8.2/mingw_64/include/QtWidgets
   OBJECT_DIR = CMakeFiles\Veditor.dir
@@ -105,7 +105,7 @@ build CMakeFiles/Veditor.dir/core/Piece.cpp.obj: CXX_COMPILER__Veditor_unscanned
 #############################################
 # Link the executable Veditor.exe
 
-build Veditor.exe: CXX_EXECUTABLE_LINKER__Veditor_Release CMakeFiles/Veditor.dir/Veditor_autogen/mocs_compilation.cpp.obj CMakeFiles/Veditor.dir/core/main.cpp.obj CMakeFiles/Veditor.dir/core/CodeEditor.cpp.obj CMakeFiles/Veditor.dir/core/MainWindow.cpp.obj CMakeFiles/Veditor.dir/core/PieceOfTable.cpp.obj CMakeFiles/Veditor.dir/core/Piece.cpp.obj | D$:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a D$:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a D$:/Qt/6.8.2/mingw_64/lib/libQt6Core.a || Veditor_autogen Veditor_autogen_timestamp_deps
+build Veditor.exe: CXX_EXECUTABLE_LINKER__Veditor_Release CMakeFiles/Veditor.dir/Veditor_autogen/mocs_compilation.cpp.obj CMakeFiles/Veditor.dir/core/main.cpp.obj CMakeFiles/Veditor.dir/core/Editor.cpp.obj CMakeFiles/Veditor.dir/core/PieceOfTable.cpp.obj CMakeFiles/Veditor.dir/core/ScrollBar.cpp.obj CMakeFiles/Veditor.dir/core/LineNumerator.cpp.obj | D$:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a D$:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a D$:/Qt/6.8.2/mingw_64/lib/libQt6Core.a || Veditor_autogen Veditor_autogen_timestamp_deps
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = D:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a  D:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a  D:/Qt/6.8.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Veditor.dir

@@ -293,14 +293,15 @@ Veditor_autogen/timestamp: \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/CMakeFiles/3.27.8/CMakeRCCompiler.cmake \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/Veditor_autogen/moc_predefs.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/MainWindow.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/MainWindow.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/Piece.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/Piece.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/HELPER/CONSTANTS.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h \
 	C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.cpp \
 	C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h \
 	C:/Users/vovab/Documents/GitHub/Veditor/core/main.cpp \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QDebug \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QList \
@@ -439,8 +440,10 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qversiontagging.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qxptype_traits.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
+	D:/Qt/6.8.2/mingw_64/include/QtGui/QBrush \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/QPaintEvent \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/QPainter \
+	D:/Qt/6.8.2/mingw_64/include/QtGui/QPen \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/QTextLayout \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qaction.h \
@@ -489,7 +492,15 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qvectornd.h \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QGridLayout \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollBar \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QWidget \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qabstractslider.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qboxlayout.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qgridlayout.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayout.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qscrollbar.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qsizepolicy.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \

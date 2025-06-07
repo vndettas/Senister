@@ -27,16 +27,26 @@ QString &PieceOfTable::getAddBuffer() const {
 }
 
 
-  QString &getTextRange(size_t start, size_t length)
-  {
-
-  }
-
 QString* PieceOfTable::getReadBuffer() const {
   return const_cast<QString *>(&read_buffer);
 
 }
 
-const std::vector<Piece>* PieceOfTable::getPieceTable() const {
+const std::vector<PieceOfTable::Piece>* PieceOfTable::getPieceTable() const {
   return &piece_table;
+}
+
+PieceOfTable::Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length),
+                                                                              buffer_type(bufferType) {}
+
+QString &PieceOfTable::getTextRange(size_t offset, size_t length) {
+  QString requested_text;
+  requested_text.reserve(length);
+  size_t current_offset=0;
+  for(auto piece: piece_table) {
+    if(current_offset + piece.length < offset)
+      // size_t local_offset =
+      return requested_text;
+  }
+
 }

@@ -268,27 +268,33 @@
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h",
 			"Mu",
-			"TAC5DWH4SE/moc_CodeEditor.cpp",
+			"TAC5DWH4SE/moc_Editor.cpp",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/MainWindow.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/HELPER/CONSTANTS.h",
 			"Mu",
-			"TAC5DWH4SE/moc_MainWindow.cpp",
+			"52ICQB5XFS/moc_CONSTANTS.cpp",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/Piece.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h",
 			"Mu",
-			"TAC5DWH4SE/moc_Piece.cpp",
+			"TAC5DWH4SE/moc_LineNumerator.cpp",
 			null
 		],
 		[
 			"C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h",
 			"Mu",
 			"TAC5DWH4SE/moc_PieceOfTable.cpp",
+			null
+		],
+		[
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h",
+			"Mu",
+			"TAC5DWH4SE/moc_ScrollBar.cpp",
 			null
 		]
 	],
@@ -364,19 +370,19 @@
 	"SETTINGS_FILE" : "C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/CMakeFiles/Veditor_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp", "Mu", null ],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/CodeEditor.cpp",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp",
 			"Mu",
 			null
 		],
-		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/MainWindow.cpp",
-			"Mu",
-			null
-		],
-		[ "C:/Users/vovab/Documents/GitHub/Veditor/core/Piece.cpp", "Mu", null ],
 		[
 			"C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.cpp",
+			"Mu",
+			null
+		],
+		[
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp",
 			"Mu",
 			null
 		],

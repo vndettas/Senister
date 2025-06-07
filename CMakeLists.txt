@@ -9,14 +9,17 @@ set(CMAKE_AUTOMOC ON)
 
 add_executable(Veditor
         core/main.cpp
-        core/CodeEditor.cpp
-        core/CodeEditor.h
-        core/MainWindow.cpp
-        core/MainWindow.h
+        core/Editor.cpp
+        core/Editor.h
         core/PieceOfTable.cpp
         core/PieceOfTable.h
-        core/Piece.cpp
-        core/Piece.h
+        core/ScrollBar.cpp
+        core/ScrollBar.h
+        core/ScrollBar.h
+        core/LineNumerator.cpp
+        core/LineNumerator.h
+        core/HELPER/CONSTANTS.h
+        core/HELPER/CONSTANTS.h
 )
 
 target_compile_definitions(Veditor
@@ -24,4 +27,7 @@ target_compile_definitions(Veditor
         $<$<CONFIG:Release>:QT_NO_DEBUG_OUTPUT>
 )
 
+
 target_link_libraries(Veditor Qt6::Core Qt6::Gui Qt6::Widgets)
+
+

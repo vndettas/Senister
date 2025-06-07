@@ -11,10 +11,29 @@
 #include <fstream>
 #include <QString>
 #include <iostream>
-#include "Piece.h"
+#include "Editor.h"
+#include "HELPER/CONSTANTS.h"
 
+
+enum class buffer {
+    add_buffer, read_only_buffer
+};
 
 class PieceOfTable {
+public:
+       struct Piece {
+        public:
+
+            size_t offset;
+
+            size_t length;
+
+            buffer buffer_type;
+
+            Piece(size_t offset, size_t length, buffer bufferType);
+
+
+        };
 public:
 
     [[nodiscard]] QString* getReadBuffer() const;
@@ -23,10 +42,11 @@ public:
 
     std::string readToBuffer(const std::string& filepath);
 
+    QString &getTextRange(size_t offset, size_t length);
+
     PieceOfTable(const std::string& filepath);
 
     [[nodiscard]] const  std::vector<Piece>* getPieceTable() const;
-
 
 private:
 
