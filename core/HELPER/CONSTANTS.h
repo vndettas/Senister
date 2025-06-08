@@ -14,12 +14,15 @@ namespace Constants{
     // --Window & layout
     inline constexpr size_t WINDOW_WIDTH = 1260;
     inline constexpr size_t WINDOW_HEIGHT = 720;
+    inline constexpr int FPS = 90;
+    inline constexpr int DELAY = 1000/FPS;
 
     // --Numerator plugin
     inline constexpr size_t NUMERATION_WIDTH = 30;
     inline constexpr size_t NUMERATION_X_OFFSET = 125;
     inline constexpr size_t CODE_LINES_X_OFFSET = NUMERATION_X_OFFSET + NUMERATION_WIDTH;
     inline constexpr size_t CODE_LINES_Y_OFFSET = 50;
+    inline constexpr size_t CODE_VIEWPORT_HEIGHT = WINDOW_HEIGHT - CODE_LINES_Y_OFFSET;
 
 
     // --- Brushes ---

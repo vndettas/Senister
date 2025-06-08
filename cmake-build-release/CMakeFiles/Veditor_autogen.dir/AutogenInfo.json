@@ -268,9 +268,9 @@
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/App.h",
 			"Mu",
-			"TAC5DWH4SE/moc_Editor.cpp",
+			"TAC5DWH4SE/moc_App.cpp",
 			null
 		],
 		[
@@ -280,21 +280,27 @@
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.h",
 			"Mu",
-			"TAC5DWH4SE/moc_LineNumerator.cpp",
+			"KWMJOHB5UG/moc_PieceOfTable.cpp",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.h",
 			"Mu",
-			"TAC5DWH4SE/moc_PieceOfTable.cpp",
+			"KWMJOHB5UG/moc_TextEngine.cpp",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.h",
 			"Mu",
-			"TAC5DWH4SE/moc_ScrollBar.cpp",
+			"XVCM6U34GC/moc_CodeUI.cpp",
+			null
+		],
+		[
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.h",
+			"Mu",
+			"XVCM6U34GC/moc_LineNumerator.cpp",
 			null
 		]
 	],
@@ -372,19 +378,24 @@
 	"SETTINGS_FILE" : "C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/CMakeFiles/Veditor_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp", "Mu", null ],
+		[ "C:/Users/vovab/Documents/GitHub/Veditor/core/App.cpp", "Mu", null ],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.cpp",
 			"Mu",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.cpp",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.cpp",
 			"Mu",
 			null
 		],
 		[
-			"C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp",
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.cpp",
+			"Mu",
+			null
+		],
+		[
+			"C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.cpp",
 			"Mu",
 			null
 		],

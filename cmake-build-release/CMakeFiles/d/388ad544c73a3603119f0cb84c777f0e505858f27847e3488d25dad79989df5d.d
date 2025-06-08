@@ -294,15 +294,17 @@ Veditor_autogen/timestamp: \
   CMakeFiles/3.27.8/CMakeRCCompiler.cmake \
   CMakeFiles/3.27.8/CMakeSystem.cmake \
   Veditor_autogen/moc_predefs.h \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/App.cpp \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/App.h \
   C:/Users/vovab/Documents/GitHub/Veditor/core/HELPER/CONSTANTS.h \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.cpp \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp \
-  C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.cpp \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.cpp \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.cpp \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.cpp \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.h \
   C:/Users/vovab/Documents/GitHub/Veditor/core/main.cpp \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QDebug \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QList \
@@ -311,6 +313,7 @@ Veditor_autogen/timestamp: \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QSize \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QSizeF \
   D:/Qt/6.8.2/mingw_64/include/QtCore/QString \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20functional.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20iterator.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20memory.h \
@@ -325,6 +328,7 @@ Veditor_autogen/timestamp: \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qatomic.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qatomic_cxx11.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qbasicatomic.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qbindingstorage.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qbytearray.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -424,6 +428,7 @@ Veditor_autogen/timestamp: \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtdeprecationmarkers.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtextstream.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtmetamacros.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtnoop.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -494,14 +499,11 @@ Veditor_autogen/timestamp: \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/QGridLayout \
-  D:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollBar \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/QWidget \
-  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qabstractslider.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qboxlayout.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qgridlayout.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayout.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qscrollbar.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \

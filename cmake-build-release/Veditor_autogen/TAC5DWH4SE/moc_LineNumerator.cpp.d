@@ -32,6 +32,7 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_defines.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_ptr.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstream.tcc \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/functexcept.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/functional_hash.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hash_bytes.h \
@@ -142,11 +143,13 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/string_conversions.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_traits.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/format \
+  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/fstream \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/functional \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/initializer_list \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iomanip \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \
+  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
@@ -192,8 +195,10 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
@@ -246,7 +251,18 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h \
   C:/Users/vovab/Documents/GitHub/Veditor/core/HELPER/CONSTANTS.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h \
+  C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QDebug \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QList \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QObject \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QRect \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QSize \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QSizeF \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/QString \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20functional.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20iterator.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/q20memory.h \
@@ -277,10 +293,16 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtCore/qcontainerinfo.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qcontainertools_impl.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qcontiguouscache.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qcoreapplication.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qcoreevent.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qdatastream.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qdeadlinetimer.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qdebug.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qelapsedtimer.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qendian.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qeventloop.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qflags.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qfloat16.h \
@@ -292,12 +314,14 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtCore/qglobalstatic.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qhash.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qhashfunctions.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qiodevice.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qiodevicebase.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qiterable.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qiterator.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qlatin1stringview.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qline.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qlist.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qlocale.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qlogging.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qmalloc.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qmap.h \
@@ -307,6 +331,7 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtCore/qmetatype.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qminmax.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qnamespace.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qnativeinterface.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qnumeric.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qobject.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qobject_impl.h \
@@ -361,6 +386,7 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtversionchecks.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtypeinfo.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qtypes.h \
+  D:/Qt/6.8.2/mingw_64/include/QtCore/qurl.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qutf8stringview.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qvariant.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -368,17 +394,29 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtCore/qxptype_traits.h \
   D:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/QBrush \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/QPaintEvent \
   D:/Qt/6.8.2/mingw_64/include/QtGui/QPainter \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/QTextLayout \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/Qpen \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qaction.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qbitmap.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qbrush.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qcolor.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qcursor.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qevent.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qeventpoint.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qfont.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qfontdatabase.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qfontinfo.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qfontmetrics.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qglyphrun.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qguiapplication.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qguiapplication_platform.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qicon.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qimage.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qinputdevice.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qinputmethod.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qkeysequence.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpaintdevice.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpainter.h \
@@ -386,18 +424,36 @@ C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-release/Veditor_autogen/TAC5
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpen.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpixelformat.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpixmap.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qpointingdevice.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qpolygon.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qrawfont.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qregion.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qrgb.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qrgba64.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qscreen.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qscreen_platform.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qtextcursor.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qtextdocument.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qtextformat.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qtextlayout.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qtextoption.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qtgui-config.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qtguiexports.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qtguiglobal.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qtransform.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qvector2d.h \
+  D:/Qt/6.8.2/mingw_64/include/QtGui/qvectornd.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
   D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/QGridLayout \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollBar \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/QWidget \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qabstractslider.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qboxlayout.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qgridlayout.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayout.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+  D:/Qt/6.8.2/mingw_64/include/QtWidgets/qscrollbar.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \

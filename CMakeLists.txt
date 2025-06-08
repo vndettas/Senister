@@ -9,17 +9,19 @@ set(CMAKE_AUTOMOC ON)
 
 add_executable(Veditor
         core/main.cpp
-        core/Editor.cpp
-        core/Editor.h
-        core/PieceOfTable.cpp
-        core/PieceOfTable.h
-        core/ScrollBar.cpp
-        core/ScrollBar.h
-        core/ScrollBar.h
-        core/LineNumerator.cpp
-        core/LineNumerator.h
+        core/UI/CodeUI.cpp
+        core/UI/CodeUI.h
+        core/Text/PieceOfTable.cpp
+        core/Text/PieceOfTable.h
+        core/UI/LineNumerator.cpp
+        core/UI/LineNumerator.h
         core/HELPER/CONSTANTS.h
         core/HELPER/CONSTANTS.h
+        core/Text/TextEngine.cpp
+        core/Text/TextEngine.h
+        core/App.cpp
+        core/App.h
+        core/App.h
 )
 
 target_compile_definitions(Veditor

@@ -1,24 +1,99 @@
 Veditor_autogen/timestamp: \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCCompiler.cmake.in \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCCompilerABI.c \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCInformation.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCXXCompiler.cmake.in \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeCompilerIdDetection.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompileFeatures.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineRCCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeFindBinUtils.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeParseImplicitIncludeInfo.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeParseImplicitLinkInfo.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeParseLibraryArchitecture.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeRCCompiler.cmake.in \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeRCInformation.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeSystem.cmake.in \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestCompilerCommon.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CMakeTestRCCompiler.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckCXXCompilerFlag.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckCXXSourceCompiles.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckIncludeFile.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/CheckLibraryExists.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/ADSP-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Borland-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Clang-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Cray-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GHS-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU-C.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU-FindBinUtils.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/GNU.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/HP-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IAR-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Intel-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/LCC-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/MSVC-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/PGI-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/PathScale-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/SCO-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/TI-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Tasking-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/Watcom-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/XL-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/FindPackageMessage.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/FindThreads.cmake \
@@ -27,6 +102,8 @@ Veditor_autogen/timestamp: \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Internal/CheckCompilerFlag.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Internal/CheckFlagCommonConfig.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Internal/FeatureTesting.cmake \
+	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Platform/Windows-Determine-CXX.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Platform/Windows-GNU-C-ABI.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Platform/Windows-GNU-C.cmake \
 	C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/cmake/win/x64/share/cmake-3.27/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
@@ -293,15 +370,17 @@ Veditor_autogen/timestamp: \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/CMakeFiles/3.27.8/CMakeRCCompiler.cmake \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake \
 	C:/Users/vovab/Documents/GitHub/Veditor/cmake-build-debug/Veditor_autogen/moc_predefs.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/Editor.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/App.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/App.h \
 	C:/Users/vovab/Documents/GitHub/Veditor/core/HELPER/CONSTANTS.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/LineNumerator.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/PieceOfTable.h \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.cpp \
-	C:/Users/vovab/Documents/GitHub/Veditor/core/ScrollBar.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Text/PieceOfTable.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/Text/TextEngine.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/UI/CodeUI.h \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.cpp \
+	C:/Users/vovab/Documents/GitHub/Veditor/core/UI/LineNumerator.h \
 	C:/Users/vovab/Documents/GitHub/Veditor/core/main.cpp \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QDebug \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QList \
@@ -310,6 +389,7 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QSize \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QSizeF \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/QString \
+	D:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/q20functional.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/q20iterator.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/q20memory.h \
@@ -324,6 +404,7 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qatomic.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qatomic_cxx11.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qbasicatomic.h \
+	D:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qbindingstorage.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qbytearray.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -423,6 +504,7 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtdeprecationmarkers.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtextstream.h \
+	D:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtmetamacros.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtnoop.h \
 	D:/Qt/6.8.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -493,14 +575,11 @@ Veditor_autogen/timestamp: \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
 	D:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QGridLayout \
-	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollBar \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/QWidget \
-	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qabstractslider.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qboxlayout.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qgridlayout.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayout.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qscrollbar.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qsizepolicy.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
 	D:/Qt/6.8.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
