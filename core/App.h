@@ -14,13 +14,14 @@ public:
 
     App();
 
+
+private:
+
     std::unique_ptr<CodeUI> window;
 
     std::shared_ptr<TextEngine> text_engine;
 
     std::shared_ptr<PieceOfTable> text_data_structure;
-
-private:
 
 };
 

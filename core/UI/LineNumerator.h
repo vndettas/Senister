@@ -16,17 +16,16 @@ class LineNumerator : public  QWidget {
 Q_OBJECT
 
 public:
-    LineNumerator(QWidget *parent) : QWidget(parent) {
-    }
+    LineNumerator(QWidget *parent) : QWidget(parent) {};
 
-    ~LineNumerator() override {
 
-    }
+    ~LineNumerator() {};
+
 
     void paintEvent(QPaintEvent *event);
+
 private:
 
-    //*CodeUI
 };
 
 

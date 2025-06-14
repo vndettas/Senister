@@ -7,7 +7,8 @@
 
 
 //reads file to read-only buffer
-std::string PieceOfTable::readToBuffer(const std::string &filepath) {
+std::string PieceOfTable::read_To_Buffer(const std::string &filepath)
+{
   std::ifstream istream(filepath);
   if(!istream){
     std::cout << "opening failed";
@@ -17,30 +18,33 @@ std::string PieceOfTable::readToBuffer(const std::string &filepath) {
 }
 
 //initilise read-only buffer and copies it to add buffer
-PieceOfTable::PieceOfTable(const std::string& filepath) : read_buffer(QString::fromStdString((readToBuffer(filepath))))
-, add_buffer((getReadBuffer()->data()))  {
-  piece_table.emplace_back(Piece(0, add_buffer.size(), buffer::add_buffer));
+PieceOfTable::PieceOfTable(const std::string& filepath) : read_buffer(QString::fromStdString((read_To_Buffer(filepath)))), add_buffer((get_Read_Buffer()->data())) {
+  //piece_table.emplace_back(Piece(0, add_buffer.size(), buffer::add_buffer));
 
 }
 
-QString &PieceOfTable::getAddBuffer() const {
+QString &PieceOfTable::get_Add_Buffer() const
+{
   return (QString &) add_buffer;
 }
 
 
-QString* PieceOfTable::getReadBuffer() const {
+QString* PieceOfTable::get_Read_Buffer() const
+{
   return const_cast<QString *>(&read_buffer);
 
 }
 
-const std::vector<PieceOfTable::Piece>* PieceOfTable::getPieceTable() const {
+const std::vector<Piece>* PieceOfTable::get_Piece_Table() const
+{
   return &piece_table;
 }
 
-PieceOfTable::Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length),
+Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length),
                                                                               buffer_type(bufferType) {}
 
-QString &PieceOfTable::getTextRange(size_t offset, size_t length) {
+QString &PieceOfTable::get_Text_Range(size_t offset, size_t length)
+{
   QString requested_text;
   requested_text.reserve(length);
   size_t current_offset=0;
@@ -52,7 +56,8 @@ QString &PieceOfTable::getTextRange(size_t offset, size_t length) {
 
 }
 
-size_t PieceOfTable::getTextLength() {
+size_t PieceOfTable::get_Text_Length()
+{
   size_t length = 0;
  for(const Piece& piece : piece_table){
    length += piece.length;
@@ -60,7 +65,8 @@ size_t PieceOfTable::getTextLength() {
   return length;
 }
 
-QChar PieceOfTable::getCharAt(size_t pos) {
+QChar PieceOfTable::get_Char_At(size_t pos)
+{
  for(const Piece& piece : piece_table){
    if(pos >= piece.offset && pos <= piece.length){
      if(piece.buffer_type == buffer::add_buffer){
@@ -72,7 +78,8 @@ QChar PieceOfTable::getCharAt(size_t pos) {
  }
 }
 
-QString PieceOfTable::getLine(size_t offset, size_t length) {
+QString PieceOfTable::get_Line(size_t offset, size_t length)
+{
   for(const Piece &piece: piece_table) {
     if(offset >= piece.offset && offset <= piece.length) {
       if(piece.buffer_type == buffer::add_buffer) {

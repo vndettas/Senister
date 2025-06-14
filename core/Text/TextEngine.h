@@ -14,21 +14,23 @@ class PieceOfTable;
 class TextEngine {
 public:
 
-    const QString getLine(size_t index);
+    [[nodiscard]] const std::optional<QString> get_Line(size_t index);
+
+
+    void calculate_Indexes();
+
+
+    void set_Data_Structre(const std::shared_ptr<PieceOfTable>& text_data_structure);
+
 
 
 private:
 
     std::shared_ptr<PieceOfTable> text_data_structure;
 
-public:
 
     std::vector<int> line_index_offset;
 
-    void calculateIndexes();
-
-
-    void setTextDataStructure(const std::shared_ptr<PieceOfTable> &textDataStructure);
 
 };
 

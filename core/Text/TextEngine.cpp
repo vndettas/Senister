@@ -4,27 +4,28 @@
 
 #include "TextEngine.h"
 
-const QString TextEngine::getLine(size_t index) {
+[[nodiscard]] const std::optional<QString> TextEngine::get_Line(size_t index) const
+{
   qDebug() << index;
+
   if(index < line_index_offset.size()) {
-    qDebug() << line_index_offset[index + 1] - line_index_offset[index];
-    return text_data_structure->getLine(line_index_offset[index],
-                                        line_index_offset[index + 1] - line_index_offset[index]);
+    return text_data_structure->get_Line(line_index_offset[index], line_index_offset[index + 1] - line_index_offset[index]);
   }
-  return "";
+    return std::nullopt;
 }
 
-void TextEngine::setTextDataStructure(const std::shared_ptr<PieceOfTable> &textDataStructure) {
-  text_data_structure=textDataStructure;
-  calculateIndexes();
+void TextEngine::set_Data_Structre(const std::shared_ptr<PieceOfTable> &text_data_structure)
+{
+  this->text_data_structure = text_data_structure;
+  calculate_Indexes();
 }
 
-void TextEngine::calculateIndexes() {
-  const size_t buffer_size = text_data_structure->getTextLength();
-
+void TextEngine::calculate_Indexes()
+{
+    const size_t buffer_size =this->text_data_structure->get_Text_Length();
 
   for(int i = 0; i < buffer_size; ++i){
-    if(text_data_structure->getCharAt(i) == '\n')
+     if(text_data_structure->get_Char_At(i) == '\n')
       line_index_offset.push_back(i);
   }
 }

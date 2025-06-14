@@ -14,40 +14,39 @@
 
 
 
-enum class buffer {
+enum class buffer{
     add_buffer, read_only_buffer
 };
 
-class PieceOfTable {
-public:
-       struct Piece {
-        public:
-
-            size_t offset;
-
-            size_t length;
-
-            buffer buffer_type;
-
-            Piece(size_t offset, size_t length, buffer bufferType);
-
-
-        };
+struct Piece {
 public:
 
-    QChar getCharAt(size_t pos);
+    size_t offset;
 
-    [[nodiscard]] QString* getReadBuffer() const;
+    size_t length;
 
-    size_t getTextLength();
+    buffer buffer_type;
 
-    QString getLine(size_t offset, size_t length);
+    Piece(size_t offset, size_t length, buffer bufferType);
 
-    QString &getAddBuffer() const;
+};
 
-    std::string readToBuffer(const std::string& filepath);
+    class PieceOfTable {
+public:
 
-    QString &getTextRange(size_t offset, size_t length);
+    [[nodiscard]] QChar get_Char_At(size_t pos);
+
+    [[nodiscard]] QString* get_Read_Buffer() const;
+
+    size_t get_Text_Length();
+
+    QString get_Line(size_t offset, size_t length);
+
+    QString &get_Add_Buffer() const;
+
+    std::string read_To_Buffer(const std::string& filepath);
+
+    QString &get_Text_Range(size_t offset, size_t length);
 
     void insert(size_t offset, const std::string&);
 
@@ -55,7 +54,7 @@ public:
 
     PieceOfTable(const std::string& filepath);
 
-    [[nodiscard]] const  std::vector<Piece>* getPieceTable() const;
+    [[nodiscard]] const  std::vector<Piece>* get_Piece_Table() const;
 
 private:
 

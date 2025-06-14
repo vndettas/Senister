@@ -21,8 +21,9 @@
 #include <QGridLayout>
 #include "LineNumerator.h"
 #include "../HELPER/CONSTANTS.h"
-class TextEngine;
 
+
+class TextEngine;
 
 
 class CodeUI : public QWidget {
@@ -31,33 +32,32 @@ class CodeUI : public QWidget {
 
 public:
 
+    CodeUI(std::shared_ptr<TextEngine>, std::shared_ptr<PieceOfTable>, QWidget *parent =nullptr,
+           const Qt::WindowFlags& f = Qt::Widget);
+
+    ~CodeUI()
+    {
+      delete timer;
+    };
+
+
+private :
+
     float scroll_offset_y = 0;
 
     float scroll_velocity = 0;
 
     QTimer* timer;
 
-protected:
-    void wheelEvent(QWheelEvent *event) override;
-
-public:
-
-
-    CodeUI(std::shared_ptr<TextEngine>, std::shared_ptr<PieceOfTable>, QWidget *parent =nullptr,
-           const Qt::WindowFlags& f = Qt::Widget);
-
-    ~CodeUI();
-
-
-private :
-
-    void onScrollTick();
-
     std::shared_ptr<TextEngine> text_engine;
 
     std::shared_ptr<PieceOfTable> text_data_structure;
 
+    void on_Scroll_Tick();
+
     void paintEvent(QPaintEvent *event) override;
+
+    void wheelEvent(QWheelEvent *event) override;
 
 
 };

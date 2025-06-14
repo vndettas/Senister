@@ -10,15 +10,15 @@
 
 
 
-CodeUI::CodeUI(std::shared_ptr<TextEngine> text_engine, std::shared_ptr<PieceOfTable> text_data_structure,
-               QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), text_engine(text_engine)
-               {
+CodeUI::CodeUI(std::shared_ptr<TextEngine> text_engine, std::shared_ptr<PieceOfTable> text_data_structure, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), text_engine(text_engine)
+{
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this, &CodeUI::onScrollTick);
+  connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
 }
 
-void CodeUI::paintEvent(QPaintEvent* event) {
+void CodeUI::paintEvent(QPaintEvent* event)
+{
   QWidget::paintEvent(event);
 
   QPainter painter(this);
@@ -57,38 +57,39 @@ void CodeUI::paintEvent(QPaintEvent* event) {
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
   while(line_counter <= visible_line_count) {
-    QString line=(text_engine->getLine(line_counter));
-    QTextLayout layout(line, text_font);
-    layout.beginLayout();
-    QTextLine l=layout.createLine();
-    if(l.isValid()) {
-      l.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
-      l.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
+
+    std::optional<QString> line=(text_engine->get_Line(line_counter));
+    if(line) {
+      QTextLayout layout(line.value(), text_font);
+      layout.beginLayout();
+      QTextLine l=layout.createLine();
+      if(l.isValid()) {
+        l.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
+        l.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
+      }
+      ++line_counter;
+      layout.endLayout();
+      y+=line_spacing + 2;
     }
-    ++line_counter;
-    layout.endLayout();
-    y+=line_spacing + 2;
+    else{
+
+    }
   }
 }
 
 
-
-CodeUI::~CodeUI() {
-  delete timer;
-}
-
-
-
-void CodeUI::wheelEvent(QWheelEvent *event) {
+void CodeUI::wheelEvent(QWheelEvent *event)
+{
   QWidget::wheelEvent(event);
-  scroll_velocity -= event->angleDelta().y()/5;
-  if(!timer->isActive()) timer->start(Constants::DELAY);
+  scroll_velocity -= event->angleDelta().y()/11;
+  if(!timer->isActive()) timer->start(1000/120);
   update();
 }
 
-void CodeUI::onScrollTick() {
+void CodeUI::on_Scroll_Tick()
+{
   if((scroll_offset_y + scroll_velocity) > 0) scroll_offset_y += scroll_velocity;
-  scroll_velocity = scroll_velocity * 0.93;
+  scroll_velocity = scroll_velocity * 0.92;
   if (std::abs(scroll_velocity) < 0.01f) {
     timer->stop();
     scroll_velocity = 0.0f;
