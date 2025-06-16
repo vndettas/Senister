@@ -19,7 +19,6 @@
 #include <iostream>
 #include <memory>
 #include <QGridLayout>
-#include "LineNumerator.h"
 #include "../HELPER/CONSTANTS.h"
 
 
@@ -35,10 +34,7 @@ public:
     CodeUI(std::shared_ptr<TextEngine>, std::shared_ptr<PieceOfTable>, QWidget *parent =nullptr,
            const Qt::WindowFlags& f = Qt::Widget);
 
-    ~CodeUI()
-    {
-      delete timer;
-    };
+    ~CodeUI(){};
 
 
 private :
@@ -56,6 +52,10 @@ private :
     void on_Scroll_Tick();
 
     void paintEvent(QPaintEvent *event) override;
+
+    void paint_Background(QPainter *painter);
+
+    void paint_Line_Numeration(QPainter *painter);
 
     void wheelEvent(QWheelEvent *event) override;
 

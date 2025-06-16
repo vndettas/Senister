@@ -11,6 +11,7 @@
 #include <fstream>
 #include <QString>
 #include <iostream>
+#include <filesystem>
 
 
 
@@ -36,15 +37,12 @@ public:
 
     [[nodiscard]] QChar get_Char_At(size_t pos);
 
-    [[nodiscard]] QString* get_Read_Buffer() const;
-
     size_t get_Text_Length();
 
     QString get_Line(size_t offset, size_t length);
 
-    QString &get_Add_Buffer() const;
 
-    std::string read_To_Buffer(const std::string& filepath);
+    std::string read_To_Const_Buffer(const std::filesystem::path filepath);
 
     QString &get_Text_Range(size_t offset, size_t length);
 
@@ -52,9 +50,14 @@ public:
 
     void erase(size_t offset, size_t length);
 
-    PieceOfTable(const std::string& filepath);
+    PieceOfTable(const std::filesystem::path);
 
+    //Getters
     [[nodiscard]] const  std::vector<Piece>* get_Piece_Table() const;
+
+    [[nodiscard]] QString* get_Read_Buffer() const;
+
+    QString &get_Add_Buffer() const;
 
 private:
 

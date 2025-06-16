@@ -13,8 +13,6 @@ add_executable(Veditor
         core/UI/CodeUI.h
         core/Text/PieceOfTable.cpp
         core/Text/PieceOfTable.h
-        core/UI/LineNumerator.cpp
-        core/UI/LineNumerator.h
         core/HELPER/CONSTANTS.h
         core/HELPER/CONSTANTS.h
         core/Text/TextEngine.cpp

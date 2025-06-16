@@ -5,9 +5,7 @@
 #include "PieceOfTable.h"
 #include <QDebug>
 
-
-//reads file to read-only buffer
-std::string PieceOfTable::read_To_Buffer(const std::string &filepath)
+std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
 {
   std::ifstream istream(filepath);
   if(!istream){
@@ -17,10 +15,9 @@ std::string PieceOfTable::read_To_Buffer(const std::string &filepath)
   return str_buffer;
 }
 
-//initilise read-only buffer and copies it to add buffer
-PieceOfTable::PieceOfTable(const std::string& filepath) : read_buffer(QString::fromStdString((read_To_Buffer(filepath)))), add_buffer((get_Read_Buffer()->data())) {
-  //piece_table.emplace_back(Piece(0, add_buffer.size(), buffer::add_buffer));
-
+//reads whole file to const buffer
+PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer((get_Read_Buffer()->data())) {
+  piece_table.emplace_back(Piece(0, add_buffer.size(), buffer::add_buffer));
 }
 
 QString &PieceOfTable::get_Add_Buffer() const
@@ -83,10 +80,8 @@ QString PieceOfTable::get_Line(size_t offset, size_t length)
   for(const Piece &piece: piece_table) {
     if(offset >= piece.offset && offset <= piece.length) {
       if(piece.buffer_type == buffer::add_buffer) {
-        qDebug() << add_buffer.mid(offset, length);
         return add_buffer.mid(offset, length);
       } else if(piece.buffer_type == buffer::read_only_buffer) {
-        qDebug() << add_buffer.mid(offset, length);
         return read_buffer.mid(offset, length);
       }
     }
