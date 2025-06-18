@@ -18,7 +18,7 @@ namespace Constants{
     inline constexpr int DELAY = 1000/FPS;
 
     // --Numerator plugin
-    inline constexpr size_t NUMERATION_WIDTH = 30;
+    inline constexpr size_t NUMERATION_WIDTH = 45;
     inline constexpr size_t NUMERATION_X_OFFSET = 125;
     inline constexpr size_t CODE_LINES_X_OFFSET = NUMERATION_X_OFFSET + NUMERATION_WIDTH;
     inline constexpr size_t CODE_LINES_Y_OFFSET = 50;

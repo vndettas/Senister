@@ -14,7 +14,16 @@ CodeUI::CodeUI(std::shared_ptr<TextEngine> text_engine, std::shared_ptr<PieceOfT
   {
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
+  line_numerator = new LineNumerator(this, text_engine);
+  line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
+}
+
+void CodeUI::resizeEvent(QResizeEvent *event) {
+  QWidget::resizeEvent(event);
+
+  line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
+
 }
 
 void CodeUI::paintEvent(QPaintEvent* event)
@@ -23,45 +32,42 @@ void CodeUI::paintEvent(QPaintEvent* event)
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing, true);
 
-  // Font setup
-  QFont text_font("Lucida Sans Typewriter", 9);
+  QFont text_font("Lucida Sans Typewriter", 10);
   text_font.setStyleStrategy(QFont::PreferAntialias);
   text_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
-  painter.setFont(text_font);
 
-  paint_Background(&painter);
-  qDebug() << "Going back to code";
+  draw_Background(&painter);
 
   // Text rendering
-  const int line_spacing=fontMetrics().lineSpacing();
   int y=Constants::CODE_LINES_Y_OFFSET;
-  int line_height=fontMetrics().height();
   float first_visible_line=scroll_offset_y / line_height;
+  text_engine->setFirstVisibleLine(first_visible_line);
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
-  size_t visible_line_count=(Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
   size_t line_counter=first_visible_line;
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
   while(line_counter <= visible_line_count) {
 
+
     std::optional<QString> line=(text_engine->get_Line(line_counter));
     if(line)
     {
-      QTextLayout layout(line.value(), text_font);
-      layout.beginLayout();
-      QTextLine l=layout.createLine();
-        if(l.isValid())
+      QTextLayout text_layout(line.value(), text_font);
+      text_layout.beginLayout();
+
+      QTextLine text_line=text_layout.createLine();
+        if(text_line.isValid())
         {
-        l.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
-        l.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
+          painter.setFont(text_font);
+          text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
+          text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
       }
       ++line_counter;
-      layout.endLayout();
+      text_layout.endLayout();
       y+=line_spacing + 2;
     }
     else{
       ++line_counter;
-
     }
   }
   painter.end();
@@ -88,13 +94,14 @@ void CodeUI::on_Scroll_Tick()
 
 }
 
-void CodeUI::paint_Background(QPainter *painter)
+void CodeUI::draw_Background(QPainter *painter)
   {
   painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
   painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET,
                    width() - Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_LINES_Y_OFFSET,
                    Constants::CODE_BACKGROUND_BRUSH);
   painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
+
 
   QPen ruler_pen(Constants::LINE_NUMBER_BRUSH, 1, Qt::SolidLine);
   painter->setPen(ruler_pen);
@@ -104,4 +111,9 @@ void CodeUI::paint_Background(QPainter *painter)
   painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
                    QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
 }
+
+const uint32_t CodeUI::getLineSpacing() const {
+  return line_spacing;
+}
+
 

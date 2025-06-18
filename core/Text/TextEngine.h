@@ -25,9 +25,20 @@ public:
 
 
 
+    inline size_t get_Lines_Count(){
+      return line_index_offset.size();
+    }
+
+    int getFirstVisibleLine() const;
+
+    void setFirstVisibleLine(int firstVisibleLine);
+
+
 private:
 
     std::shared_ptr<PieceOfTable> text_data_structure;
+
+    int first_visible_line = 0;
 
 
     std::vector<int> line_index_offset;

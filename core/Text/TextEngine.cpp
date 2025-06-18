@@ -6,7 +6,6 @@
 
 [[nodiscard]] std::optional<QString> TextEngine::get_Line(size_t index)
   {
-  qDebug() << line_index_offset.size();
   if(index < line_index_offset.size()) {
     return text_data_structure->get_Line(line_index_offset[index], line_index_offset[index + 1] - line_index_offset[index]);
   } else {
@@ -22,8 +21,7 @@ void TextEngine::set_Data_Structre(const std::shared_ptr<PieceOfTable> &text_dat
 
 void TextEngine::calculate_Indexes()
   {
-    qDebug() << text_data_structure->get_Text_Length();
-    const size_t buffer_size =this->text_data_structure->get_Text_Length();
+    const size_t buffer_size = this->text_data_structure->get_Text_Length();
 
     line_index_offset.reserve(buffer_size);
 
@@ -35,4 +33,12 @@ void TextEngine::calculate_Indexes()
 
 TextEngine::TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure) : text_data_structure(textDataStructure) {
   calculate_Indexes();
+}
+
+int TextEngine::getFirstVisibleLine() const {
+  return first_visible_line;
+}
+
+void TextEngine::setFirstVisibleLine(int firstVisibleLine) {
+  first_visible_line=firstVisibleLine;
 }

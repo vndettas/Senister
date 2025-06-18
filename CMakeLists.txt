@@ -20,6 +20,8 @@ add_executable(Veditor
         core/App.cpp
         core/App.h
         core/App.h
+        core/UI/LineNumerator.cpp
+        core/UI/LineNumerator.h
 )
 
 target_compile_definitions(Veditor

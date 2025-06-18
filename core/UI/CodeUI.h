@@ -20,9 +20,11 @@
 #include <memory>
 #include <QGridLayout>
 #include "../HELPER/CONSTANTS.h"
+#include "LineNumerator.h"
 
 
 class TextEngine;
+class LineNumerator;
 
 
 class CodeUI : public QWidget {
@@ -43,7 +45,15 @@ private :
 
     float scroll_velocity = 0;
 
-    QTimer* timer;
+    const uint32_t line_spacing = fontMetrics().lineSpacing();
+
+    const uint32_t line_height = fontMetrics().height();
+
+    const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
+
+    QTimer* timer = nullptr;
+
+    LineNumerator* line_numerator = nullptr;
 
     std::shared_ptr<TextEngine> text_engine;
 
@@ -53,11 +63,16 @@ private :
 
     void paintEvent(QPaintEvent *event) override;
 
-    void paint_Background(QPainter *painter);
+    void draw_Background(QPainter *painter);
 
-    void paint_Line_Numeration(QPainter *painter);
+public:
+    const uint32_t getLineSpacing() const;
 
+private:
     void wheelEvent(QWheelEvent *event) override;
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 
 };
