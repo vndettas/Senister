@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.27)
 project(Veditor)
 
-set(CMAKE_PREFIX_PATH "D:/Qt/6.8.2/mingw_64/lib/cmake")
+
+# Example (Linux):  /home/user/Qt/6.6.2/gcc_64/lib/cmake
+# Example (Windows): D:/Qt/6.8.2/mingw_64/lib/cmake
+#Qt path configuration
+set(CMAKE_PREFIX_PATH "D:/Qt/6.8.2/mingw_64/lib/cmake") # ← CHANGE THIS LINE
 find_package(Qt6 REQUIRED COMPONENTS Gui Core Widgets)
 
 set(CMAKE_CXX_STANDARD 20)
