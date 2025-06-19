@@ -6,6 +6,7 @@
 #define VEDITOR_APP_H
 
 #include "UI/CodeUI.h"
+#include "Files/FileManager.h"
 
 
 class App {
@@ -19,9 +20,7 @@ private:
 
     std::unique_ptr<CodeUI> window;
 
-    std::shared_ptr<TextEngine> text_engine;
-
-    std::shared_ptr<PieceOfTable> text_data_structure;
+    std::shared_ptr<FileManager> file_Manager;
 
 };
 

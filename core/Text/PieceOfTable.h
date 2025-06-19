@@ -37,7 +37,7 @@ public:
 
     [[nodiscard]] QChar get_Char_At(size_t pos);
 
-    size_t get_Text_Length();
+    uint32_t get_Text_Length();
 
     QString get_Line(size_t offset, size_t length);
 

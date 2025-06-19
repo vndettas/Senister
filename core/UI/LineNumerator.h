@@ -29,7 +29,7 @@ private:
 
     CodeUI* parent_widget_ui = nullptr;
 
-     uint32_t line_spacing = 0;
+    uint32_t line_spacing = 0;
 
     const uint32_t line_height = fontMetrics().height();
 

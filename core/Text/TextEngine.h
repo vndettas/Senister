@@ -16,7 +16,6 @@ public:
 
     [[nodiscard]] std::optional<QString> get_Line(size_t index);
 
-
     void calculate_Indexes();
 
     explicit TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure);
@@ -24,22 +23,20 @@ public:
     void set_Data_Structre(const std::shared_ptr<PieceOfTable>& text_data_structure);
 
 
-
     inline size_t get_Lines_Count(){
       return line_index_offset.size();
     }
 
-    int getFirstVisibleLine() const;
+    [[nodiscard]] uint32_t getFirstVisibleLine() const;
 
-    void setFirstVisibleLine(int firstVisibleLine);
+    void setFirstVisibleLine(uint32_t firstVisibleLine);
 
 
 private:
 
     std::shared_ptr<PieceOfTable> text_data_structure;
 
-    int first_visible_line = 0;
-
+    uint32_t first_visible_line = 0;
 
     std::vector<int> line_index_offset;
 

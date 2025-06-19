@@ -21,6 +21,7 @@
 #include <QGridLayout>
 #include "../HELPER/CONSTANTS.h"
 #include "LineNumerator.h"
+#include "../Files/FileManager.h"
 
 
 class TextEngine;
@@ -29,25 +30,21 @@ class LineNumerator;
 class Cursor{
 public:
 
-    size_t get_Current_Line() {return current_line_index; }
+    uint32_t get_Current_Line() {return current_line_index; }
 
-    size_t get_Current_Symbol_Index() { return current_symbol_index; }
-
+    uint32_t get_Current_Symbol_Index() { return current_symbol_index; }
 
 private:
 
-    void setCurrentLine(size_t _current_line_index){ current_line_index = _current_line_index; }
+    void setCurrentLine(uint32_t _current_line_index){ current_line_index = _current_line_index; }
 
-    void setCurrentSymbolIndex(size_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
+    void setCurrentSymbolIndex(uint32_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
 
-    size_t current_line_index = 7;
+    uint32_t current_line_index = 7;
 
-    size_t current_symbol_index = 3;
-
-
+    uint32_t current_symbol_index = 4;
 
 };
-
 
 class CodeUI : public QWidget {
 
@@ -55,27 +52,21 @@ class CodeUI : public QWidget {
 
 public:
 
-    CodeUI(std::shared_ptr<TextEngine>, std::shared_ptr<PieceOfTable>, QWidget *parent =nullptr,
+    CodeUI(std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
            const Qt::WindowFlags& f = Qt::Widget);
 
-    size_t get_Cursor_Current_Line() { return cursor->get_Current_Line(); }
+    uint32_t get_Cursor_Current_Line() { return cursor->get_Current_Line(); }
 
-    size_t get_Cursor_Current_Symbol_Index() { return cursor->get_Current_Symbol_Index(); }
+    uint32_t get_Cursor_Current_Symbol_Index() { return cursor->get_Current_Symbol_Index(); }
 
     ~CodeUI(){};
 
+signals:
+
+  void Keypressed(QKeyEvent* event);
+
 
 private :
-
-    float scroll_offset_y = 0;
-
-    float scroll_velocity = 0;
-
-    const uint32_t line_spacing = fontMetrics().lineSpacing();
-
-    const uint32_t line_height = fontMetrics().height();
-
-    const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
 
     QTimer* timer = nullptr;
 
@@ -92,6 +83,16 @@ private :
     void paintEvent(QPaintEvent *event) override;
 
     void draw_Background(QPainter *painter);
+
+    float scroll_offset_y = 0;
+
+    float scroll_velocity = 0;
+
+    const uint32_t line_spacing = fontMetrics().lineSpacing();
+
+    const uint32_t line_height = fontMetrics().height();
+
+    const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
 
 public:
     const uint32_t getLineSpacing() const;

@@ -14,18 +14,14 @@ set(CMAKE_AUTOMOC ON)
 add_executable(Veditor
         core/main.cpp
         core/UI/CodeUI.cpp
-        core/UI/CodeUI.h
         core/Text/PieceOfTable.cpp
-        core/Text/PieceOfTable.h
-        core/HELPER/CONSTANTS.h
-        core/HELPER/CONSTANTS.h
         core/Text/TextEngine.cpp
-        core/Text/TextEngine.h
         core/App.cpp
-        core/App.h
-        core/App.h
         core/UI/LineNumerator.cpp
-        core/UI/LineNumerator.h
+        core/Input/InputEngine.cpp
+        core/Input/VimStrategy.cpp
+        core/Files/File.cpp
+        core/Files/FileManager.cpp
 )
 
 target_compile_definitions(Veditor

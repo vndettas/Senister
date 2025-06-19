@@ -9,7 +9,7 @@ std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filep
 {
   std::ifstream istream(filepath);
   if(!istream){
-    std::cout << "opening failed";
+    throw std::runtime_error("Failed to open file");
   }
   std::string str_buffer((std::istreambuf_iterator<char>(istream)), std::istreambuf_iterator<char>());
   return str_buffer;
@@ -44,7 +44,7 @@ QString &PieceOfTable::get_Text_Range(size_t offset, size_t length)
 {
   QString requested_text;
   requested_text.reserve(length);
-  size_t current_offset=0;
+  uint32_t current_offset=0;
   for(auto piece: piece_table) {
     if(current_offset + piece.length < offset)
       // size_t local_offset =
@@ -53,9 +53,9 @@ QString &PieceOfTable::get_Text_Range(size_t offset, size_t length)
 
 }
 
-size_t PieceOfTable::get_Text_Length()
+uint32_t PieceOfTable::get_Text_Length()
 {
-  size_t length = 0;
+  uint32_t length = 0;
  for(const Piece& piece : piece_table){
    length += piece.length;
  }

@@ -40,11 +40,11 @@ void CodeUI::paintEvent(QPaintEvent* event)
 
   draw_Background(&painter);
 
-  int y=Constants::CODE_LINES_Y_OFFSET;
+  uint32_t y=Constants::CODE_LINES_Y_OFFSET;
   float first_visible_line=scroll_offset_y / line_height;
   text_engine->setFirstVisibleLine(first_visible_line);
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
-  size_t line_counter=first_visible_line;
+  uint32_t line_counter=first_visible_line;
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
     while (line_counter <= visible_line_count) {
@@ -126,6 +126,10 @@ void CodeUI::draw_Background(QPainter *painter)
 
 const uint32_t CodeUI::getLineSpacing() const {
   return line_spacing;
+}
+
+void CodeUI::Keypressed(QKeyEvent *event) {
+  emit keyPressEvent(event);
 }
 
 

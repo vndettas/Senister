@@ -25,7 +25,7 @@ void TextEngine::calculate_Indexes()
 
     line_index_offset.reserve(buffer_size);
 
-  for(int i = 0; i < buffer_size; ++i){
+  for(size_t i = 0; i < buffer_size; ++i){
      if(text_data_structure->get_Char_At(i) == '\n')
       line_index_offset.push_back(i);
   }
@@ -35,10 +35,10 @@ TextEngine::TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure) :
   calculate_Indexes();
 }
 
-int TextEngine::getFirstVisibleLine() const {
+uint32_t TextEngine::getFirstVisibleLine() const {
   return first_visible_line;
 }
 
-void TextEngine::setFirstVisibleLine(int firstVisibleLine) {
+void TextEngine::setFirstVisibleLine(uint32_t firstVisibleLine) {
   first_visible_line=firstVisibleLine;
 }

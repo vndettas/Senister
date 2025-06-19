@@ -25,7 +25,7 @@ void LineNumerator::paintEvent(QPaintEvent *event)
 
   uint32_t y = 0;
   uint32_t numeration_line = text_engine->getFirstVisibleLine();
-  size_t line_numerator_counter = 0;
+  uint32_t line_numerator_counter = 0;
   uint32_t all_lines_count = text_engine->get_Lines_Count();
   uint32_t selected_line = parent_widget_ui->get_Cursor_Current_Line();
 
