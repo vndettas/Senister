@@ -14,6 +14,7 @@ CodeUI::CodeUI(std::shared_ptr<TextEngine> text_engine, std::shared_ptr<PieceOfT
   {
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
+  cursor = std::make_unique<Cursor>();
   line_numerator = new LineNumerator(this, text_engine);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
@@ -35,10 +36,10 @@ void CodeUI::paintEvent(QPaintEvent* event)
   QFont text_font("Lucida Sans Typewriter", 10);
   text_font.setStyleStrategy(QFont::PreferAntialias);
   text_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
+  size_t current_line_index = cursor->get_Current_Line();
 
   draw_Background(&painter);
 
-  // Text rendering
   int y=Constants::CODE_LINES_Y_OFFSET;
   float first_visible_line=scroll_offset_y / line_height;
   text_engine->setFirstVisibleLine(first_visible_line);
@@ -46,30 +47,41 @@ void CodeUI::paintEvent(QPaintEvent* event)
   size_t line_counter=first_visible_line;
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
-  while(line_counter <= visible_line_count) {
+    while (line_counter <= visible_line_count) {
+      std::optional<QString> line = text_engine->get_Line(line_counter);
+      if (!line) {
+        ++line_counter;
+        continue;
+      }
 
-
-    std::optional<QString> line=(text_engine->get_Line(line_counter));
-    if(line)
-    {
       QTextLayout text_layout(line.value(), text_font);
       text_layout.beginLayout();
-
-      QTextLine text_line=text_layout.createLine();
-        if(text_line.isValid())
-        {
-          painter.setFont(text_font);
-          text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
-          text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
-      }
-      ++line_counter;
+      QTextLine text_line = text_layout.createLine();
+      text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
       text_layout.endLayout();
-      y+=line_spacing + 2;
-    }
-    else{
+
+      if (line_counter == current_line_index) {
+        QTextCharFormat selected_char_format;
+        selected_char_format.setFontPointSize(text_font.pointSizeF() + 1);
+        selected_char_format.setFontWeight(QFont::Bold);
+
+        QTextLayout::FormatRange highlight;
+        highlight.start = cursor->get_Current_Symbol_Index();
+        highlight.length = 1;
+        highlight.format = selected_char_format;
+
+        QVector<QTextLayout::FormatRange> formats;
+        formats.append(highlight);
+        text_layout.setFormats(formats);
+      }
+
+      if (text_line.isValid()) {
+        text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y));
+      }
+
       ++line_counter;
+      y += line_spacing + 2;
     }
-  }
   painter.end();
 }
 

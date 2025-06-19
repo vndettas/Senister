@@ -26,6 +26,28 @@
 class TextEngine;
 class LineNumerator;
 
+class Cursor{
+public:
+
+    size_t get_Current_Line() {return current_line_index; }
+
+    size_t get_Current_Symbol_Index() { return current_symbol_index; }
+
+
+private:
+
+    void setCurrentLine(size_t _current_line_index){ current_line_index = _current_line_index; }
+
+    void setCurrentSymbolIndex(size_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
+
+    size_t current_line_index = 7;
+
+    size_t current_symbol_index = 3;
+
+
+
+};
+
 
 class CodeUI : public QWidget {
 
@@ -35,6 +57,10 @@ public:
 
     CodeUI(std::shared_ptr<TextEngine>, std::shared_ptr<PieceOfTable>, QWidget *parent =nullptr,
            const Qt::WindowFlags& f = Qt::Widget);
+
+    size_t get_Cursor_Current_Line() { return cursor->get_Current_Line(); }
+
+    size_t get_Cursor_Current_Symbol_Index() { return cursor->get_Current_Symbol_Index(); }
 
     ~CodeUI(){};
 
@@ -52,6 +78,8 @@ private :
     const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
 
     QTimer* timer = nullptr;
+
+    std::unique_ptr<Cursor> cursor;
 
     LineNumerator* line_numerator = nullptr;
 
