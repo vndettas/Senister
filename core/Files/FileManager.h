@@ -13,11 +13,15 @@ public:
 
     void add_File(File&& file) noexcept;
 
+    std::shared_ptr<File> get_Active_File(){ return active_file; };
+
 
 
 private:
 
-    std::vector<File> files;
+    std::vector<std::shared_ptr<File>> files;
+
+    std::shared_ptr<File> active_file;
 
 
 };

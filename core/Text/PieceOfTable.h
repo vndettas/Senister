@@ -35,6 +35,8 @@ public:
     class PieceOfTable {
 public:
 
+    PieceOfTable(const std::filesystem::path);
+
     [[nodiscard]] QChar get_Char_At(size_t pos);
 
     uint32_t get_Text_Length();
@@ -50,9 +52,7 @@ public:
 
     void erase(size_t offset, size_t length);
 
-    PieceOfTable(const std::filesystem::path);
-
-    //Getters
+        //Getters
     [[nodiscard]] const  std::vector<Piece>* get_Piece_Table() const;
 
     [[nodiscard]] QString* get_Read_Buffer() const;

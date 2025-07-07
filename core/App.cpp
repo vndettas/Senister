@@ -6,10 +6,9 @@
 
 App::App()
 {
-    std::shared_ptr<PieceOfTable> text_data_structure = std::make_shared<PieceOfTable>("..\\test\\test.cpp");
-    std::shared_ptr<TextEngine> text_engine = std::make_shared<TextEngine>(text_data_structure);
-    file_Manager = std::make_shared<FileManager>();
-    file_Manager->add_File(File(text_data_structure, text_engine));
+    file_manager = std::make_shared<FileManager>();
+    File first_file = File("..\\test\\test.cpp");
+    file_Manager->add_File(first_file);
     window = std::make_unique<CodeUI>(file_Manager);
     window->show();
 }

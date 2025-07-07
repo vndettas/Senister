@@ -14,11 +14,11 @@ class PieceOfTable;
 class TextEngine {
 public:
 
+    explicit TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure);
+
     [[nodiscard]] std::optional<QString> get_Line(size_t index);
 
     void calculate_Indexes();
-
-    explicit TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure);
 
     void set_Data_Structre(const std::shared_ptr<PieceOfTable>& text_data_structure);
 

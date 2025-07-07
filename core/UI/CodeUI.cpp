@@ -10,12 +10,12 @@
 
 
 
-CodeUI::CodeUI(std::shared_ptr<TextEngine> text_engine, std::shared_ptr<PieceOfTable> text_data_structure, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), text_engine(text_engine)
+CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
   {
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
   cursor = std::make_unique<Cursor>();
-  line_numerator = new LineNumerator(this, text_engine);
+  line_numerator = new LineNumerator(this, file_manager->get_Active_File->get_Text_Engine().get());
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
 }
@@ -42,7 +42,7 @@ void CodeUI::paintEvent(QPaintEvent* event)
 
   uint32_t y=Constants::CODE_LINES_Y_OFFSET;
   float first_visible_line=scroll_offset_y / line_height;
-  text_engine->setFirstVisibleLine(first_visible_line);
+  file_manager->get_Active_File->get_Text_Engine->set_First_Visible_Line(first_visible_line);
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
   uint32_t line_counter=first_visible_line;
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);

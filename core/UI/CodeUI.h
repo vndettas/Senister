@@ -70,13 +70,11 @@ private :
 
     QTimer* timer = nullptr;
 
+    std::shared_ptr<FileManager> file_manager;
+
     std::unique_ptr<Cursor> cursor;
 
     LineNumerator* line_numerator = nullptr;
-
-    std::shared_ptr<TextEngine> text_engine;
-
-    std::shared_ptr<PieceOfTable> text_data_structure;
 
     void on_Scroll_Tick();
 

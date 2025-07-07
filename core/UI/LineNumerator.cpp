@@ -9,8 +9,6 @@
 
 void LineNumerator::paintEvent(QPaintEvent *event)
 {
-  assert(parent_widget_ui != nullptr);
-
   QWidget::paintEvent(event);
   QPainter painter(this);
   QPen numerator_pen(Constants::TEXT_COLOR_WHITE_PURE);
