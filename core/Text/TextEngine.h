@@ -9,18 +9,19 @@
 #include <QString>
 #include "../UI/CodeUI.h"
 #include "../Text/PieceOfTable.h"
+
 class PieceOfTable;
 
 class TextEngine {
 public:
 
-    explicit TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure);
+    explicit TextEngine(PieceOfTable* textDataStructure);
 
     [[nodiscard]] std::optional<QString> get_Line(size_t index);
 
     void calculate_Indexes();
 
-    void set_Data_Structre(const std::shared_ptr<PieceOfTable>& text_data_structure);
+    void set_Data_Structre(PieceOfTable* text_data_structure);
 
 
     inline size_t get_Lines_Count(){
@@ -34,7 +35,7 @@ public:
 
 private:
 
-    std::shared_ptr<PieceOfTable> text_data_structure;
+    PieceOfTable* text_data_structure;
 
     uint32_t first_visible_line = 0;
 

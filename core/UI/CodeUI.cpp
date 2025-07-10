@@ -6,16 +6,15 @@
 #include "CodeUI.h"
 
 
-
-
-
-
 CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
   {
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
   cursor = std::make_unique<Cursor>();
-  line_numerator = new LineNumerator(this, file_manager->get_Active_File->get_Text_Engine().get());
+  set_Current_File(file_manager->get_Active_File());
+  text_data_structure = file_manager->get_Active_File()->get_Text_Data_Structure();
+  text_engine = file_manager->get_Active_File()->get_Text_Engine();
+  line_numerator = new LineNumerator(this, text_engine);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
 }
@@ -27,12 +26,13 @@ void CodeUI::resizeEvent(QResizeEvent *event) {
 
 }
 
+
 void CodeUI::paintEvent(QPaintEvent* event)
   {
   QWidget::paintEvent(event);
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing, true);
-
+  
   QFont text_font("Lucida Sans Typewriter", 10);
   text_font.setStyleStrategy(QFont::PreferAntialias);
   text_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
@@ -40,9 +40,10 @@ void CodeUI::paintEvent(QPaintEvent* event)
 
   draw_Background(&painter);
 
+
   uint32_t y=Constants::CODE_LINES_Y_OFFSET;
   float first_visible_line=scroll_offset_y / line_height;
-  file_manager->get_Active_File->get_Text_Engine->set_First_Visible_Line(first_visible_line);
+  text_engine->setFirstVisibleLine(first_visible_line);
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
   uint32_t line_counter=first_visible_line;
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
@@ -128,8 +129,8 @@ const uint32_t CodeUI::getLineSpacing() const {
   return line_spacing;
 }
 
-void CodeUI::Keypressed(QKeyEvent *event) {
-  emit keyPressEvent(event);
-}
+// void CodeUI::Keypressed(QKeyEvent *event) {
+//   emit keyPressEvent(event);
+// }
 
 

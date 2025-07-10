@@ -21,11 +21,11 @@ class TextEngine;
 class LineNumerator : public QWidget {
 
 public:
-    LineNumerator(QWidget *parent, std::shared_ptr<TextEngine> engine, const Qt::WindowFlags &f = Qt::Widget);
+    LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f = Qt::Widget);
 
 private:
 
-    std::shared_ptr<TextEngine> text_engine = nullptr;
+    TextEngine* text_engine = nullptr;
 
     CodeUI* parent_widget_ui = nullptr;
 

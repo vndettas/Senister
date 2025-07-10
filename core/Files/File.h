@@ -9,25 +9,26 @@
 #include "../Text/PieceOfTable.h"
 #include "../Text/TextEngine.h"
 
+class TextEngine;
+
 class File {
 public:
 
     File(){};
 
-    File(std::shared_ptr<PieceOfTable>, std::shared_ptr<TextEngine>);
-
     File(const std::filesystem::path path);
     
+    const std::string name
 
-    std::shared_ptr<PieceOfTable> get_Text_Data_Structure() { return text_data_structure; };
+    PieceOfTable* get_Text_Data_Structure() { return text_data_structure.get(); };
 
-    std::shared_ptr<TextEngine> get_Text_Engine() { return text_engine; };
+    TextEngine* get_Text_Engine() { return text_engine.get(); };
 
 private:
 
-    std::shared_ptr<PieceOfTable> text_data_structure;
+    std::unique_ptr<PieceOfTable> text_data_structure;
 
-    std::shared_ptr<TextEngine> text_engine;
+    std::unique_ptr<TextEngine> text_engine;
 
 
 };

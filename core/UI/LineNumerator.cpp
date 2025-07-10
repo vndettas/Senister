@@ -47,7 +47,7 @@ void LineNumerator::paintEvent(QPaintEvent *event)
   }
 }
 
-LineNumerator::LineNumerator(QWidget *parent, std::shared_ptr<TextEngine> engine, const Qt::WindowFlags &f): text_engine(engine)
+LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f): text_engine(engine)
 {
   setParent(parent);
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);

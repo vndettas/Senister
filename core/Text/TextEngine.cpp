@@ -13,7 +13,7 @@
   }
 }
 
-void TextEngine::set_Data_Structre(const std::shared_ptr<PieceOfTable> &text_data_structure)
+void TextEngine::set_Data_Structre(PieceOfTable* text_data_structure)
   {
   this->text_data_structure = text_data_structure;
   calculate_Indexes();
@@ -31,7 +31,7 @@ void TextEngine::calculate_Indexes()
   }
 }
 
-TextEngine::TextEngine(const std::shared_ptr<PieceOfTable> &textDataStructure) : text_data_structure(textDataStructure) {
+TextEngine::TextEngine(PieceOfTable* textDataStructure) : text_data_structure(textDataStructure) {
   calculate_Indexes();
 }
 

@@ -1,0 +1,3 @@
+#ifndef VEDITOR_FILEBAR_H
+#define VEDITOR_FILEBAR_H
+#endif //VEDITOR_FILEBAR_H
