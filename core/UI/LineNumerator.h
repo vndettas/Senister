@@ -1,11 +1,4 @@
-//
-// Created by vovab on 18.06.2025.
-//
-
-#ifndef VEDITOR_LINENUMERATOR_H
-#define VEDITOR_LINENUMERATOR_H
-
-
+#pragma once
 #include <QWidget>
 #include <QInternal>
 #include <QTextLayout>
@@ -35,8 +28,8 @@ private:
 
     const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
 
+protected:
+
     void paintEvent(QPaintEvent *event);
 };
 
-
-#endif //VEDITOR_LINENUMERATOR_H

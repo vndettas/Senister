@@ -1,9 +1,4 @@
-//
-// Created by vovab on 19.06.2025.
-//
-
-#ifndef VEDITOR_FILEMANAGER_H
-#define VEDITOR_FILEMANAGER_H
+#pragma once
 
 #include "File.h"
 #include <vector>
@@ -11,15 +6,16 @@
 #include "../Text/PieceOfTable.h"
 #include "../Text/TextEngine.h"
 
-
-
 class File;
+
 
 class FileManager {
 
 public:
 
     // void add_File(File&& file) noexcept;
+
+    const std::vector<std::shared_ptr<File>>& get_Files() const { return files; };
 
     void add_File(std::shared_ptr<File> file);
 
@@ -35,6 +31,4 @@ private:
 
 
 };
-
-
 

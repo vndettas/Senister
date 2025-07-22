@@ -1,9 +1,4 @@
-//
-// Created by vovab on 19.06.2025.
-//
-
-#ifndef VEDITOR_FILE_H
-#define VEDITOR_FILE_H
+#pragma once
 
 #include <memory>
 #include "../Text/PieceOfTable.h"
@@ -18,13 +13,17 @@ public:
 
     File(const std::filesystem::path path);
     
-    const std::string name
+    std::string get_File_Name() {return name; };
 
+    size_t get_File_Name_Length() {return name.length(); };
+    
     PieceOfTable* get_Text_Data_Structure() { return text_data_structure.get(); };
 
     TextEngine* get_Text_Engine() { return text_engine.get(); };
 
 private:
+
+    std::string name;
 
     std::unique_ptr<PieceOfTable> text_data_structure;
 
@@ -32,6 +31,3 @@ private:
 
 
 };
-
-
-#endif //VEDITOR_FILE_H

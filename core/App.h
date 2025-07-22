@@ -1,10 +1,4 @@
-//
-// Created by vovab on 07.06.2025.
-//
-
-#ifndef VEDITOR_APP_H
-#define VEDITOR_APP_H
-
+#pragma once
 #include "UI/CodeUI.h"
 #include "Files/FileManager.h"
 
@@ -23,6 +17,3 @@ private:
     std::shared_ptr<FileManager> file_Manager;
 
 };
-
-
-#endif //VEDITOR_APP_H

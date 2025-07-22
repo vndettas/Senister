@@ -1,11 +1,4 @@
-//
-// Created by vovab on 07.06.2025.
-//
-
-#ifndef VEDITOR_TEXTENGINE_H
-#define VEDITOR_TEXTENGINE_H
-
-
+#pragma once
 #include <QString>
 #include "../UI/CodeUI.h"
 #include "../Text/PieceOfTable.h"
@@ -36,7 +29,7 @@ public:
 private:
 
     PieceOfTable* text_data_structure;
-
+    
     uint32_t first_visible_line = 0;
 
     std::vector<int> line_index_offset;
@@ -44,5 +37,3 @@ private:
 
 };
 
-
-#endif //VEDITOR_TEXTENGINE_H

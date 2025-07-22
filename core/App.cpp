@@ -1,7 +1,3 @@
-//
-// Created by vovab on 07.06.2025.
-//
-
 #include "App.h"
 
 App::App()
@@ -12,6 +8,5 @@ App::App()
     file_manager->add_File(first_file);
     file_manager->add_File(second_file);
     window = std::make_unique<CodeUI>(file_manager);
-    std::cout << "Window created";
     window->show();
 }

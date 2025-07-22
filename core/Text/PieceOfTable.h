@@ -1,11 +1,4 @@
-//
-// Created by vovab on 13.03.2025.
-//
-
-#ifndef VEDITOR_PIECEOFTABLE_H
-#define VEDITOR_PIECEOFTABLE_H
-
-
+#pragma once
 #include <array>
 #include <string>
 #include <fstream>
@@ -70,4 +63,3 @@ private:
 };
 
 
-#endif //VEDITOR_PIECEOFTABLE_H

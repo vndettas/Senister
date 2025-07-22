@@ -1,18 +1,65 @@
-# Default ignored files
-/shelf/
-/.idea/workspace.xml
+# ===================== #
+# OS-Specific
+# ===================== #
+.DS_Store
+Thumbs.db
 
-# Editor-based HTTP Client requests
+# ===================== #
+# IDEs & Editors
+# ===================== #
+.idea/
+.vscode/
+*.code-workspace
 
-# IDE
-.idea
-
-# Qt / CMake / Make
+# ===================== #
+# Build Artifacts
+# ===================== #
 build/
 build-*/
+CMakeFiles/
+CMakeCache.txt
 cmake-*
+CMakeScripts/
+Makefile
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
 
+# Ninja
+build.ninja
+.ninja_deps
+.ninja_log
+
+# ===================== #
+# Qt
+# ===================== #
+*.user
+*.user.*
+*.pro.user
+*.qbs.user
+*.qmlc
+*.jsc
+*.rcc
+
+# ===================== #
+# Logs / Debug
+# ===================== #
+*.log
+*.out
+
+# ===================== #
+# Binaries
+# ===================== #
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+
+# ===================== #
+# Other
+# ===================== #
+/shelf/
 /httpRequests/
-# Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml

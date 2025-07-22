@@ -1,7 +1,3 @@
-//
-// Created by vovab on 19.06.2025.
-//
-
 #include "File.h"
 
 // File::File(std::shared_ptr<PieceOfTable> _piece_of_table, std::shared_ptr<TextEngine> _text_engine)
@@ -13,5 +9,5 @@ File::File(const std::filesystem::path file_path)
 {
   text_data_structure = std::make_unique<PieceOfTable>(file_path);
   text_engine = std::make_unique<TextEngine>(text_data_structure.get());
-  name = file_path.filename;
+  name = file_path.filename().string();
 }

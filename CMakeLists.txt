@@ -21,6 +21,7 @@ set(CMAKE_AUTOMOC ON)
 
 add_executable(Veditor
         core/main.cpp
+        core/UI/FileBar.cpp
         core/UI/CodeUI.cpp
         core/Text/PieceOfTable.cpp
         core/Text/TextEngine.cpp
