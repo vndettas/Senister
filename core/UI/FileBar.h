@@ -6,6 +6,7 @@
 #include "../Files/File.h"
 #include <QFontMetrics>
 #include <QString>
+#include <QColor>
 
 class File;
 class FileManager;

@@ -127,8 +127,7 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
 }
 
 void CodeUI::draw_Lines(QPainter *painter) {
-  QPen ruler_pen(Constants::LINE_NUMBER_BRUSH, 1, Qt::SolidLine);
-  painter->setPen(ruler_pen);
+  painter->setPen(Constants::LINES_PEN);
 
   painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
                    QPoint(Constants::CODE_LINES_X_OFFSET, height()));
