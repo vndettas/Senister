@@ -40,7 +40,7 @@ private:
 
     void setCurrentSymbolIndex(uint32_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
 
-    uint32_t current_line_index = 3;
+    uint32_t current_line_index = 7;
 
     uint32_t current_symbol_index = 4;
 
@@ -67,7 +67,7 @@ public:
 
 signals:
 
-  void Keypressed(QKeyEvent* event);
+  void key_Pressed(QKeyEvent* event);
 
 
 private :
@@ -110,6 +110,8 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     
     void wheelEvent(QWheelEvent *event) override;
+
+    void keyPressEvent(QKeyEvent *event) override;
 
 };
 

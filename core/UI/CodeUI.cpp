@@ -141,8 +141,8 @@ const uint32_t CodeUI::getLineSpacing() const {
   return line_spacing;
 }
 
-// void CodeUI::Keypressed(QKeyEvent *event) {
-//   emit keyPressEvent(event);
-// }
+ void CodeUI::keyPressEvent(QKeyEvent *event){
+  emit key_Pressed(event);
+ }
 
 

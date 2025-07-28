@@ -1,5 +1,5 @@
 #include "InputEngine.h"
 
-void InputEngine::onKeyPressed(QEvent *event) {
+void InputEngine::input_Received(QEvent *event) {
 
 }

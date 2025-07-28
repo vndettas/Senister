@@ -10,7 +10,7 @@ public:
 
 public slots:
 
-    void onKeyPressed(QEvent* event);
+    void input_Received(QEvent* event);
 
 private:
 
