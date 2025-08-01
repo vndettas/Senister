@@ -20,6 +20,22 @@ void InputEngine::move_Cursor_Right(){
 
 }
 
+
+void InputEngine::move_Cursor_Down(){
+    cursor->move_Down();
+    update_ui();
+}
+
+void InputEngine::move_Cursor_Up(){
+    cursor->move_Up();
+    update_ui();
+}
+
+void InputEngine::move_Cursor_Left(){
+    cursor->move_Left();
+    update_ui();
+}
+
 void InputEngine::set_Strategy(std::unique_ptr<InputStrategy> strategy){
 current_strategy = std::move(strategy);
 }

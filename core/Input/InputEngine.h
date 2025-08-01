@@ -23,6 +23,12 @@ public:
 
     void move_Cursor_Right();
 
+    void move_Cursor_Left();
+
+    void move_Cursor_Up();
+
+    void move_Cursor_Down();
+
     void update_ui();
 
 private:

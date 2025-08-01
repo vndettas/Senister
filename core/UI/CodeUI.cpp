@@ -149,3 +149,15 @@ const uint32_t CodeUI::getLineSpacing() const {
  void Cursor::move_Right(){
   current_symbol_index += 1;
  }
+
+ void Cursor::move_Left(){
+  current_symbol_index -= 1;
+ }
+
+ void Cursor::move_Up(){
+  current_line_index -= 1;
+ }
+
+ void Cursor::move_Down(){
+  current_line_index += 1;
+ }

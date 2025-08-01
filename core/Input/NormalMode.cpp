@@ -14,9 +14,8 @@ void NormalMode::handle_Key(QKeyEvent *event){
 
 
 void NormalMode::init_Keys() {
-        Bind(Qt::Key_L, move_Cursor_Right());
-}
-
-void NormalMode::move_Cursor_Right(){
-    engine->move_Cursor_Right();
+        Bind(Qt::Key_L, engine->move_Cursor_Right());
+        Bind(Qt::Key_H, engine->move_Cursor_Left());
+        Bind(Qt::Key_J, engine->move_Cursor_Down());
+        Bind(Qt::Key_K, engine->move_Cursor_Up());
 }

@@ -39,6 +39,12 @@ public:
 
     void move_Right();
 
+    void move_Left();
+
+    void move_Up();
+
+    void move_Down();
+
 private:
 
     void setCurrentLine(uint32_t _current_line_index){ current_line_index = _current_line_index; }

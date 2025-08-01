@@ -10,6 +10,8 @@ public:
 
     void move_Cursor_Right();
 
+    void move_Cursor_Left();
+
     void handle_Key(QKeyEvent *key) override;
 
 private:
