@@ -8,6 +8,7 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
   timer = new QTimer(this);
   cursor = std::make_unique<Cursor>();
   text_data_structure = file_manager->get_Active_File()->get_Text_Data_Structure();
+  input_engine = std::make_unique<InputEngine>(cursor.get(),this);
   text_engine = file_manager->get_Active_File()->get_Text_Engine();
   line_numerator = new LineNumerator(this, text_engine);
   file_bar = new FileBar(this, file_manager.get());
@@ -142,7 +143,9 @@ const uint32_t CodeUI::getLineSpacing() const {
 }
 
  void CodeUI::keyPressEvent(QKeyEvent *event){
-  emit key_Pressed(event);
+  input_engine->handle_Key(event);
  }
 
-
+ void Cursor::move_Right(){
+  current_symbol_index += 1;
+ }

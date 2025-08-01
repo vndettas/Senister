@@ -19,7 +19,10 @@
 #include "../Files/FileManager.h"
 #include "../Files/File.h"
 #include "../UI/FileBar.h"
+#include "../Input/InputEngine.h"
 
+
+class InputEngine;
 class TextEngine;
 class LineNumerator;
 class FileManager;
@@ -34,15 +37,17 @@ public:
 
     uint32_t get_Current_Symbol_Index() { return current_symbol_index; }
 
+    void move_Right();
+
 private:
 
     void setCurrentLine(uint32_t _current_line_index){ current_line_index = _current_line_index; }
 
     void setCurrentSymbolIndex(uint32_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
 
-    uint32_t current_line_index = 7;
+    uint32_t current_line_index = 1;
 
-    uint32_t current_symbol_index = 4;
+    uint32_t current_symbol_index = 3;
 
 };
 
@@ -76,12 +81,18 @@ private :
 
     std::shared_ptr<File> current_file;
 
+    //Todo: make it unq ptr
+    
     TextEngine* text_engine;
 
     PieceOfTable* text_data_structure;
 
+    std::unique_ptr<InputEngine> input_engine;
+
     std::unique_ptr<Cursor> cursor;
-    
+
+    //Todo: make it unq ptr
+
     QTimer* timer = nullptr;
 
     LineNumerator* line_numerator = nullptr;

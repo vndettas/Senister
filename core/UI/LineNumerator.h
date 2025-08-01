@@ -13,6 +13,8 @@ class TextEngine;
 
 class LineNumerator : public QWidget {
 
+    Q_OBJECT
+
 public:
     LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f = Qt::Widget);
 

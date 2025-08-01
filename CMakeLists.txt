@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.27)
 project(Veditor)
 
 
-set(CMAKE_C_COMPILER_LAUNCHER ccache)
-set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
+ set(CMAKE_C_COMPILER_LAUNCHER ccache)
+ set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
@@ -28,8 +28,9 @@ add_executable(Veditor
         core/App.cpp
         core/UI/LineNumerator.cpp
         core/Input/InputEngine.cpp
-        core/Input/VimStrategy.cpp
+        core/Input/NormalMode.cpp
         core/Files/File.cpp
+        core/Input/Shortcut.cpp
         core/Files/FileManager.cpp
 )
 
@@ -41,5 +42,3 @@ target_compile_definitions(Veditor
 
 
 target_link_libraries(Veditor Qt6::Core Qt6::Gui Qt6::Widgets)
-
-
