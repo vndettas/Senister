@@ -18,6 +18,8 @@ class LineNumerator : public QWidget {
 public:
     LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f = Qt::Widget);
 
+    void set_Current_Text_Engine(TextEngine* text_engine);
+
 private:
 
     TextEngine* text_engine = nullptr;

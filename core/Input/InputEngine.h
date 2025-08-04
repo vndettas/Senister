@@ -20,6 +20,8 @@ public:
     void set_Strategy(std::unique_ptr<InputStrategy> strategy);
 
     void handle_Key(QKeyEvent *event);
+    
+    void open_File_Index(uint32_t index);
 
     void move_Cursor_Right();
 

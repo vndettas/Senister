@@ -72,13 +72,16 @@ public:
 
     uint32_t get_Cursor_Current_Symbol_Index() { return cursor->get_Current_Symbol_Index(); }
     
-    void set_Current_File(std::shared_ptr<File> file) { current_file = file; }
+    void set_Current_File(std::shared_ptr<File> file); 
     
+    void set_Current_File_Index(uint32_t index);
+
     ~CodeUI(){};
 
 signals:
 
   void key_Pressed(QKeyEvent* event);
+  
 
 
 private :

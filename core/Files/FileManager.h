@@ -19,9 +19,11 @@ public:
 
     void add_File(std::shared_ptr<File> file);
 
-    std::shared_ptr<File> get_Active_File(){ return active_file; };
+    std::shared_ptr<File> get_Active_File();
 
+    void set_Active_File_Index(uint32_t index);
 
+    std::shared_ptr<File> get_File_By_Index(uint32_t index);
 
 private:
 

@@ -18,4 +18,7 @@ void NormalMode::init_Keys() {
         Bind(Qt::Key_H, engine->move_Cursor_Left());
         Bind(Qt::Key_J, engine->move_Cursor_Down());
         Bind(Qt::Key_K, engine->move_Cursor_Up());
+        Bind(Shortcut(Qt::Key_1, Qt::ControlModifier), engine->open_File_Index(0));
+        Bind(Shortcut(Qt::Key_2, Qt::ControlModifier), engine->open_File_Index(1));
+        Bind(Shortcut(Qt::Key_3, Qt::ControlModifier), engine->open_File_Index(2));
 }

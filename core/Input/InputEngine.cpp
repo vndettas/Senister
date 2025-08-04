@@ -39,3 +39,8 @@ void InputEngine::move_Cursor_Left(){
 void InputEngine::set_Strategy(std::unique_ptr<InputStrategy> strategy){
 current_strategy = std::move(strategy);
 }
+
+
+void InputEngine::open_File_Index(uint32_t index){
+    code_ui->set_Current_File_Index(index);
+}

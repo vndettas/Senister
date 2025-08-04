@@ -7,15 +7,14 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
   timer = new QTimer(this);
   cursor = std::make_unique<Cursor>();
-  text_data_structure = file_manager->get_Active_File()->get_Text_Data_Structure();
-  input_engine = std::make_unique<InputEngine>(cursor.get(),this);
-  text_engine = file_manager->get_Active_File()->get_Text_Engine();
   line_numerator = new LineNumerator(this, text_engine);
+  input_engine = std::make_unique<InputEngine>(cursor.get(),this);
   file_bar = new FileBar(this, file_manager.get());
+  // Todo : the editor should open with no active file and draw something like menu
+  set_Current_File(file_manager->get_Active_File());
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
-  set_Current_File(file_manager->get_Active_File());
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
 }
@@ -25,7 +24,7 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
 void CodeUI::paintEvent(QPaintEvent* event) {
   QWidget::paintEvent(event);
   QPainter painter(this);
-
+  
   // --Text setup--
   QFont text_font("Lucida Sans Typewriter", 10);
   text_font.setStyleStrategy(QFont::PreferAntialias);
@@ -38,7 +37,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
   
   
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
-
+  
   // --Logic calculation--
   size_t current_line_index = cursor->get_Current_Line();
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
@@ -49,7 +48,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
   
   // --Logic update--
   text_engine->setFirstVisibleLine(first_visible_line);
-
+  
   while (line_counter <= visible_line_count) {
     // --Here we check if line exists, if not we dont have to print it--
     // --So our file contains 10 lines of code but on the screen can be shown 42 we will print only 10 and wont print empty lines--
@@ -65,7 +64,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
     QTextLine text_line = text_layout.createLine();
     text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
     text_layout.endLayout();
-   
+    
     // --Cursor logic--
     if (line_counter == current_line_index) {
       QTextCharFormat selected_char_format;
@@ -96,7 +95,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
 
 void CodeUI::resizeEvent(QResizeEvent *event) {
   QWidget::resizeEvent(event);
-
+  
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
 }
@@ -123,41 +122,59 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
   painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
   painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET,
     width() - Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_LINES_Y_OFFSET,
-                   Constants::CODE_BACKGROUND_BRUSH);
-  painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
-}
-
-void CodeUI::draw_Lines(QPainter *painter) {
-  painter->setPen(Constants::LINES_PEN);
-
-  painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
-                   QPoint(Constants::CODE_LINES_X_OFFSET, height()));
-  painter->drawLine(QPoint(width() * 0.75, Constants::CODE_LINES_Y_OFFSET), QPoint(width() * 0.75, height()));
-  painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
-                   QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
+    Constants::CODE_BACKGROUND_BRUSH);
+    painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
+  }
   
-}
-
-const uint32_t CodeUI::getLineSpacing() const {
-  return line_spacing;
-}
-
- void CodeUI::keyPressEvent(QKeyEvent *event){
-  input_engine->handle_Key(event);
- }
-
- void Cursor::move_Right(){
-  current_symbol_index += 1;
- }
-
- void Cursor::move_Left(){
-  current_symbol_index -= 1;
- }
-
- void Cursor::move_Up(){
-  current_line_index -= 1;
- }
-
- void Cursor::move_Down(){
-  current_line_index += 1;
+  void CodeUI::draw_Lines(QPainter *painter) {
+    painter->setPen(Constants::LINES_PEN);
+    
+    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
+    QPoint(Constants::CODE_LINES_X_OFFSET, height()));
+    painter->drawLine(QPoint(width() * 0.75, Constants::CODE_LINES_Y_OFFSET), QPoint(width() * 0.75, height()));
+    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
+    QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
+    
+  }
+  
+  const uint32_t CodeUI::getLineSpacing() const {
+    return line_spacing;
+  }
+  
+  void CodeUI::keyPressEvent(QKeyEvent *event){
+    input_engine->handle_Key(event);
+  }
+  
+  void Cursor::move_Right(){
+    current_symbol_index += 1;
+  }
+  
+  void Cursor::move_Left(){
+    current_symbol_index -= 1;
+  }
+  
+  void Cursor::move_Up(){
+    current_line_index -= 1;
+  }
+  
+  void Cursor::move_Down(){
+    current_line_index += 1;
+  }
+  
+  void CodeUI::set_Current_File_Index(uint32_t index){
+    file_manager->set_Active_File_Index(index);
+    set_Current_File(file_manager->get_Active_File());
+    assert(line_numerator);
+    update();
+  }
+  
+  void CodeUI::set_Current_File(std::shared_ptr<File> file){
+    current_file = file;
+    text_engine = file_manager->get_Active_File()->get_Text_Engine();
+    assert(line_numerator);
+    assert(text_engine);
+    text_data_structure = file_manager->get_Active_File()->get_Text_Data_Structure();
+    assert(line_numerator);
+    line_numerator->set_Current_Text_Engine(text_engine);
+    
  }
