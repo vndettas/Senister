@@ -23,39 +23,13 @@
 
 
 class InputEngine;
+class Cursor;
 class TextEngine;
 class LineNumerator;
 class FileManager;
 class File;
 class FileBar;
 
-
-class Cursor{
-public:
-
-    uint32_t get_Current_Line() {return current_line_index; }
-
-    uint32_t get_Current_Symbol_Index() { return current_symbol_index; }
-
-    void move_Right();
-
-    void move_Left();
-
-    void move_Up();
-
-    void move_Down();
-
-private:
-
-    void setCurrentLine(uint32_t _current_line_index){ current_line_index = _current_line_index; }
-
-    void setCurrentSymbolIndex(uint32_t _current_symbol_index) { current_symbol_index = _current_symbol_index; }
-
-    uint32_t current_line_index = 1;
-
-    uint32_t current_symbol_index = 3;
-
-};
 
 class CodeUI : public QWidget {
 
@@ -68,13 +42,13 @@ public:
     
     const uint32_t getLineSpacing() const;
 
-    uint32_t get_Cursor_Current_Line() { return cursor->get_Current_Line(); }
-
-    uint32_t get_Cursor_Current_Symbol_Index() { return cursor->get_Current_Symbol_Index(); }
-    
     void set_Current_File(std::shared_ptr<File> file); 
     
     void set_Current_File_Index(uint32_t index);
+    
+    TextEngine* get_Text_Engine();
+
+    Cursor* get_Cursor();
 
     ~CodeUI(){};
 
@@ -92,9 +66,9 @@ private :
 
     //Todo: make it unq ptr
     
-    TextEngine* text_engine;
+    TextEngine* text_engine = nullptr;
 
-    PieceOfTable* text_data_structure;
+    PieceOfTable* text_data_structure = nullptr;
 
     std::unique_ptr<InputEngine> input_engine;
 

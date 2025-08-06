@@ -10,6 +10,11 @@ void InputEngine::handle_Key(QKeyEvent *event){
 current_strategy->handle_Key(event);
 }
 
+void InputEngine::delete_Char_Cursor(){
+    code_ui->get_Text_Engine()->delete_Char_Cursor(code_ui->get_Cursor()->get_Cursor_Position());
+    update_ui();
+}
+
 void InputEngine::update_ui(){
     code_ui->update();
 }

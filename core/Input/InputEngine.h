@@ -3,6 +3,7 @@
 #include "InputStrategy.h"
 #include <memory>
 #include <QKeyEvent>
+#include "../UI/Cursor.h"
 #include "../UI/CodeUI.h"
 
 class Cursor;
@@ -30,6 +31,8 @@ public:
     void move_Cursor_Up();
 
     void move_Cursor_Down();
+
+    void delete_Char_Cursor();
 
     void update_ui();
 

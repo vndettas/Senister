@@ -6,7 +6,7 @@ NormalMode::NormalMode(InputEngine *engine) : InputStrategy(engine){
 
 void NormalMode::handle_Key(QKeyEvent *event){
     for( auto pox : key_bindings){
-        if(pox.first.get_Key() == event->key()){
+        if(pox.first.get_Key() == event->key() && pox.first.get_Modifier() == event->modifiers()){
             pox.second();
         }
     }
@@ -21,4 +21,5 @@ void NormalMode::init_Keys() {
         Bind(Shortcut(Qt::Key_1, Qt::ControlModifier), engine->open_File_Index(0));
         Bind(Shortcut(Qt::Key_2, Qt::ControlModifier), engine->open_File_Index(1));
         Bind(Shortcut(Qt::Key_3, Qt::ControlModifier), engine->open_File_Index(2));
+        Bind(Shortcut(Qt::Key_X), engine->delete_Char_Cursor());
 }

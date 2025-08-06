@@ -39,7 +39,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
   
   // --Logic calculation--
-  size_t current_line_index = cursor->get_Current_Line();
+  size_t current_line_index = cursor->get_Current_Line_Index();
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
   // --Floats used to create smooth scrooling
   float first_visible_line=scroll_offset_y / line_height;
@@ -178,3 +178,11 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
     line_numerator->set_Current_Text_Engine(text_engine);
     
  }
+
+ Cursor* CodeUI::get_Cursor(){
+  return cursor.get();
+ }
+
+TextEngine* CodeUI::get_Text_Engine(){
+  return text_engine;
+}

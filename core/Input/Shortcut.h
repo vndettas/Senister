@@ -13,6 +13,8 @@ friend bool operator<(const Shortcut& first,  const Shortcut& second){ return st
 
 inline Qt::Key get_Key() const { return key; };
 
+ Qt::KeyboardModifier get_Modifier() const {return modifier; };
+
 private:
 
     Qt::Key key;

@@ -21,7 +21,7 @@ void TextEngine::set_Data_Structre(PieceOfTable* text_data_structure)
 
 void TextEngine::calculate_Indexes()
   {
-    const size_t buffer_size = this->text_data_structure->get_Text_Length();
+    const size_t buffer_size = text_data_structure->get_Text_Length();
 
     line_index_offset.reserve(buffer_size);
 
@@ -41,4 +41,12 @@ uint32_t TextEngine::getFirstVisibleLine() const {
 
 void TextEngine::setFirstVisibleLine(uint32_t firstVisibleLine) {
   first_visible_line=firstVisibleLine;
+}
+
+size_t TextEngine::get_Lines_Count(){
+  return line_index_offset.size();
+}
+
+void TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos){
+  
 }

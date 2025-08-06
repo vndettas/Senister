@@ -16,10 +16,9 @@ public:
 
     void set_Data_Structre(PieceOfTable* text_data_structure);
 
+    void delete_Char_Cursor(std::pair<int, int>);
 
-    inline size_t get_Lines_Count(){
-      return line_index_offset.size();
-    }
+    size_t get_Lines_Count();
 
     [[nodiscard]] uint32_t getFirstVisibleLine() const;
 

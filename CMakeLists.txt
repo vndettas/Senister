@@ -27,6 +27,7 @@ add_executable(Veditor
         core/Text/TextEngine.cpp
         core/App.cpp
         core/UI/LineNumerator.cpp
+        core/UI/Cursor.cpp
         core/Input/InputEngine.cpp
         core/Input/NormalMode.cpp
         core/Files/File.cpp
