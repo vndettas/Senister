@@ -1,12 +1,6 @@
-//
-// Created by vovab on 13.03.2025.
-//
-
 #include "PieceOfTable.h"
-#include <QDebug>
 
-std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
-{
+std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath) {
   std::ifstream istream(filepath);
   if(!istream){
     throw std::runtime_error("Failed to open file");
@@ -15,46 +9,39 @@ std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filep
   return str_buffer;
 }
 
-//reads whole file to const buffer
-PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer((get_Read_Buffer()->data())) {
-  piece_table.emplace_back(Piece(0, add_buffer.size(), buffer::add_buffer));
+PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer() {
+  piece_table.reserve(10);
+  piece_table.emplace_back(Piece(0, read_buffer.size(), buffer::read_only_buffer));
 }
 
-QString &PieceOfTable::get_Add_Buffer() const
-{
+QString &PieceOfTable::get_Add_Buffer() const {
   return (QString &) add_buffer;
 }
 
 
-QString* PieceOfTable::get_Read_Buffer() const
-{
+QString* PieceOfTable::get_Read_Buffer() const {
   return const_cast<QString *>(&read_buffer);
 
 }
 
-const std::vector<Piece>* PieceOfTable::get_Piece_Table() const
-{
+const std::vector<Piece>* PieceOfTable::get_Piece_Table() const {
   return &piece_table;
 }
 
-Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length),
-                                                                              buffer_type(bufferType) {}
+Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length), buffer_type(bufferType) {}
 
-QString &PieceOfTable::get_Text_Range(size_t offset, size_t length)
-{
+QString &PieceOfTable::get_Text_Range(size_t offset, size_t length) {
   QString requested_text;
   requested_text.reserve(length);
   uint32_t current_offset=0;
   for(auto piece: piece_table) {
     if(current_offset + piece.length < offset)
-      // size_t local_offset =
       return requested_text;
   }
-
 }
 
-uint32_t PieceOfTable::get_Text_Length()
-{
+
+uint32_t PieceOfTable::get_Text_Length() {
   uint32_t length = 0;
  for(const Piece& piece : piece_table){
    length += piece.length;
@@ -62,8 +49,21 @@ uint32_t PieceOfTable::get_Text_Length()
   return length;
 }
 
-QChar PieceOfTable::get_Char_At(size_t pos)
-{
+void PieceOfTable::print_Logs_Piece_Table(){
+  std::cout << "---Table---\n";
+  size_t itr = 0;
+  for( const Piece piece : piece_table){
+    std::cout << "piece : " << itr << "\n";
+    std::cout << "type: : " << piece.buffer_type << '\n';
+    std::cout << "offset : " << piece.offset << " ";
+    std::cout << "length : " << piece.length;
+    std::cout << "\n";
+    itr++;
+  }
+  std::cout << "---\n";
+}
+
+QChar PieceOfTable::get_Char_At(size_t pos) {
  for(const Piece& piece : piece_table){
    if(pos >= piece.offset && pos <= piece.length){
      if(piece.buffer_type == buffer::add_buffer){
@@ -75,15 +75,56 @@ QChar PieceOfTable::get_Char_At(size_t pos)
  }
 }
 
-QString PieceOfTable::get_Line(size_t offset, size_t length)
-{
-  for(const Piece &piece: piece_table) {
-    if(offset >= piece.offset && offset <= piece.length) {
-      if(piece.buffer_type == buffer::add_buffer) {
-        return add_buffer.mid(offset, length);
-      } else if(piece.buffer_type == buffer::read_only_buffer) {
-        return read_buffer.mid(offset, length);
+QString PieceOfTable::get_Line(size_t offset, size_t length) const {
+  size_t remaining_length = length;
+  size_t new_offset = offset;
+  QString line = "";
+  for(const Piece piece: piece_table) {
+    if(new_offset >= piece.offset && new_offset < piece.offset + piece.length) {
+        size_t length_from_piece = remaining_length > piece.length ? piece.length : remaining_length;
+        line += piece.buffer_type == buffer::add_buffer ? add_buffer.mid(new_offset - piece.offset, length_from_piece) : read_buffer.mid(new_offset - piece.offset, remaining_length);
+        remaining_length -= length_from_piece;
+        new_offset += length_from_piece;
+      if(remaining_length == 0) return line;
+     }
+   }
+  }
+
+void Piece::shrink_Front() {
+  this->offset++ && this->length--;
+}
+
+void Piece::shrink_Back() {
+  this->length--;
+}
+
+void Piece::shrink_Back(size_t _length) {
+  if(_length < this->length){
+    this->length -= _length;
+  }
+}
+
+void Piece::set_Length(size_t _length) {
+  this->length = _length;
+}
+
+
+void PieceOfTable::delete_Char(size_t offset) {
+  for(size_t itr = 0; itr <= piece_table.size(); ++itr){
+    Piece& piece = piece_table[itr];
+    if(offset >= piece.offset && offset <= piece.offset + piece.length){
+       if(offset == piece.offset) {
+        piece.shrink_Front();
+        } else if(offset == piece.offset + piece.length) {
+          piece.shrink_Back();
+        } else {
+          auto iterator = piece_table.begin() + itr;
+          piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
+          piece.set_Length(piece.offset + offset + );
+          print_Logs_Piece_Table();
+          break;
+        }
       }
     }
   }
-}
+  

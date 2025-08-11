@@ -1,8 +1,11 @@
 #pragma once
-#include <QString>
 #include "../UI/CodeUI.h"
 #include "../Text/PieceOfTable.h"
+#include <utility>
 
+
+class Cursor;
+class QString;
 class PieceOfTable;
 
 class TextEngine {
@@ -16,7 +19,7 @@ public:
 
     void set_Data_Structre(PieceOfTable* text_data_structure);
 
-    void delete_Char_Cursor(std::pair<int, int>);
+    void delete_Char_Cursor(std::pair<int, int> cursor_pos);
 
     size_t get_Lines_Count();
 

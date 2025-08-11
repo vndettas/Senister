@@ -24,6 +24,7 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
 void CodeUI::paintEvent(QPaintEvent* event) {
   QWidget::paintEvent(event);
   QPainter painter(this);
+
   
   // --Text setup--
   QFont text_font("Lucida Sans Typewriter", 10);

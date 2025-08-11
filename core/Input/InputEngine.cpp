@@ -16,6 +16,7 @@ void InputEngine::delete_Char_Cursor(){
 }
 
 void InputEngine::update_ui(){
+    assert(code_ui);
     code_ui->update();
 }
 
