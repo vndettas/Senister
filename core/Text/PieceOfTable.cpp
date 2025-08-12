@@ -64,15 +64,16 @@ void PieceOfTable::print_Logs_Piece_Table(){
 }
 
 QChar PieceOfTable::get_Char_At(size_t pos) {
- for(const Piece& piece : piece_table){
-   if(pos >= piece.offset && pos <= piece.length){
+ for(const Piece piece : piece_table){
+   if(pos >= piece.offset && pos <= piece.offset +  piece.length){
      if(piece.buffer_type == buffer::add_buffer){
-       return add_buffer.at(pos);
+       return add_buffer.at(pos - piece.offset);
      } else if(piece.buffer_type == buffer::read_only_buffer){
-       return read_buffer.at(pos);
+       return read_buffer.at(pos - piece.offset);
      }
    }
  }
+ return {};
 }
 
 QString PieceOfTable::get_Line(size_t offset, size_t length) const {
@@ -120,11 +121,12 @@ void PieceOfTable::delete_Char(size_t offset) {
         } else {
           auto iterator = piece_table.begin() + itr;
           piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
-          piece.set_Length(piece.offset + offset + );
+          piece.set_Length(piece.offset + offset);
           print_Logs_Piece_Table();
           break;
         }
       }
     }
+    
   }
   

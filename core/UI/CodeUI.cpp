@@ -1,4 +1,3 @@
-#include <QLayout>
 #include "CodeUI.h"
 
 
@@ -23,8 +22,9 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
 
 void CodeUI::paintEvent(QPaintEvent* event) {
   QWidget::paintEvent(event);
-  QPainter painter(this);
 
+  QPainter painter(this);
+  // Todo: the editor should handle case when there is no active files
   
   // --Text setup--
   QFont text_font("Lucida Sans Typewriter", 10);
@@ -35,19 +35,21 @@ void CodeUI::paintEvent(QPaintEvent* event) {
   // --Draws Ui--
   draw_Rectangles(&painter);
   draw_Lines(&painter);
-  
-  
+  // Pen for text
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
   
   // --Logic calculation--
+  // Current line used for handling cursor highlighting 
   size_t current_line_index = cursor->get_Current_Line_Index();
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
+
   // --Floats used to create smooth scrooling
+  // Editor renders only visible on screen lines so when we scroll line that is first on the bottom recalculated
   float first_visible_line=scroll_offset_y / line_height;
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
   uint32_t line_counter=first_visible_line;
   
-  // --Logic update--
+  // -- First visible line used also in LineNumerator 
   text_engine->setFirstVisibleLine(first_visible_line);
   
   while (line_counter <= visible_line_count) {
@@ -59,34 +61,22 @@ void CodeUI::paintEvent(QPaintEvent* event) {
       continue;
     }
     
-    // --Layout setup--
     QTextLayout text_layout(line.value(), text_font);
     text_layout.beginLayout();
     QTextLine text_line = text_layout.createLine();
+    // Area where line can be 
+    // If line bigger than this area it will be transfered to the next and basically will break all next lines :/
     text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
     text_layout.endLayout();
     
     // --Cursor logic--
     if (line_counter == current_line_index) {
-      QTextCharFormat selected_char_format;
-      selected_char_format.setFontPointSize(text_font.pointSizeF() + 1);
-      selected_char_format.setFontWeight(QFont::Bold);
-      
-      QTextLayout::FormatRange highlight;
-      highlight.start = cursor->get_Current_Symbol_Index();
-      highlight.length = 1;
-      highlight.format = selected_char_format;
-      
-      QVector<QTextLayout::FormatRange> formats;
-      formats.append(highlight);
-      text_layout.setFormats(formats);
+      draw_Cursor(&painter, &text_layout, &text_font);
     }
     
-    // --Qt check--
     if (text_line.isValid()) {
       text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y_offset));
     }
-    // --Logic update--
     ++line_counter;
     y_offset += line_spacing + 2;
   }
@@ -96,7 +86,6 @@ void CodeUI::paintEvent(QPaintEvent* event) {
 
 void CodeUI::resizeEvent(QResizeEvent *event) {
   QWidget::resizeEvent(event);
-  
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
 }
@@ -127,6 +116,22 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
     painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
   }
   
+  void CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font){
+    QTextCharFormat selected_char_format;
+    selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
+    selected_char_format.setFontWeight(QFont::Bold);
+    
+    //Symbol highlighting
+    QTextLayout::FormatRange highlight;
+    highlight.start = cursor->get_Current_Symbol_Index();
+    highlight.length = 1;
+    highlight.format = selected_char_format;
+    
+    QVector<QTextLayout::FormatRange> formats;
+    formats.append(highlight);
+    text_layout->setFormats(formats);
+    
+  }
   void CodeUI::draw_Lines(QPainter *painter) {
     painter->setPen(Constants::LINES_PEN);
     

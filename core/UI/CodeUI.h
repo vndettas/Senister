@@ -19,6 +19,7 @@
 #include "../Files/FileManager.h"
 #include "../Files/File.h"
 #include "../UI/FileBar.h"
+#include <QLayout>
 #include "../Input/InputEngine.h"
 
 
@@ -83,6 +84,8 @@ private :
     FileBar* file_bar = nullptr;
 
     void on_Scroll_Tick();
+
+    void draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
 
     void paintEvent(QPaintEvent *event) override;
 
