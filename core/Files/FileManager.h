@@ -1,5 +1,10 @@
-#pragma once
+// 
+// SPDX-License-Identifier: MIT
+// /file  : FileManager.h
+// Last modified: 2025-08-12 17:39
+// 
 
+#pragma once
 #include "File.h"
 #include <vector>
 #include <memory>

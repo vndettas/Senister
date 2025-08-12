@@ -1,3 +1,9 @@
+// 
+// SPDX-License-Identifier: MIT
+// /file  : NormalMode.cpp
+// Last modified: 2025-08-12 17:40
+// 
+
 #include "NormalMode.h"
 
 NormalMode::NormalMode(InputEngine *engine) : InputStrategy(engine){

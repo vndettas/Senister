@@ -1,3 +1,9 @@
+// 
+// SPDX-License-Identifier: MIT
+// /file  : PieceOfTable.h
+// Last modified: 2025-08-12 17:40
+// 
+
 #pragma once
 #include <array>
 #include <string>

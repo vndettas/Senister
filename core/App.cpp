@@ -1,3 +1,9 @@
+// 
+// SPDX-License-Identifier: MIT
+// /file  : App.cpp
+// Last modified: 2025-08-12 17:40
+// 
+
 #include "App.h"
 
 App::App()

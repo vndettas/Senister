@@ -1,5 +1,10 @@
-#pragma once
+// 
+// SPDX-License-Identifier: MIT
+// /file  : NormalMode.h
+// Last modified: 2025-08-12 17:40
+// 
 
+#pragma once
 #include "InputStrategy.h"
 
 class NormalMode : public InputStrategy {

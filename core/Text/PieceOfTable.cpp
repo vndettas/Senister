@@ -1,3 +1,9 @@
+// 
+// SPDX-License-Identifier: MIT
+// /file  : PieceOfTable.cpp
+// Last modified: 2025-08-12 17:40
+// 
+
 #include "PieceOfTable.h"
 
 std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath) {

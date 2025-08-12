@@ -1,3 +1,9 @@
+// 
+// SPDX-License-Identifier: MIT
+// /file  : File.cpp
+// Last modified: 2025-08-12 17:39
+// 
+
 #include "File.h"
 
 // File::File(std::shared_ptr<PieceOfTable> _piece_of_table, std::shared_ptr<TextEngine> _text_engine)
