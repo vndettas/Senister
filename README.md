@@ -1,6 +1,6 @@
 # **Project Description**
 
-Lightweight, cross-platform custom IDE built for personal use.
+Lightweight, custom IDE.
 Written in C++ using the Qt 6 framework and a custom Piece Table text data structure.
 
 # **Tested On**
