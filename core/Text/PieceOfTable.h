@@ -1,18 +1,18 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : PieceOfTable.h
-// Last modified: 2025-08-12 17:40
+// Last modified: 2025-08-14 20:27
 // 
 
 #pragma once
 #include <array>
 #include <string>
 #include <fstream>
-#include <QString>
 #include <iostream>
 #include <filesystem>
-#include <QDebug>
+#include <QString>
 
+class QString;
 
 
 enum class buffer{

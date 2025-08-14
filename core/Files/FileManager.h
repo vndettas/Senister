@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : FileManager.h
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-08-14 19:32
 // 
 
 #pragma once
@@ -17,8 +17,6 @@ class File;
 class FileManager {
 
 public:
-
-    // void add_File(File&& file) noexcept;
 
     const std::vector<std::shared_ptr<File>>& get_Files() const { return files; };
 

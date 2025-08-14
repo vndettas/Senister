@@ -65,8 +65,8 @@ target_link_libraries(Veditor Qt6::Core Qt6::Gui Qt6::Widgets)
 #------------Test-----------------
 enable_testing()
 add_executable(
-       PieceTableTest test/PieceTableTest.cc)
+       PieceTableTest test/PieceTableTest.cc ../core/Text/PieceOfTable.cpp)
 
-target_link_libraries( PieceTableTest GTest::gtest_main ) 
+target_link_libraries( PieceTableTest Qt6::Core GTest::gtest_main)
 include(GoogleTest)
 gtest_discover_tests(PieceTableTest)

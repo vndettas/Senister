@@ -1,15 +1,10 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : FileManager.cpp
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-08-14 19:32
 // 
 
 #include "FileManager.h"
-
-// void FileManager::add_File(File &&file) noexcept{
-//   files.push_back(std::move(file));
-// }
-
 void FileManager::add_File(std::shared_ptr<File> file){
     files.push_back(file);
     active_file = file;
