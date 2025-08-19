@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : PieceOfTable.h
-// Last modified: 2025-08-14 20:27
+// Last modified: 2025-08-19 11:59
 // 
 
 #pragma once
@@ -11,8 +11,6 @@
 #include <iostream>
 #include <filesystem>
 #include <QString>
-
-class QString;
 
 
 enum class buffer{
@@ -33,6 +31,8 @@ struct Piece {
 public:
 
     void shrink_Front();
+
+    void shrink_Front(size_t length);
 
     void shrink_Back();
 
@@ -64,8 +64,6 @@ public:
     std::string read_To_Const_Buffer(const std::filesystem::path filepath);
 
     void print_Logs_Piece_Table();
-
-    QString &get_Text_Range(size_t offset, size_t length);
 
     void insert(size_t offset, const std::string&);
 

@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : App.cpp
-// Last modified: 2025-08-12 17:40
+// Last modified: 2025-08-19 11:54
 // 
 
 #include "App.h"
@@ -18,5 +18,6 @@ App::App()
     file_manager->add_File(fourth_file);
     file_manager->add_File(fifth_file);
     window = std::make_unique<CodeUI>(file_manager);
+    
     window->show();
 }

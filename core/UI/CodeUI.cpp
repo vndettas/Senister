@@ -70,6 +70,7 @@ void CodeUI::paintEvent(QPaintEvent* event) {
     text_layout.endLayout();
     
     // --Cursor logic--
+    // Todo: separate in method
     if (line_counter == current_line_index) {
       draw_Cursor(&painter, &text_layout, &text_font);
     }

@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : PieceOfTable.cpp
-// Last modified: 2025-08-12 17:40
+// Last modified: 2025-08-19 11:58
 // 
 
 #include "PieceOfTable.h"
@@ -35,17 +35,6 @@ const std::vector<Piece>* PieceOfTable::get_Piece_Table() const {
 }
 
 Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length), buffer_type(bufferType) {}
-
-QString &PieceOfTable::get_Text_Range(size_t offset, size_t length) {
-  QString requested_text;
-  requested_text.reserve(length);
-  uint32_t current_offset=0;
-  for(auto piece: piece_table) {
-    if(current_offset + piece.length < offset)
-      return requested_text;
-  }
-}
-
 
 uint32_t PieceOfTable::get_Text_Length() {
   uint32_t length = 0;
@@ -95,6 +84,7 @@ QString PieceOfTable::get_Line(size_t offset, size_t length) const {
       if(remaining_length == 0) return line;
      }
    }
+   return line;
   }
 
 void Piece::shrink_Front() {
@@ -113,6 +103,11 @@ void Piece::shrink_Back(size_t _length) {
 
 void Piece::set_Length(size_t _length) {
   this->length = _length;
+}
+
+void Piece::shrink_Front(size_t length){
+  this->offset += length;
+  //
 }
 
 
