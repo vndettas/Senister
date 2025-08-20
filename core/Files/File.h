@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : File.h
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-08-20 17:52
 // 
 
 #pragma once
@@ -18,13 +18,15 @@ public:
 
     File(const std::filesystem::path path);
     
-    std::string get_File_Name() {return name; };
+    //Getters
 
-    size_t get_File_Name_Length() {return name.length(); };
+    std::string File_Name() {return name; };
+
+    size_t FIle_Name_Length() {return name.length(); };
     
-    PieceOfTable* get_Text_Data_Structure() { return text_data_structure.get(); };
+    PieceOfTable* Text_Data_Structure() { return text_data_structure.get(); };
 
-    TextEngine* get_Text_Engine() { return text_engine.get(); };
+    TextEngine* Text_Engine() { return text_engine.get(); };
 
 private:
 

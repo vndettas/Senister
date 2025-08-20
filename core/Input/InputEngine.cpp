@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : InputEngine.cpp
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-08-20 17:52
 // 
 
 #include "InputEngine.h"
@@ -17,7 +17,7 @@ current_strategy->handle_Key(event);
 }
 
 void InputEngine::delete_Char_Cursor(){
-    code_ui->get_Text_Engine()->delete_Char_Cursor(code_ui->get_Cursor()->get_Cursor_Position());
+    code_ui->Text_Engine()->delete_Char_Cursor(code_ui->get_Cursor()->get_Cursor_Position());
     update_ui();
 }
 

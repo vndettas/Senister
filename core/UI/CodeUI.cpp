@@ -10,7 +10,7 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
   input_engine = std::make_unique<InputEngine>(cursor.get(),this);
   file_bar = new FileBar(this, file_manager.get());
   // Todo : the editor should open with no active file and draw something like menu
-  set_Current_File(file_manager->get_Active_File());
+  set_Current_File(file_manager->Active_File());
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
@@ -170,17 +170,17 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
   
   void CodeUI::set_Current_File_Index(uint32_t index){
     file_manager->set_Active_File_Index(index);
-    set_Current_File(file_manager->get_Active_File());
+    set_Current_File(file_manager->Active_File());
     assert(line_numerator);
     update();
   }
   
   void CodeUI::set_Current_File(std::shared_ptr<File> file){
     current_file = file;
-    text_engine = file_manager->get_Active_File()->get_Text_Engine();
+    text_engine = file_manager->Active_File()->Text_Engine();
     assert(line_numerator);
     assert(text_engine);
-    text_data_structure = file_manager->get_Active_File()->get_Text_Data_Structure();
+    text_data_structure = file_manager->Active_File()->Text_Data_Structure();
     assert(line_numerator);
     line_numerator->set_Current_Text_Engine(text_engine);
     
@@ -190,6 +190,6 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
   return cursor.get();
  }
 
-TextEngine* CodeUI::get_Text_Engine(){
+TextEngine* CodeUI::Text_Engine(){
   return text_engine;
 }

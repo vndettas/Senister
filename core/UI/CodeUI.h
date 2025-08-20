@@ -47,7 +47,7 @@ public:
     
     void set_Current_File_Index(uint32_t index);
     
-    TextEngine* get_Text_Engine();
+    TextEngine* Text_Engine();
 
     Cursor* get_Cursor();
 
