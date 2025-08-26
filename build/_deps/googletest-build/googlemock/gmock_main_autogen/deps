@@ -1,0 +1,6 @@
+gmock_main_autogen/timestamp: \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googlemock/CMakeLists.txt \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googlemock/cmake/gmock.pc.in \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googlemock/cmake/gmock_main.pc.in \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googlemock/src/gmock_main.cc \
+	D:/Qt/Tools/CMake_64/bin/cmake.exe

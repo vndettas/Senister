@@ -1,0 +1,5 @@
+C:/Users/vovab/Documents/GitHub/Veditor/CMakeFiles/Veditor.dir
+C:/Users/vovab/Documents/GitHub/Veditor/CMakeFiles/edit_cache.dir
+C:/Users/vovab/Documents/GitHub/Veditor/CMakeFiles/rebuild_cache.dir
+C:/Users/vovab/Documents/GitHub/Veditor/CMakeFiles/Veditor_autogen_timestamp_deps.dir
+C:/Users/vovab/Documents/GitHub/Veditor/CMakeFiles/Veditor_autogen.dir

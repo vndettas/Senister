@@ -1,0 +1,15 @@
+gtest_main_autogen/timestamp: \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/CMakeLists.txt \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/cmake/Config.cmake.in \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/cmake/gtest.pc.in \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/cmake/gtest_main.pc.in \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/cmake/internal_utils.cmake \
+	C:/Users/vovab/Documents/GitHub/Veditor/build/_deps/googletest-src/googletest/src/gtest_main.cc \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPackageMessage.cmake \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPython.cmake \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPython/Support.cmake \
+	D:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake \
+	D:/Qt/Tools/CMake_64/bin/cmake.exe

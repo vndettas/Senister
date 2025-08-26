@@ -177,10 +177,10 @@ void CodeUI::draw_Rectangles(QPainter *painter) {
   
   void CodeUI::set_Current_File(std::shared_ptr<File> file){
     current_file = file;
-    text_engine = file_manager->Active_File()->Text_Engine();
+    text_engine = file_manager->Active_File()->text_Engine();
     assert(line_numerator);
     assert(text_engine);
-    text_data_structure = file_manager->Active_File()->Text_Data_Structure();
+    text_data_structure = file_manager->Active_File()->text_Data_Structure();
     assert(line_numerator);
     line_numerator->set_Current_Text_Engine(text_engine);
     

@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : File.h
-// Last modified: 2025-08-20 17:52
+// Last modified: 2025-08-26 13:01
 // 
 
 #pragma once
@@ -14,27 +14,23 @@ class TextEngine;
 class File {
 public:
 
-    File(){};
+    File                                                (const std::filesystem::path path);             
 
-    File(const std::filesystem::path path);
+    size_t                                              file_Name_Length();
     
-    //Getters
-
-    std::string File_Name() {return name; };
-
-    size_t FIle_Name_Length() {return name.length(); };
+    std::string                                         file_Name();
     
-    PieceOfTable* Text_Data_Structure() { return text_data_structure.get(); };
+    PieceOfTable*                                       text_Data_Structure();
 
-    TextEngine* Text_Engine() { return text_engine.get(); };
+    TextEngine*                                         text_Engine();
 
 private:
 
-    std::string name;
+    std::string                         name;
 
-    std::unique_ptr<PieceOfTable> text_data_structure;
+    std::unique_ptr<PieceOfTable>       text_data_structure;
 
-    std::unique_ptr<TextEngine> text_engine;
+    std::unique_ptr<TextEngine>         text_engine;
 
 
 };
