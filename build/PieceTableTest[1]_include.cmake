@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/vovab/Documents/GitHub/Veditor/build/PieceTableTest[1]_tests.cmake")
-  include("C:/Users/vovab/Documents/GitHub/Veditor/build/PieceTableTest[1]_tests.cmake")
-else()
-  add_test(PieceTableTest_NOT_BUILT PieceTableTest_NOT_BUILT)
-endif()
