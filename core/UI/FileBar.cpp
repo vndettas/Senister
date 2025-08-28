@@ -25,7 +25,7 @@ void FileBar::draw_Files(QPainter *painter) {
   uint32_t text_position_x = 3; 
   const int char_width = QWidget::fontMetrics().averageCharWidth();
   
-  std::vector<std::shared_ptr<File>> files = file_manager->Files();
+  std::vector<std::shared_ptr<File>> files = file_manager->files();
   uint32_t msg_end_x = 0;
 
   for(const std::shared_ptr<File> file : files){
@@ -36,7 +36,7 @@ void FileBar::draw_Files(QPainter *painter) {
     painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
 
-    if(file == file_manager->Active_File()){
+    if(file == file_manager->active_File()){
       // File that is open in current window
       painter->fillRect(text_position_x, 0, text_position_x + msg_size + Constants::FILE_BAR_TAB_WIDTH, Constants::FILE_BAR_HEIGHT, QColor(50, 50, 50));
       painter->drawText(text_position_x, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
@@ -78,5 +78,5 @@ void FileBar::draw_Lines(QPainter *painter){
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
   
   // I get vector of available  files from file manager 
-  std::vector<std::shared_ptr<File>> files = file_manager->Files();
+  std::vector<std::shared_ptr<File>> files = file_manager->files();
 }

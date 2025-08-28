@@ -1,24 +1,51 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : FileManager.cpp
-// Last modified: 2025-08-20 17:55
+// Last modified: 2025-08-28 15:06
 // 
 
 #include "FileManager.h"
-void FileManager::add_File(std::shared_ptr<File> file) {
-    files.push_back(file);
+
+void
+FileManager::add_File(std::shared_ptr<File> file)
+{
+
+    current_files.push_back(file);
     active_file = file;
+
 }
 
-void FileManager::set_Active_File_Index(uint32_t index) {
-    assert(files[index]);
-    active_file = files[index];
+const std::vector<std::shared_ptr<File>>&
+FileManager::files() const
+{
+
+    return current_files;
+
 }
-std::shared_ptr<File> FileManager::File_By_Index(uint32_t index) {
-    assert(files[index]);
-    return files[index];
+
+void
+FileManager::set_Active_File_Index(uint32_t index)
+{
+                                                                                                        //ToDo: make it range checking
+    assert(current_files[index]);
+    active_file = current_files[index];
+
 }
-std::shared_ptr<File> FileManager::Active_File() {
+
+std::shared_ptr<File>
+FileManager::file_By_Index(uint32_t index) const
+{
+    
+    assert(current_files[index]);
+    return current_files[index];
+
+}
+
+std::shared_ptr<File>
+FileManager::active_File() const
+{
+
     assert(active_file);
     return active_file;
+
 }

@@ -21,6 +21,7 @@ CMakeCache.txt
 cmake-*
 CMakeScripts/
 Makefile
+CMakeCache
 cmake_install.cmake
 compile_commands.json
 CTestTestfile.cmake
