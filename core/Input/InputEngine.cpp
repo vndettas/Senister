@@ -1,19 +1,29 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : InputEngine.cpp
-// Last modified: 2025-08-20 17:52
+// Last modified: 2025-08-29 01:55
 // 
 
 #include "InputEngine.h"
 #include "NormalMode.h"
 
-InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui){
+InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui)
+{
+    
+
     code_ui = _code_ui;
     current_strategy = std::make_unique<NormalMode>(this);
     cursor = _cursor;
+
+
 }
-void InputEngine::handle_Key(QKeyEvent *event){
-current_strategy->handle_Key(event);
+
+void
+InputEngine::handle_Key(QKeyEvent *event)
+{
+    
+    current_strategy->handle_Key(event);
+
 }
 
 void InputEngine::delete_Char_Cursor(){

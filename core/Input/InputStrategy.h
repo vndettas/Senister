@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : InputStrategy.h
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-09-01 22:25
 // 
 
 #pragma once
@@ -20,18 +20,18 @@ class InputStrategy {
 
 public:
 
-    InputStrategy(InputEngine *_engine) : engine(_engine){};
+    InputStrategy                                                           (InputEngine *_engine) : engine(_engine){};
 
-    virtual void handle_Key(QKeyEvent *key) = 0;
+    virtual void                                                            handle_Key(QKeyEvent *key) = 0;
 
 private:
 
-    virtual void init_Keys() = 0;
+    virtual void                                                            init_Keys() = 0;
 
 protected:
 
-    InputEngine* engine = nullptr;
+    InputEngine*                                        engine = nullptr;
 
-    std::map<Shortcut, function> key_bindings;
+    std::map<Shortcut, function>                        key_bindings;
 
 };

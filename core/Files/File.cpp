@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : File.cpp
-// Last modified: 2025-08-28 15:07
+// Last modified: 2025-08-28 18:51
 // 
 
 #include "File.h"
@@ -17,7 +17,7 @@ File::File(const std::filesystem::path file_path) {
 }
 
 size_t
-File::file_Name_Length()                           
+File::file_Name_Length() const                           
 {
 
   return name.length();
@@ -25,7 +25,7 @@ File::file_Name_Length()
 }
 
 std::string
-File::file_Name()
+File::file_Name() const
 {
 
   return name;
@@ -33,7 +33,7 @@ File::file_Name()
 }
 
 PieceOfTable*
-File::text_Data_Structure()
+File::text_Data_Structure() const
 {
 
   return text_data_structure.get();
@@ -41,7 +41,7 @@ File::text_Data_Structure()
 }
 
 TextEngine*
-File::text_Engine()
+File::text_Engine() const
 {
 
  return text_engine.get(); 

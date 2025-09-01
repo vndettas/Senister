@@ -1,7 +1,7 @@
 // 
 // SPDX-License-Identifier: MIT
 // /file  : CONSTANTS.h
-// Last modified: 2025-08-12 17:39
+// Last modified: 2025-08-29 01:50
 // 
 
 #pragma once
@@ -9,7 +9,9 @@
 #include <QBrush>
 #include <QPen>
 
-namespace Constants{
+namespace Constants {
+    
+
     // --Window & layout--
     inline constexpr uint32_t WINDOW_WIDTH = 1260;
     inline constexpr uint32_t WINDOW_HEIGHT = 720;
@@ -48,4 +50,6 @@ namespace Constants{
     inline const QColor TEXT_COLOR_WHITE_SOFT = QColor(249, 246, 238);            // Soft white text
     inline const QColor TEXT_COLOR_WHITE_PURE = QColor(255, 255, 255);            // Pure white (full intensity)
     inline const QColor TEXT_COLOR_GRAY_DARK = QColor(88, 88, 88);                // Dark gray color
+
+
 }
