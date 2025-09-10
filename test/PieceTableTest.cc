@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../core/Text/PieceOfTable.h"
+#include "../app/core/text/PieceOfTable.h"
 
 TEST(PieceTest, ShrinkBack){
   Piece piece_add{1, 5, buffer::add_buffer};
@@ -37,7 +37,7 @@ TEST(PieceTest, ShrinkBackLengthLessZero){
  piece_read_only.shrink_Back(8);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
-} 
+}
 
 TEST(PieceTest, ShrinkBackLength){
  Piece piece_add{2, 5, buffer::add_buffer};
@@ -45,7 +45,7 @@ TEST(PieceTest, ShrinkBackLength){
  piece_add.shrink_Back(4);
  piece_read_only.shrink_Back(4);
  EXPECT_EQ(piece_add.length, 1);
- EXPECT_EQ(piece_read_only.length, 1); 
+ EXPECT_EQ(piece_read_only.length, 1);
 }
 
 TEST(PieceTest, Idempotent){
@@ -59,5 +59,4 @@ TEST(PieceTest, Idempotent){
  EXPECT_EQ(piece_read_only.length, 5);
  EXPECT_EQ(piece_add.offset, 2);
  EXPECT_EQ(piece_read_only.offset, 2);
-} 
-
+}
