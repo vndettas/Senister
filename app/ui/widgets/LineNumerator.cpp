@@ -1,8 +1,20 @@
 #include <QInternal>
 #include "LineNumerator.h"
 
-void LineNumerator::paintEvent(QPaintEvent *event)
+LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f): text_engine(engine)
 {
+
+  setParent(parent);
+  parent_widget_ui = dynamic_cast<CodeUI *>(parent);
+  line_spacing = parent_widget_ui->getLineSpacing();
+
+}
+
+void
+LineNumerator::paintEvent(QPaintEvent *event)
+{
+
+
   assert(text_engine);
   QWidget::paintEvent(event);
   QPainter painter(this);
@@ -40,18 +52,15 @@ void LineNumerator::paintEvent(QPaintEvent *event)
     ++numeration_line;
     ++line_numerator_counter;
   }
+
+
 }
 
-LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f): text_engine(engine)
+void
+LineNumerator::set_Current_Text_Engine(TextEngine* _text_engine)
 {
-  setParent(parent);
-  parent_widget_ui = dynamic_cast<CodeUI *>(parent);
-  line_spacing = parent_widget_ui->getLineSpacing();
 
-}
-
-
-void LineNumerator::set_Current_Text_Engine(TextEngine* _text_engine){
   text_engine = _text_engine;
   update();
+
 }

@@ -1,6 +1,7 @@
 add_library(senister_core STATIC
 text/PieceOfTable.cpp
 text/TextEngine.cpp
+text/Piece.cpp
 files/File.cpp
 files/FileManager.cpp
 )

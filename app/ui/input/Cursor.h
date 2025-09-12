@@ -2,32 +2,31 @@
 #include <cstdint>
 #include <utility>
 
-class Cursor{
+class Cursor {
 public:
 
-    uint32_t get_Current_Line_Index(); 
+    void                                                                                setCurrentLine(uint32_t _current_line_index);
 
-    uint32_t get_Current_Symbol_Index();
+    void                                                                                setCurrentSymbolIndex(uint32_t _current_symbol_index);
 
-    std::pair<int, int> get_Cursor_Position();
+    void                                                                                move_Right();
 
-    void setCurrentLine(uint32_t _current_line_index);
-    
-    void setCurrentSymbolIndex(uint32_t _current_symbol_index);
-    
-    // --Movement--
-    void move_Right();
+    void                                                                                move_Up();
 
-    void move_Left();
+    void                                                                                move_Down();
 
-    void move_Up();
+    void                                                                                move_Left();
 
-    void move_Down();
+    std::pair<int, int>                                                                 get_Cursor_Position();
 
-private:    
+    uint32_t                                                                            get_Current_Symbol_Index();
 
-    uint32_t current_line_index = 1;
+    uint32_t                                                                            get_Current_Line_Index();
 
-    uint32_t current_symbol_index = 3;
+private:
+
+    uint32_t                                            current_line_index = 1;
+
+    uint32_t                                            current_symbol_index = 3;
 
 };

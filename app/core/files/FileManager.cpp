@@ -1,8 +1,8 @@
-// 
+//
 // SPDX-License-Identifier: MIT
 // /file  : FileManager.cpp
 // Last modified: 2025-08-28 15:06
-// 
+//
 
 #include "FileManager.h"
 
@@ -26,7 +26,6 @@ FileManager::files() const
 void
 FileManager::set_Active_File_Index(uint32_t index)
 {
-                                                                                                        //ToDo: make it range checking
     assert(current_files[index]);
     active_file = current_files[index];
 
@@ -35,7 +34,7 @@ FileManager::set_Active_File_Index(uint32_t index)
 std::shared_ptr<File>
 FileManager::file_By_Index(uint32_t index) const
 {
-    
+
     assert(current_files[index]);
     return current_files[index];
 

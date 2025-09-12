@@ -1,8 +1,8 @@
-// 
+//
 // SPDX-License-Identifier: MIT
 // /file  : PieceOfTable.h
 // Last modified: 2025-08-19 11:59
-// 
+//
 
 #pragma once
 #include <array>
@@ -15,7 +15,7 @@
 
 enum class buffer{
     add_buffer, read_only_buffer
-    
+
 };
 
 inline std::ostream& operator<<(std::ostream& os, buffer b) {
@@ -27,65 +27,39 @@ inline std::ostream& operator<<(std::ostream& os, buffer b) {
 }
 
 
-struct Piece {
-public:
-
-    void shrink_Front();
-
-    void shrink_Front(size_t length);
-
-    void shrink_Back();
-
-    void shrink_Back(size_t length);
-
-    void set_Length(size_t length);
-
-    size_t offset;
-
-    size_t length;
-
-    buffer buffer_type;
-
-    Piece(size_t offset, size_t length, buffer bufferType);
-
-};
-
     class PieceOfTable {
 public:
 
-    PieceOfTable(const std::filesystem::path);
+    PieceOfTable                                                        (const std::filesystem::path);
 
-    [[nodiscard]] QChar get_Char_At(size_t pos);
+    void                                                                insert(size_t offset, const std::string&);
 
-    uint32_t get_Text_Length();
+    void                                                                delete_Char(size_t offset);
 
-    QString get_Line(size_t offset, size_t length) const;
+    std::string                                                         read_To_Const_Buffer(const std::filesystem::path filepath);
 
-    std::string read_To_Const_Buffer(const std::filesystem::path filepath);
+    void                                                                erase(size_t offset, size_t length);
 
-    void print_Logs_Piece_Table();
+    [[nodiscard]] QChar                                                 get_Char_At(size_t pos);
 
-    void insert(size_t offset, const std::string&);
+    QString                                                             get_Line(size_t offset, size_t length) const;
 
-    void delete_Char(size_t offset);
+    uint32_t                                                            get_Text_Length();
 
-    void erase(size_t offset, size_t length);
+    void                                                                print_Logs_Piece_Table();
 
-        //Getters
-    [[nodiscard]] const  std::vector<Piece>* get_Piece_Table() const;
+    [[nodiscard]] const std::vector<Piece>*                             get_Piece_Table() const;
 
-    [[nodiscard]] QString* get_Read_Buffer() const;
+    [[nodiscard]] QString*                                              get_Read_Buffer() const;
 
-    QString &get_Add_Buffer() const;
+    QString                                                             &get_Add_Buffer() const;
 
 private:
 
-    const QString read_buffer;
+    const QString                                        read_buffer;
 
-     QString add_buffer;
+    QString                                              add_buffer;
 
-    std::vector<Piece> piece_table;
+    std::vector<Piece>                                   piece_table;
 
 };
-
-

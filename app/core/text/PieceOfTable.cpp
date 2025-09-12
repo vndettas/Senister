@@ -1,51 +1,79 @@
-// 
+//
 // SPDX-License-Identifier: MIT
 // /file  : PieceOfTable.cpp
 // Last modified: 2025-08-19 11:58
-// 
+//
 
 #include "PieceOfTable.h"
+#include "TextEngine.h"
 
-std::string PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath) {
+PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer()
+{
+
+
+  piece_table.reserve(10);
+  piece_table.emplace_back(Piece(0, read_buffer.size(), buffer::read_only_buffer));
+
+
+}
+
+std::string
+PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
+{
+
+
   std::ifstream istream(filepath);
   if(!istream){
     throw std::runtime_error("Failed to open file");
   }
   std::string str_buffer((std::istreambuf_iterator<char>(istream)), std::istreambuf_iterator<char>());
   return str_buffer;
+
+
 }
 
-PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer() {
-  piece_table.reserve(10);
-  piece_table.emplace_back(Piece(0, read_buffer.size(), buffer::read_only_buffer));
-}
+QString
+&PieceOfTable::get_Add_Buffer() const
+{
 
-QString &PieceOfTable::get_Add_Buffer() const {
   return (QString &) add_buffer;
+
 }
 
+QString*
+PieceOfTable::get_Read_Buffer() const
+{
 
-QString* PieceOfTable::get_Read_Buffer() const {
   return const_cast<QString *>(&read_buffer);
 
 }
 
-const std::vector<Piece>* PieceOfTable::get_Piece_Table() const {
+const std::vector<Piece>*
+PieceOfTable::get_Piece_Table() const
+{
   return &piece_table;
+
 }
 
-Piece::Piece(size_t offset, size_t length, buffer bufferType) : offset(offset), length(length), buffer_type(bufferType) {}
+uint32_t
+PieceOfTable::get_Text_Length()
+{
 
-uint32_t PieceOfTable::get_Text_Length() {
+
   uint32_t length = 0;
  for(const Piece& piece : piece_table){
    length += piece.length;
  }
   return length;
+
+
 }
 
-void PieceOfTable::print_Logs_Piece_Table(){
-  std::cout << "---Table---\n";
+void
+PieceOfTable::print_Logs_Piece_Table()
+{
+
+
   size_t itr = 0;
   for( const Piece piece : piece_table){
     std::cout << "piece : " << itr << "\n";
@@ -56,9 +84,14 @@ void PieceOfTable::print_Logs_Piece_Table(){
     itr++;
   }
   std::cout << "---\n";
+
+
 }
 
-QChar PieceOfTable::get_Char_At(size_t pos) {
+QChar
+PieceOfTable::get_Char_At(size_t pos)
+{
+
  for(const Piece piece : piece_table){
    if(pos >= piece.offset && pos <= piece.offset +  piece.length){
      if(piece.buffer_type == buffer::add_buffer){
@@ -69,9 +102,15 @@ QChar PieceOfTable::get_Char_At(size_t pos) {
    }
  }
  return {};
+
+
 }
 
-QString PieceOfTable::get_Line(size_t offset, size_t length) const {
+QString
+PieceOfTable::get_Line(size_t offset, size_t length) const
+{
+
+
   size_t remaining_length = length;
   size_t new_offset = offset;
   QString line = "";
@@ -85,33 +124,16 @@ QString PieceOfTable::get_Line(size_t offset, size_t length) const {
      }
    }
    return line;
-  }
 
-void Piece::shrink_Front() {
-  this->offset++ && this->length--;
-}
 
-void Piece::shrink_Back() {
-  this->length--;
-}
-
-void Piece::shrink_Back(size_t _length) {
-  if(_length < this->length){
-    this->length -= _length;
-  }
-}
-
-void Piece::set_Length(size_t _length) {
-  this->length = _length;
-}
-
-void Piece::shrink_Front(size_t length){
-  this->offset += length;
-  //
 }
 
 
-void PieceOfTable::delete_Char(size_t offset) {
+void
+PieceOfTable::delete_Char(size_t offset)
+{
+
+
   for(size_t itr = 0; itr <= piece_table.size(); ++itr){
     Piece& piece = piece_table[itr];
     if(offset >= piece.offset && offset <= piece.offset + piece.length){
@@ -128,6 +150,6 @@ void PieceOfTable::delete_Char(size_t offset) {
         }
       }
     }
-    
-  }
-  
+
+
+}

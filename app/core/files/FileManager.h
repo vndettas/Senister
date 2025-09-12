@@ -18,15 +18,15 @@ class FileManager {
 
 public:
 
-    const std::vector<std::shared_ptr<File>>&                   files() const;
+    void                                                        set_Active_File_Index(uint32_t index);
+
+    void                                                        add_File(std::shared_ptr<File> file);
 
     [[nodiscard]] std::shared_ptr<File>                         file_By_Index(uint32_t index) const;
 
     [[nodiscard]] std::shared_ptr<File>                         active_File() const;
 
-    void                                                        set_Active_File_Index(uint32_t index);
-
-    void                                                        add_File(std::shared_ptr<File> file);
+    const std::vector<std::shared_ptr<File>>&                   files() const;
 
 private:
 

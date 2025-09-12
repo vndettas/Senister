@@ -6,7 +6,8 @@
 
 #include "File.h"
 
-File::File(const std::filesystem::path file_path) {
+File::File(const std::filesystem::path file_path)
+{
 
 
   text_data_structure = std::make_unique<PieceOfTable>(file_path);

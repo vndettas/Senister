@@ -38,76 +38,72 @@ class CodeUI : public QWidget {
 
 public:
 
-   CodeUI(std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
-    const Qt::WindowFlags& f = Qt::Widget);
+    CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
+                                                                                const Qt::WindowFlags& f = Qt::Widget);
 
-    const uint32_t getLineSpacing() const;
+    void                                                                     set_Current_File_Index(uint32_t index);
 
-    void set_Current_File(std::shared_ptr<File> file);
+    void                                                                     set_Current_File(std::shared_ptr<File> file);
 
-    void set_Current_File_Index(uint32_t index);
+    const uint32_t                                                           getLineSpacing() const;
 
-    TextEngine* Text_Engine();
+    TextEngine*                                                              Text_Engine();
 
-    Cursor* get_Cursor();
+    Cursor*                                                                  get_Cursor();
+
+    void                                                                     on_Scroll_Tick();
+
+    void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
+
+    void                                                                     paintEvent(QPaintEvent *event) override;
+
+    void                                                                     draw_Rectangles(QPainter *painter);
+
+    void                                                                     draw_Lines(QPainter *painter);
 
     ~CodeUI(){};
 
 signals:
 
-  void key_Pressed(QKeyEvent* event);
+  void                                                                      key_Pressed(QKeyEvent* event);
 
 
 
 private :
 
-    std::shared_ptr<FileManager> file_manager;
+    std::shared_ptr<FileManager>                                file_manager;
 
-    std::shared_ptr<File> current_file;
+    std::shared_ptr<File>                                       current_file;
 
-    //Todo: make it unq ptr
+    TextEngine*                                                 text_engine = nullptr;
 
-    TextEngine* text_engine = nullptr;
+    PieceOfTable*                                               text_data_structure = nullptr;
 
-    PieceOfTable* text_data_structure = nullptr;
+    std::unique_ptr<InputEngine>                                input_engine;
 
-    std::unique_ptr<InputEngine> input_engine;
+    std::unique_ptr<Cursor>                                     cursor;
 
-    std::unique_ptr<Cursor> cursor;
+    QTimer*                                                     timer = nullptr;
 
-    //Todo: make it unq ptr
+    LineNumerator*                                              line_numerator = nullptr;
 
-    QTimer* timer = nullptr;
+    FileBar*                                                    file_bar = nullptr;
 
-    LineNumerator* line_numerator = nullptr;
+    float                                                       scroll_offset_y = 0;
 
-    FileBar* file_bar = nullptr;
+    float                                                       scroll_velocity = 0;
 
-    void on_Scroll_Tick();
+    const uint32_t                                              line_spacing = fontMetrics().lineSpacing();
 
-    void draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
+    const uint32_t                                              line_height = fontMetrics().height();
 
-    void paintEvent(QPaintEvent *event) override;
-
-    void draw_Rectangles(QPainter *painter);
-
-    void draw_Lines(QPainter *painter);
-
-    float scroll_offset_y = 0;
-
-    float scroll_velocity = 0;
-
-    const uint32_t line_spacing = fontMetrics().lineSpacing();
-
-    const uint32_t line_height = fontMetrics().height();
-
-    const uint32_t visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
+    const uint32_t                                              visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
+    void                                                                            resizeEvent(QResizeEvent *event) override;
 
-    void wheelEvent(QWheelEvent *event) override;
+    void                                                                            wheelEvent(QWheelEvent *event) override;
 
-    void keyPressEvent(QKeyEvent *event) override;
+    void                                                                            keyPressEvent(QKeyEvent *event) override;
 
 };
