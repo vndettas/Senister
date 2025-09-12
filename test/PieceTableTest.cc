@@ -28,8 +28,10 @@ TEST(PieceTest, ShrinkFrontLength){
  Piece piece_read_only{2, 5, buffer::read_only_buffer};
  piece_add.shrink_Front(4);
  piece_read_only.shrink_Front(4);
- EXPECT_EQ(piece_add.length, 0);
- EXPECT_EQ(piece_read_only.length, 0);
+ EXPECT_EQ(piece_add.length, 1);
+ EXPECT_EQ(piece_read_only.length, 1);
+ EXPECT_EQ(piece_read_only.offset, 6);
+ EXPECT_EQ(piece_add.offset, 6);
 }
 
 TEST(PieceTest, ShrinkBackLengthLessZero){
@@ -55,10 +57,42 @@ TEST(PieceTest, Idempotent){
  Piece piece_read_only{2, 5, buffer::read_only_buffer};
  piece_add.shrink_Back(0);
  piece_read_only.shrink_Back(0);
- piece_add.shrink_Front();
- piece_read_only.shrink_Front();
+ piece_add.shrink_Front(0);
+ piece_read_only.shrink_Front(0);
  EXPECT_EQ(piece_add.length, 5);
  EXPECT_EQ(piece_read_only.length, 5);
  EXPECT_EQ(piece_add.offset, 2);
  EXPECT_EQ(piece_read_only.offset, 2);
 }
+ TEST(PieceTest, FrontAllLength){
+ Piece piece_add{2, 5, buffer::add_buffer};
+ Piece piece_read_only{2, 5, buffer::read_only_buffer};
+ piece_read_only.shrink_Front(5);
+ piece_add.shrink_Front(5);
+ EXPECT_EQ(piece_add.length, 0);
+ EXPECT_EQ(piece_read_only.length, 0);
+ }
+
+ TEST(PieceTest, BackAllLength){
+ Piece piece_add{2, 5, buffer::add_buffer};
+ Piece piece_read_only{2, 5, buffer::read_only_buffer};
+ piece_add.shrink_Back(5);
+ piece_read_only.shrink_Back(5);
+ EXPECT_EQ(piece_add.length, 0);
+ EXPECT_EQ(piece_read_only.length, 0);
+ }
+
+ TEST(PieceTest, ZeroPiece){
+ Piece piece_add{0, 0, buffer::add_buffer};
+ Piece piece_read_only{0, 0, buffer::read_only_buffer};
+ piece_read_only.shrink_Back();
+ piece_read_only.shrink_Back(5);
+ piece_add.shrink_Back();
+ piece_add.shrink_Back(5);
+ piece_read_only.shrink_Front();
+ piece_read_only.shrink_Front(5);
+ piece_add.shrink_Front();
+ piece_add.shrink_Front(5);
+ EXPECT_EQ(piece_add.length, 0);
+ EXPECT_EQ(piece_read_only.length, 0);
+ }
