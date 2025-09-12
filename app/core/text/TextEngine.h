@@ -5,7 +5,7 @@
 //
 
 #pragma once
-#include <../core/text/PieceOfTable.h>
+#include "PieceOfTable.h"
 #include <utility>
 
 
@@ -15,6 +15,8 @@ class PieceOfTable;
 
 class TextEngine {
 public:
+
+    TextEngine()=delete;
 
     explicit TextEngine                                                             (PieceOfTable* textDataStructure);
 

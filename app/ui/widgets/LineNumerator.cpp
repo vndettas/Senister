@@ -4,6 +4,8 @@
 LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f): text_engine(engine)
 {
 
+  line_height = fontMetrics().height();
+  visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
   setParent(parent);
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);
   line_spacing = parent_widget_ui->getLineSpacing();

@@ -5,6 +5,7 @@
 //
 
 #pragma once
+#include "Piece.h"
 #include <array>
 #include <string>
 #include <fstream>
@@ -12,23 +13,13 @@
 #include <filesystem>
 #include <QString>
 
-
-enum class buffer{
-    add_buffer, read_only_buffer
-
-};
-
-inline std::ostream& operator<<(std::ostream& os, buffer b) {
-    switch (b) {
-        case buffer::add_buffer: return os << "add_buffer";
-        case buffer::read_only_buffer: return os << "read_only_buffer";
-        default: return os << "unknown";
-    }
-}
+class Piece;
 
 
-    class PieceOfTable {
+   class PieceOfTable {
 public:
+
+    PieceOfTable()=delete;
 
     PieceOfTable                                                        (const std::filesystem::path);
 

@@ -39,6 +39,7 @@ build.ninja
 *.pro.user
 *.qbs.user
 *.qmlc
+*.qt
 *.jsc
 *.rcc
 

@@ -11,13 +11,15 @@ class Shortcut {
 
 public:
 
-Shortcut                                                            (Qt::Key _key, Qt::KeyboardModifier _modifier = Qt::NoModifier);
+    Shortcut()=delete;
 
-friend bool operator<(const Shortcut& first,  const Shortcut& second){ return static_cast<int>(first.key) < static_cast<int>(second.key); };
+    Shortcut                                                            (Qt::Key _key, Qt::KeyboardModifier _modifier = Qt::NoModifier);
 
-inline Qt::Key                                                      get_Key() const;
+    friend bool operator<                                               (const Shortcut& first,  const Shortcut& second){ return static_cast<int>(first.key) < static_cast<int>(second.key); };
 
- Qt::KeyboardModifier                                               get_Modifier() const;
+    Qt::Key                                                             get_Key() const;
+
+    Qt::KeyboardModifier                                                get_Modifier() const;
 
 private:
 

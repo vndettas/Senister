@@ -32,7 +32,7 @@ private:
 
     std::vector<std::shared_ptr<File>>                   current_files;
 
-    std::shared_ptr<File>                                active_file;
+    std::shared_ptr<File>                                active_file = nullptr;
 
 
 };

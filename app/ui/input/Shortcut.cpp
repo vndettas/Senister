@@ -14,7 +14,7 @@ Shortcut::Shortcut(Qt::Key _key, Qt::KeyboardModifier _modifier)
 
 }
 Qt::Key
-Shortcut::get_Key()
+Shortcut::get_Key() const
 {
 
     return key;
@@ -22,7 +22,7 @@ Shortcut::get_Key()
 }
 
 Qt::KeyboardModifier
-Shortcut::get_Modifier()
+Shortcut::get_Modifier() const
 {
 
     return modifier;

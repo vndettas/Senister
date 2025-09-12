@@ -20,6 +20,8 @@ class InputStrategy {
 
 public:
 
+    InputStrategy()=delete;
+
     InputStrategy                                                           (InputEngine *_engine) : engine(_engine){};
 
     virtual void                                                            handle_Key(QKeyEvent *key) = 0;
@@ -30,7 +32,7 @@ private:
 
 protected:
 
-    InputEngine*                                        engine = nullptr;
+    InputEngine*                                        engine;
 
     std::map<Shortcut, function>                        key_bindings;
 

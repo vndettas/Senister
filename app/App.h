@@ -13,13 +13,13 @@ class App {
 
 public:
 
-    App();
+    App                                                     ();
 
 
 private:
 
-    std::unique_ptr<CodeUI> window;
+    std::unique_ptr<CodeUI>                        window;
 
-    std::shared_ptr<FileManager> file_Manager;
+    std::shared_ptr<FileManager>                   file_Manager;
 
 };

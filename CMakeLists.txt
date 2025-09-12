@@ -45,7 +45,7 @@ add_subdirectory(app/ui)
 #------------Test-----------------
 enable_testing()
 add_executable(
-       PieceTableTest test/PieceTableTest.cc app/core/text/PieceOfTable.cpp)
+       PieceTableTest test/PieceTableTest.cc app/core/text/PieceOfTable.cpp app/core/text/Piece.cpp)
 
 target_link_libraries( PieceTableTest Qt6::Core GTest::gtest_main)
 include(GoogleTest)

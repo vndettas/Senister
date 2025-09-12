@@ -22,13 +22,14 @@ public:
 
 private:
 
-    FileManager*                                                        file_manager = nullptr;
 
     void                                                                draw_Lines(QPainter *painter);
 
     void                                                                draw_Rectangles(QPainter *painter);
 
     void                                                                draw_Files(QPainter *painter);
+
+    FileManager*                                                        file_manager = nullptr;
 
 protected:
 

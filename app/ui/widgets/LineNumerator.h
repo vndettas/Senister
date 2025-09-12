@@ -15,21 +15,23 @@ class LineNumerator : public QWidget {
 
 public:
 
+    LineNumerator()=delete;
+
     LineNumerator                                                           (QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f = Qt::Widget);
 
     void                                                                    set_Current_Text_Engine(TextEngine* text_engine);
 
 private:
 
-    TextEngine*                     text_engine = nullptr;
+    TextEngine*                     text_engine;
 
     CodeUI*                         parent_widget_ui = nullptr;
 
     uint32_t                        line_spacing = 0;
 
-    const uint32_t                  line_height = fontMetrics().height();
+    uint32_t                        line_height;
 
-    const uint32_t                  visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
+    uint32_t                        visible_line_count;
 
 protected:
 

@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "../app/core/text/PieceOfTable.h"
+#include "../app/core/text/Piece.h"
+
 
 TEST(PieceTest, ShrinkBack){
   Piece piece_add{1, 5, buffer::add_buffer};

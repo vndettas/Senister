@@ -1,8 +1,8 @@
-// 
+//
 // SPDX-License-Identifier: MIT
 // /file  : CONSTANTS.h
 // Last modified: 2025-08-29 01:50
-// 
+//
 
 #pragma once
 #include <cstddef>
@@ -10,7 +10,7 @@
 #include <QPen>
 
 namespace Constants {
-    
+
 
     // --Window & layout--
     inline constexpr uint32_t WINDOW_WIDTH = 1260;
@@ -36,7 +36,7 @@ namespace Constants {
 
     // ---Brushes ---
     inline const QBrush CODE_BACKGROUND_BRUSH = QBrush(QColor(30, 31, 34));       // Main editor background
-    inline const QBrush FILE_BAR_BACKGROUND_BRUSH = QBrush(QColor(28, 29, 32));       // File Bar empty space   
+    inline const QBrush FILE_BAR_BACKGROUND_BRUSH = QBrush(QColor(28, 29, 32));       // File Bar empty space
     inline const QBrush FILE_BAR_ACTIVE_TAB = QBrush(QColor((92, 92, 86)));         // File Bar active tab
     inline const QBrush FILE_BAR_INACTIVE_TAB = QBrush(QColor(35, 35, 35));        // File Bar inactive tab
     inline const QBrush MENU_BACKGROUND_BRUSH = QBrush(QColor(56, 56, 56));       // Top menu background
@@ -44,8 +44,7 @@ namespace Constants {
 
     // --- Pens ---
     inline const QPen LINES_PEN =  QPen(LINE_NUMBER_BRUSH, 1, Qt::SolidLine);
-    
-    
+
     // --- Colors ---
     inline const QColor TEXT_COLOR_WHITE_SOFT = QColor(249, 246, 238);            // Soft white text
     inline const QColor TEXT_COLOR_WHITE_PURE = QColor(255, 255, 255);            // Pure white (full intensity)

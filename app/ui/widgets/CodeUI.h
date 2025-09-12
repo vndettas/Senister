@@ -38,6 +38,8 @@ class CodeUI : public QWidget {
 
 public:
 
+    CodeUI()=delete;
+
     CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
                                                                                 const Qt::WindowFlags& f = Qt::Widget);
 
@@ -75,9 +77,9 @@ private :
 
     std::shared_ptr<File>                                       current_file;
 
-    TextEngine*                                                 text_engine = nullptr;
+    TextEngine*                                                 text_engine;
 
-    PieceOfTable*                                               text_data_structure = nullptr;
+    PieceOfTable*                                               text_data_structure;
 
     std::unique_ptr<InputEngine>                                input_engine;
 
@@ -97,7 +99,7 @@ private :
 
     const uint32_t                                              line_height = fontMetrics().height();
 
-    const uint32_t                                              visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
+    uint32_t                                                    visible_line_count;
 
 protected:
     void                                                                            resizeEvent(QResizeEvent *event) override;
