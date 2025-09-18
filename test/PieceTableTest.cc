@@ -2,8 +2,14 @@
 #include "../app/core/text/PieceOfTable.h"
 #include "../app/core/text/Piece.h"
 
+class PieceTest : public testing::Test{
+    protected:
+  Piece piece_add{2, 5, buffer::add_buffer};
+  Piece piece_read_only{2, 5, buffer::read_only_buffer};
 
-TEST(PieceTest, ShrinkBack){
+};
+
+TEST(PieceTests, ShrinkBack){
   Piece piece_add{1, 5, buffer::add_buffer};
   Piece piece_read_only{1, 5, buffer::read_only_buffer};
   piece_add.shrink_Back();
@@ -12,9 +18,7 @@ TEST(PieceTest, ShrinkBack){
   EXPECT_EQ(piece_read_only.length, 4);
 }
 
-TEST(PieceTest, ShrinkFront){
-  Piece piece_add{2, 5, buffer::add_buffer};
-  Piece piece_read_only{2, 5, buffer::read_only_buffer};
+TEST_F(PieceTest, ShrinkFront){
   piece_add.shrink_Front();
   piece_read_only.shrink_Front();
   EXPECT_EQ(piece_add.offset, 3);
@@ -23,9 +27,7 @@ TEST(PieceTest, ShrinkFront){
   EXPECT_EQ(piece_read_only.length, 4);
 }
 
-TEST(PieceTest, ShrinkFrontLength){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+TEST_F(PieceTest, ShrinkFrontLength){
  piece_add.shrink_Front(4);
  piece_read_only.shrink_Front(4);
  EXPECT_EQ(piece_add.length, 1);
@@ -34,27 +36,21 @@ TEST(PieceTest, ShrinkFrontLength){
  EXPECT_EQ(piece_add.offset, 6);
 }
 
-TEST(PieceTest, ShrinkBackLengthLessZero){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+TEST_F(PieceTest, ShrinkBackLengthLessZero){
  piece_add.shrink_Back(8);
  piece_read_only.shrink_Back(8);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
 }
 
-TEST(PieceTest, ShrinkBackLength){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+TEST_F(PieceTest, ShrinkBackLength){
  piece_add.shrink_Back(4);
  piece_read_only.shrink_Back(4);
  EXPECT_EQ(piece_add.length, 1);
  EXPECT_EQ(piece_read_only.length, 1);
 }
 
-TEST(PieceTest, Idempotent){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+TEST_F(PieceTest, Idempotent){
  piece_add.shrink_Back(0);
  piece_read_only.shrink_Back(0);
  piece_add.shrink_Front(0);
@@ -64,25 +60,21 @@ TEST(PieceTest, Idempotent){
  EXPECT_EQ(piece_add.offset, 2);
  EXPECT_EQ(piece_read_only.offset, 2);
 }
- TEST(PieceTest, FrontAllLength){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+ TEST_F(PieceTest, FrontShrinkAllLength){
  piece_read_only.shrink_Front(5);
  piece_add.shrink_Front(5);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
  }
 
- TEST(PieceTest, BackAllLength){
- Piece piece_add{2, 5, buffer::add_buffer};
- Piece piece_read_only{2, 5, buffer::read_only_buffer};
+ TEST_F(PieceTest, BackShrinkAllLength){
  piece_add.shrink_Back(5);
  piece_read_only.shrink_Back(5);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
  }
 
- TEST(PieceTest, ZeroPiece){
+ TEST(PieceTests, ZeroPiece){
  Piece piece_add{0, 0, buffer::add_buffer};
  Piece piece_read_only{0, 0, buffer::read_only_buffer};
  piece_read_only.shrink_Back();
