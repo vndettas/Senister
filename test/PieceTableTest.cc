@@ -2,23 +2,13 @@
 #include "../app/core/text/PieceOfTable.h"
 #include "../app/core/text/Piece.h"
 
-class PieceTest : public testing::Test{
+class PieceTestSmallBuffers : public testing::Test{
     protected:
   Piece piece_add{2, 5, buffer::add_buffer};
   Piece piece_read_only{2, 5, buffer::read_only_buffer};
 
 };
-
-TEST(PieceTests, ShrinkBack){
-  Piece piece_add{1, 5, buffer::add_buffer};
-  Piece piece_read_only{1, 5, buffer::read_only_buffer};
-  piece_add.shrink_Back();
-  piece_read_only.shrink_Back();
-  EXPECT_EQ(piece_add.length, 4);
-  EXPECT_EQ(piece_read_only.length, 4);
-}
-
-TEST_F(PieceTest, ShrinkFront){
+TEST_F(PieceTestSmallBuffers, ShrinkFront){
   piece_add.shrink_Front();
   piece_read_only.shrink_Front();
   EXPECT_EQ(piece_add.offset, 3);
@@ -27,7 +17,7 @@ TEST_F(PieceTest, ShrinkFront){
   EXPECT_EQ(piece_read_only.length, 4);
 }
 
-TEST_F(PieceTest, ShrinkFrontLength){
+TEST_F(PieceTestSmallBuffers, ShrinkFrontLength){
  piece_add.shrink_Front(4);
  piece_read_only.shrink_Front(4);
  EXPECT_EQ(piece_add.length, 1);
@@ -36,21 +26,21 @@ TEST_F(PieceTest, ShrinkFrontLength){
  EXPECT_EQ(piece_add.offset, 6);
 }
 
-TEST_F(PieceTest, ShrinkBackLengthLessZero){
+TEST_F(PieceTestSmallBuffers, ShrinkBackLengthLessZero){
  piece_add.shrink_Back(8);
  piece_read_only.shrink_Back(8);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
 }
 
-TEST_F(PieceTest, ShrinkBackLength){
+TEST_F(PieceTestSmallBuffers, ShrinkBackLength){
  piece_add.shrink_Back(4);
  piece_read_only.shrink_Back(4);
  EXPECT_EQ(piece_add.length, 1);
  EXPECT_EQ(piece_read_only.length, 1);
 }
 
-TEST_F(PieceTest, Idempotent){
+TEST_F(PieceTestSmallBuffers, Idempotent){
  piece_add.shrink_Back(0);
  piece_read_only.shrink_Back(0);
  piece_add.shrink_Front(0);
@@ -60,23 +50,28 @@ TEST_F(PieceTest, Idempotent){
  EXPECT_EQ(piece_add.offset, 2);
  EXPECT_EQ(piece_read_only.offset, 2);
 }
- TEST_F(PieceTest, FrontShrinkAllLength){
+ TEST_F(PieceTestSmallBuffers, FrontShrinkAllLength){
  piece_read_only.shrink_Front(5);
  piece_add.shrink_Front(5);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
  }
 
- TEST_F(PieceTest, BackShrinkAllLength){
+ TEST_F(PieceTestSmallBuffers, BackShrinkAllLength){
  piece_add.shrink_Back(5);
  piece_read_only.shrink_Back(5);
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
  }
 
- TEST(PieceTests, ZeroPiece){
- Piece piece_add{0, 0, buffer::add_buffer};
- Piece piece_read_only{0, 0, buffer::read_only_buffer};
+ class PieceTestZeroBuffers : public testing::Test{
+     protected:
+
+   Piece piece_add{0, 0, buffer::add_buffer};
+   Piece piece_read_only{0, 0, buffer::read_only_buffer};
+ };
+
+ TEST_F(PieceTestZeroBuffers, ZeroPiece){
  piece_read_only.shrink_Back();
  piece_read_only.shrink_Back(5);
  piece_add.shrink_Back();
@@ -88,3 +83,40 @@ TEST_F(PieceTest, Idempotent){
  EXPECT_EQ(piece_add.length, 0);
  EXPECT_EQ(piece_read_only.length, 0);
  }
+
+TEST(PieceTests, ShrinkBack){
+  Piece piece_add{1, 5, buffer::add_buffer};
+  Piece piece_read_only{1, 5, buffer::read_only_buffer};
+  piece_add.shrink_Back();
+  piece_read_only.shrink_Back();
+  EXPECT_EQ(piece_add.length, 4);
+  EXPECT_EQ(piece_read_only.length, 4);
+}
+
+class PieceOfTableReadOnlyInitialized : public testing::Test{
+    protected:
+    PieceOfTableReadOnlyInitialized() : table{QStringLiteral("abcvddfgjdfjgdfgdfgjfdgfjdklsgdsfgdsfgd")}
+    {
+
+    }
+
+    PieceOfTable table;
+
+};
+
+TEST_F(PieceOfTableReadOnlyInitialized, TableInitialization){
+  EXPECT_EQ(table.get_Read_Buffer()->length(), 39);
+}
+
+TEST_F(PieceOfTableReadOnlyInitialized, GetCharAt){
+  EXPECT_EQ(table.get_Char_At(1), QChar{'b'});
+  EXPECT_EQ(table.get_Char_At(6), QChar{'f'});
+}
+
+TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtZero){
+  EXPECT_EQ(table.get_Char_At(0), QChar{'a'});
+}
+
+TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtMinus){
+    EXPECT_EQ(table.get_Char_At(-5), QChar{});
+}

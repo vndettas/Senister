@@ -5,8 +5,11 @@
 //
 
 #pragma once
+#include <vector>
+#include <optional>
 #include "PieceOfTable.h"
 #include <utility>
+#include <cstdint>
 
 
 class Cursor;

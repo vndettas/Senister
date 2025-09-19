@@ -86,7 +86,7 @@ TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos)
 {
 
   uint32_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
-  text_data_structure->delete_Char(offset);
+  text_data_structure->erase(offset);
   calculate_Indexes();
 
 }

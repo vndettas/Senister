@@ -6,7 +6,9 @@
 
 #pragma once
 #include "Piece.h"
+#include "TextEngine.h"
 #include <array>
+#include <cstddef>
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -21,15 +23,17 @@ public:
 
     PieceOfTable()=delete;
 
+    PieceOfTable                                                        (const QString&);
+
     PieceOfTable                                                        (const std::filesystem::path);
 
     void                                                                insert(size_t offset, const std::string&);
 
-    void                                                                delete_Char(size_t offset);
-
     std::string                                                         read_To_Const_Buffer(const std::filesystem::path filepath);
 
     void                                                                erase(size_t offset, size_t length);
+
+    void                                                                erase(size_t offset);
 
     [[nodiscard]] QChar                                                 get_Char_At(size_t pos);
 

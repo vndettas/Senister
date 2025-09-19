@@ -5,14 +5,26 @@
 //
 
 #include "PieceOfTable.h"
+#include "Piece.h"
 #include "TextEngine.h"
+#include <cstddef>
 
-PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer(QString::fromStdString((read_To_Const_Buffer(filepath)))), add_buffer()
+PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{QString::fromStdString((read_To_Const_Buffer(filepath)))}, add_buffer{}
+{
+
+ //later reserve more but now vector reallocation should be tested
+  piece_table.reserve(1);
+  piece_table.emplace_back(Piece{0, read_buffer.size(), buffer::read_only_buffer});
+
+
+}
+
+PieceOfTable::PieceOfTable(const QString &_string) : read_buffer{_string}, add_buffer{}
 {
 
 
-  piece_table.reserve(10);
-  piece_table.emplace_back(Piece(0, read_buffer.size(), buffer::read_only_buffer));
+ piece_table.reserve(1);
+ piece_table.emplace_back(Piece{0, read_buffer.size(), buffer::read_only_buffer});
 
 
 }
@@ -31,6 +43,7 @@ PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
 
 
 }
+
 
 QString
 &PieceOfTable::get_Add_Buffer() const
@@ -128,10 +141,8 @@ PieceOfTable::get_Line(size_t offset, size_t length) const
 
 }
 
-
 void
-PieceOfTable::delete_Char(size_t offset)
-{
+PieceOfTable::erase(size_t offset){
 
 
   for(size_t itr = 0; itr <= piece_table.size(); ++itr){
