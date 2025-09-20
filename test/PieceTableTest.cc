@@ -93,9 +93,15 @@ TEST(PieceTests, ShrinkBack){
   EXPECT_EQ(piece_read_only.length, 4);
 }
 
-class PieceOfTableReadOnlyInitialized : public testing::Test{
+TEST(PieceOfTableGetLengthMethod, TableInitialization){
+  PieceOfTable table{QStringLiteral("abcvddfgjdfjgdfgdfgjfdgfjdklsgdsfgdsfgd")};
+  EXPECT_EQ(table.get_Read_Buffer()->length(), QStringLiteral("abcvddfgjdfjgdfgdfgjfdgfjdklsgdsfgdsfgd").length());
+
+}
+
+class PieceOfTableGetCharMethod : public testing::Test{
     protected:
-    PieceOfTableReadOnlyInitialized() : table{QStringLiteral("abcvddfgjdfjgdfgdfgjfdgfjdklsgdsfgdsfgd")}
+    PieceOfTableGetCharMethod() : table{QStringLiteral("abcvddfgjdfjgdfgdfgjfdgfjdklsgdsfgdsfgd")}
     {
 
     }
@@ -104,24 +110,36 @@ class PieceOfTableReadOnlyInitialized : public testing::Test{
 
 };
 
-TEST_F(PieceOfTableReadOnlyInitialized, TableInitialization){
-  EXPECT_EQ(table.get_Read_Buffer()->length(), 39);
-}
-
-TEST_F(PieceOfTableReadOnlyInitialized, GetCharAt){
+TEST_F(PieceOfTableGetCharMethod, GetCharAt){
   EXPECT_EQ(table.get_Char_At(1), QChar{'b'});
   EXPECT_EQ(table.get_Char_At(6), QChar{'f'});
 }
 
-TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtZero){
+TEST_F(PieceOfTableGetCharMethod, GetCharAtZero){
   EXPECT_EQ(table.get_Char_At(0), QChar{'a'});
 }
 
-TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtMinus){
-    EXPECT_EQ(table.get_Char_At(-5), QChar{});
+TEST_F(PieceOfTableGetCharMethod, GetCharAtMinus){
+  EXPECT_EQ(table.get_Char_At(-5), QChar{});
 }
 
-TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtBiggerThanTextItself){
-    EXPECT_EQ(table.get_Char_At(45), QChar{});
-    EXPECT_EQ(table.get_Char_At(1239123891283129381923819), QChar{});
+TEST_F(PieceOfTableGetCharMethod, GetCharAtBiggerThanTextItself){
+  EXPECT_EQ(table.get_Char_At(45), QChar{});
+  EXPECT_EQ(table.get_Char_At(1239123891283129381923819), QChar{});
+}
+
+class PieceOfTableEraseMethod : public testing::Test{
+    protected:
+    PieceOfTableEraseMethod() : table{QStringLiteral("I lost all my friends today")}
+    {
+
+    }
+
+    PieceOfTable table;
+};
+
+TEST_F(PieceOfTableEraseMethod, ZeroCharacter){
+    table.erase(0);
+    table.print_Logs_Piece_Table();
+    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 1);
 }

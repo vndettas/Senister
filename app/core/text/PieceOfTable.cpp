@@ -8,6 +8,7 @@
 #include "Piece.h"
 #include "TextEngine.h"
 #include <cstddef>
+#include <vector>
 
 PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{QString::fromStdString((read_To_Const_Buffer(filepath)))}, add_buffer{}
 {
@@ -50,6 +51,14 @@ QString
 {
 
   return (QString &) add_buffer;
+
+}
+
+std::vector<Piece>
+PieceOfTable::get_Piece_Vector() const
+{
+
+    return piece_table;
 
 }
 

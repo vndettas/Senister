@@ -49,6 +49,8 @@ public:
 
     QString                                                             &get_Add_Buffer() const;
 
+    std::vector<Piece>                                                  get_Piece_Vector() const;
+
 private:
 
     const QString                                        read_buffer;

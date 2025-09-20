@@ -97,12 +97,9 @@ void
 CodeUI::resizeEvent(QResizeEvent *event)
 {
 
-
   QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
-
-
 
 }
 
@@ -136,12 +133,12 @@ void
 CodeUI::draw_Rectangles(QPainter *painter)
 {
 
-
   painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
   painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET,
-    width() - Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_LINES_Y_OFFSET,
-    Constants::CODE_BACKGROUND_BRUSH);
-    painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
+  width() - Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_LINES_Y_OFFSET,
+  Constants::CODE_BACKGROUND_BRUSH);
+  painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, height(), Constants::MENU_BACKGROUND_BRUSH);
+
   }
 
   void CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font){
