@@ -1,4 +1,5 @@
 #include "CodeUI.h"
+#include <cstdint>
 
 
 CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
@@ -33,37 +34,35 @@ CodeUI::paintEvent(QPaintEvent* event)
   QWidget::paintEvent(event);
 
   QPainter painter(this);
-  // Todo: the editor should handle case when there is no active files
 
-  // --Text setup--
   QFont text_font("Lucida Sans Typewriter", 10);
   text_font.setStyleStrategy(QFont::PreferAntialias);
   painter.setRenderHint(QPainter::Antialiasing, true);
   text_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
 
-  // --Draws Ui--
   draw_Rectangles(&painter);
   draw_Lines(&painter);
-  // Pen for text
+  //-- Text pen --
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
-  // --Logic calculation--
-  // Current line used for handling cursor highlighting
+  // -- Current line one on which cursor currently located --
   size_t current_line_index = cursor->get_Current_Line_Index();
+  // --Position where code area starts--
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
 
-  // --Floats used to create smooth scrooling
-  // Editor renders only visible on screen lines so when we scroll line that is first on the bottom recalculated
+  // -- First visible line one which is first in code area --
   float first_visible_line=scroll_offset_y / line_height;
+  std::cout << first_visible_line << '\n';
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
+  std::cout << y_offset_first_line << '\n';
   uint32_t line_counter=first_visible_line;
 
-  // -- First visible line used also in LineNumerator
+  // -- First visible line used also in LineNumerator --
   text_engine->setFirstVisibleLine(first_visible_line);
 
   while (line_counter <= visible_line_count) {
-    // --Here we check if line exists, if not we dont have to print it--
-    // --So our file contains 10 lines of code but on the screen can be shown 42 we will print only 10 and wont print empty lines--
+    // -- Here we check if line exists, if not we dont have to print it --
+    // -- So our file contains 10 lines of code but on the screen can be shown 42 we will print only 10 and wont print empty lines --
     std::optional<QString> line = text_engine->get_Line(line_counter);
     if (!line) {
       ++line_counter;
@@ -73,13 +72,11 @@ CodeUI::paintEvent(QPaintEvent* event)
     QTextLayout text_layout(line.value(), text_font);
     text_layout.beginLayout();
     QTextLine text_line = text_layout.createLine();
-    // Area where line can be
-    // If line bigger than this area it will be transfered to the next and basically will break all next lines :/
+    // -- Area where line can be --
+    // -- If line bigger than this area it will be transfered to the next and basically will break all next lines :/ --
     text_line.setLineWidth(width() - Constants::CODE_LINES_X_OFFSET);
     text_layout.endLayout();
 
-    // --Cursor logic--
-    // Todo: separate in method
     if (line_counter == current_line_index) {
       draw_Cursor(&painter, &text_layout, &text_font);
     }
@@ -114,7 +111,7 @@ CodeUI::wheelEvent(QWheelEvent *event)
 {
 
   QWidget::wheelEvent(event);
-  scroll_velocity -= event->angleDelta().y()/11;
+  scroll_velocity -= event->angleDelta().y()/13;
   if(!timer->isActive()) timer->start(1000/120);
   update();
 
@@ -123,9 +120,10 @@ CodeUI::wheelEvent(QWheelEvent *event)
 void
 CodeUI::on_Scroll_Tick()
 {
-
+    // Basic inertia algorithm
   if((scroll_offset_y + scroll_velocity) > 0) scroll_offset_y += scroll_velocity;
-  scroll_velocity = scroll_velocity * 0.92;
+    // Every frame makes velocity smaller till very small
+  scroll_velocity = scroll_velocity * 0.96;
   if (std::abs(scroll_velocity) < 0.01f) {
     timer->stop();
     scroll_velocity = 0.0f;

@@ -15,7 +15,7 @@ namespace Constants {
     // --Window & layout--
     inline constexpr uint32_t WINDOW_WIDTH = 1260;
     inline constexpr uint32_t WINDOW_HEIGHT = 720;
-    inline constexpr uint32_t FPS = 90;
+    inline constexpr uint32_t FPS = 120;
     inline constexpr uint32_t DELAY = 1000/FPS;
 
     // --Numerator plugin--

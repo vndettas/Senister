@@ -105,6 +105,8 @@ QChar
 PieceOfTable::get_Char_At(size_t pos)
 {
 
+    if(pos > this->get_Text_Length()) return {};
+
  for(const Piece piece : piece_table){
    if(pos >= piece.offset && pos <= piece.offset +  piece.length){
      if(piece.buffer_type == buffer::add_buffer){

@@ -120,3 +120,8 @@ TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtZero){
 TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtMinus){
     EXPECT_EQ(table.get_Char_At(-5), QChar{});
 }
+
+TEST_F(PieceOfTableReadOnlyInitialized, GetCharAtBiggerThanTextItself){
+    EXPECT_EQ(table.get_Char_At(45), QChar{});
+    EXPECT_EQ(table.get_Char_At(1239123891283129381923819), QChar{});
+}
