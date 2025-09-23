@@ -13,10 +13,11 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
-#include <QString>
+#include <qt6/QtCore/QChar>
+#include <qt6/QtCore/QString>
 
 class Piece;
-
+class QString;
 
    class PieceOfTable {
 public:
@@ -41,7 +42,7 @@ public:
 
     uint32_t                                                            get_Text_Length();
 
-    void                                                                print_Logs_Piece_Table();
+    void                                                                print_Logs();
 
     [[nodiscard]] const std::vector<Piece>*                             get_Piece_Table() const;
 

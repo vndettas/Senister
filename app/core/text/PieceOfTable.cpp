@@ -8,6 +8,7 @@
 #include "Piece.h"
 #include "TextEngine.h"
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 
 PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{QString::fromStdString((read_To_Const_Buffer(filepath)))}, add_buffer{}
@@ -15,7 +16,8 @@ PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{Q
 
  //later reserve more but now vector reallocation should be tested
   piece_table.reserve(1);
-  piece_table.emplace_back(Piece{0, read_buffer.size(), buffer::read_only_buffer});
+  size_t size = read_buffer.size() - 1;
+  piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
 
 }
@@ -25,7 +27,8 @@ PieceOfTable::PieceOfTable(const QString &_string) : read_buffer{_string}, add_b
 
 
  piece_table.reserve(1);
- piece_table.emplace_back(Piece{0, read_buffer.size(), buffer::read_only_buffer});
+ size_t size = read_buffer.size() - 1;
+ piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
 
 }
@@ -92,7 +95,7 @@ PieceOfTable::get_Text_Length()
 }
 
 void
-PieceOfTable::print_Logs_Piece_Table()
+PieceOfTable::print_Logs()
 {
 
 
@@ -156,21 +159,26 @@ void
 PieceOfTable::erase(size_t offset){
 
 
+  uint32_t piece_table_global_offset = 0;
   for(size_t itr = 0; itr <= piece_table.size(); ++itr){
     Piece& piece = piece_table[itr];
-    if(offset >= piece.offset && offset <= piece.offset + piece.length){
-       if(offset == piece.offset) {
+    if(offset >= piece_table_global_offset && offset <= piece_table_global_offset + piece.length){
+       if(offset == piece_table_global_offset) {
         piece.shrink_Front();
-        } else if(offset == piece.offset + piece.length) {
+        break;
+        } else if(offset == piece_table_global_offset + piece.length) {
           piece.shrink_Back();
+          break;
         } else {
+            //This still broken baby
           auto iterator = piece_table.begin() + itr;
           piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
           piece.set_Length(piece.offset + offset);
-          print_Logs_Piece_Table();
+          print_Logs();
           break;
         }
       }
+        piece_table_global_offset += piece.length;
     }
 
 

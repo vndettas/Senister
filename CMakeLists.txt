@@ -33,11 +33,6 @@ FetchContent_MakeAvailable(googletest)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 
-#target_compile_definitions( Senister
-#PRIVATE
-#$<$<CONFIG:Release>:QT_NO_DEBUG_OUTPUT>
-#)
-
 add_subdirectory(app/core)
 add_subdirectory(app/ui)
 
@@ -45,8 +40,11 @@ add_subdirectory(app/ui)
 #------------Test-----------------
 enable_testing()
 add_executable(
-       PieceTableTest test/PieceTableTest.cc app/core/text/PieceOfTable.cpp app/core/text/Piece.cpp)
+TextEngineTest test/TextEngineTest.cc app/core/text/TextEngine.cpp app/core/text/PieceOfTable.cpp app/core/text/Piece.cpp)
+add_executable(
+PieceTableTest test/PieceTableTest.cc app/core/text/PieceOfTable.cpp app/core/text/Piece.cpp)
 
-target_link_libraries( PieceTableTest Qt6::Core GTest::gtest_main)
+target_link_libraries(PieceTableTest Qt6::Core GTest::gtest_main)
+target_link_libraries(TextEngineTest Qt6::Core GTest::gtest_main)
 include(GoogleTest)
-gtest_discover_tests(PieceTableTest)
+gtest_discover_tests(PieceTableTest TextEngine)

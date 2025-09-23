@@ -52,9 +52,7 @@ CodeUI::paintEvent(QPaintEvent* event)
 
   // -- First visible line one which is first in code area --
   float first_visible_line=scroll_offset_y / line_height;
-  std::cout << first_visible_line << '\n';
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
-  std::cout << y_offset_first_line << '\n';
   uint32_t line_counter=first_visible_line;
 
   // -- First visible line used also in LineNumerator --

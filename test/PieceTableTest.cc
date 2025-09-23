@@ -136,10 +136,28 @@ class PieceOfTableEraseMethod : public testing::Test{
     }
 
     PieceOfTable table;
+
+    QString text{"I lost all my friends today"};
 };
 
 TEST_F(PieceOfTableEraseMethod, ZeroCharacter){
-    table.erase(0);
-    table.print_Logs_Piece_Table();
-    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 1);
+  table.erase(0);
+  EXPECT_EQ(table.get_Piece_Vector()[0].offset, 1);
+}
+
+TEST_F(PieceOfTableEraseMethod, ZeroCharacterTwice){
+  table.erase(0);
+  table.erase(0);
+  EXPECT_EQ(table.get_Piece_Vector()[0].offset, 2);
+}
+
+TEST_F(PieceOfTableEraseMethod, LastCharInPiece){
+  uint32_t piece_length = table.get_Piece_Vector()[0].length;
+  table.print_Logs();
+  table.erase(text.length()-1);
+  --piece_length;
+  EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
+  --piece_length;
+  table.print_Logs();
+  EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
 }

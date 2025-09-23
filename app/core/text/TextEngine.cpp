@@ -20,11 +20,11 @@ TextEngine::get_Line(size_t index)
 
 
   size_t line_index = index  > 0 ? (index - 1) : 0;
-  if(index < line_index_offset.size() - 1) {
+  if(index == line_index_offset.size()){
+      return text_data_structure->get_Line(line_index_offset[line_index], text_data_structure->get_Text_Length() - line_index_offset[line_index]);
+   } else if(index < line_index_offset.size()) {
     return text_data_structure->get_Line(line_index_offset[line_index], line_index_offset[line_index + 1] - line_index_offset[line_index]);
-  } else if(index == line_index_offset.size()){
-    return text_data_structure->get_Line(line_index_offset[line_index], text_data_structure->get_Text_Length() - line_index_offset[line_index]);
-  } else {
+    } else {
     return {};
   }
 
