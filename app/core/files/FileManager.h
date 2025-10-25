@@ -1,10 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : FileManager.h
-// Last modified: 2025-08-28 15:06
-//
-
-#pragma once
 #include <files/File.h>
 #include <vector>
 #include <memory>

@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : FileManager.cpp
-// Last modified: 2025-08-28 15:06
-//
-
 #include "FileManager.h"
 
 void

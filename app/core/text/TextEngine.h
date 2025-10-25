@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : TextEngine.h
-// Last modified: 2025-08-12 17:40
-//
-
 #pragma once
 #include <vector>
 #include <optional>

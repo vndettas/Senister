@@ -18,7 +18,8 @@
     "label": "Debug Senister Tests",
     "build": {
       "command": "cmake",
-      "args": ["--build build -j 8"]
+      "args": [" --build build -j 8"],
+      "cwd": "ZED_WORKTREE_ROOT"
     },
     "program": "~/github/Senister/build/PieceTableTest",
     "request": "launch",

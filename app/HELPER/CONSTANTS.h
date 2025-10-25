@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : CONSTANTS.h
-// Last modified: 2025-08-29 01:50
-//
-
 #pragma once
 #include <cstddef>
 #include <QBrush>

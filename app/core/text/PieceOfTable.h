@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : PieceOfTable.h
-// Last modified: 2025-08-19 11:59
-//
-
 #pragma once
 #include "Piece.h"
 #include "TextEngine.h"

@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : InputEngine.h
-// Last modified: 2025-08-29 01:53
-//
-
 #pragma once
 #include <QObject>
 #include "InputStrategy.h"

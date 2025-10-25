@@ -1,8 +1,3 @@
-// SPDX-License-Identifier: MIT
-// /file  : main.cpp
-// Last modified: 2025-08-12 17:40
-//
-
 #include <QApplication>
 #include "App.h"
 

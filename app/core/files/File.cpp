@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : File.cpp
-// Last modified: 2025-08-28 18:51
-//
-
 #include "File.h"
 
 File::File(const std::filesystem::path file_path)

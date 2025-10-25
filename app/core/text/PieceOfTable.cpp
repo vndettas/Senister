@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : PieceOfTable.cpp
-// Last modified: 2025-08-19 11:58
-//
-
 #include "PieceOfTable.h"
 #include "Piece.h"
 #include "TextEngine.h"
@@ -119,17 +113,18 @@ PieceOfTable::get_Char_At(size_t pos)
 
     if(pos > this->get_Text_Length()) return {};
 
+int global_offset = 0;
+int pos2 = pos;
  for(const Piece piece : piece_table){
-   if(pos >= piece.offset && pos <= piece.offset +  piece.length){
-     if(piece.buffer_type == buffer::add_buffer){
-       return add_buffer.at(pos - piece.offset);
-     } else if(piece.buffer_type == buffer::read_only_buffer){
-       return read_buffer.at(pos - piece.offset);
-     }
+   if(pos >= global_offset && pos <= global_offset +  piece.length){
+       global_offset += piece.offset;
+       pos2 = (pos < global_offset)  ? 0 : (pos + global_offset);
+      return  piece.buffer_type == buffer::add_buffer ? add_buffer.at(pos2) : read_buffer.at(pos2);
+    } else {
+        //global_offset += piece.length;
    }
  }
  return {};
-
 
 }
 
@@ -139,15 +134,17 @@ PieceOfTable::get_Line(size_t offset, size_t length) const
 
 
   size_t remaining_length = length;
-  size_t new_offset = offset;
+  size_t global_offset = offset;
   QString line = "";
   for(const Piece piece: piece_table) {
-    if(new_offset >= piece.offset && new_offset < piece.offset + piece.length) {
+    if(offset >= global_offset && offset <= global_offset + piece.length) {
+        size_t local_offset = offset+piece.offset;
         size_t length_from_piece = remaining_length > piece.length ? piece.length : remaining_length;
-        line += piece.buffer_type == buffer::add_buffer ? add_buffer.mid(new_offset - piece.offset, length_from_piece) : read_buffer.mid(new_offset - piece.offset, remaining_length);
+        line += piece.buffer_type == buffer::add_buffer ? add_buffer.mid(local_offset, length_from_piece) : read_buffer.mid(local_offset, remaining_length);
         remaining_length -= length_from_piece;
-        new_offset += length_from_piece;
-      if(remaining_length == 0) return line;
+        global_offset += piece.length;
+     } else {
+         return line;
      }
    }
    return line;
@@ -170,11 +167,9 @@ PieceOfTable::erase(size_t offset){
           piece.shrink_Back();
           break;
         } else {
-            //This still broken baby
           auto iterator = piece_table.begin() + itr;
           piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
-          piece.set_Length(piece.offset + offset);
-          print_Logs();
+          piece_table[itr].set_Length(piece_table[itr + 1].offset - 1);
           break;
         }
       }

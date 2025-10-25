@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : InputEngine.cpp
-// Last modified: 2025-08-29 01:55
-//
-
 #include "InputEngine.h"
 #include "NormalMode.h"
 

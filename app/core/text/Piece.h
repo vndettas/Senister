@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : Piece.h
-// Last modified: 2025-09-11 21:17
-//
-
 #pragma once
 #include <string>
 #include <iostream>

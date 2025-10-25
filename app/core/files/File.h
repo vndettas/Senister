@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : File.h
-// Last modified: 2025-08-28 19:06
-//
-
 #pragma once
 #include <memory>
 #include <filesystem>

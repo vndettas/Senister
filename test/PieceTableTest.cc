@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../app/core/text/PieceOfTable.h"
 #include "../app/core/text/Piece.h"
+#include <iostream>
 
 class PieceTestSmallBuffers : public testing::Test{
     protected:
@@ -140,6 +141,11 @@ class PieceOfTableEraseMethod : public testing::Test{
     QString text{"I lost all my friends today"};
 };
 
+
+//Todo : two piece and in first last char
+// in the middle
+// two piece and in second first char
+
 TEST_F(PieceOfTableEraseMethod, ZeroCharacter){
   table.erase(0);
   EXPECT_EQ(table.get_Piece_Vector()[0].offset, 1);
@@ -153,11 +159,33 @@ TEST_F(PieceOfTableEraseMethod, ZeroCharacterTwice){
 
 TEST_F(PieceOfTableEraseMethod, LastCharInPiece){
   uint32_t piece_length = table.get_Piece_Vector()[0].length;
-  table.print_Logs();
+  std::cout << table.get_Piece_Vector()[0].length;
   table.erase(text.length()-1);
   --piece_length;
   EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
   --piece_length;
+  table.erase(text.length()-2);
   table.print_Logs();
   EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
+}
+
+TEST_F(PieceOfTableEraseMethod, Middle){
+    size_t piece_length = table.get_Piece_Vector()[0].length;
+    table.erase(text.length()/2);
+    EXPECT_EQ(table.get_Piece_Table()->size(), 2);
+    EXPECT_EQ(table.get_Piece_Vector()[0].length, 12);
+    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 0);
+    EXPECT_EQ(table.get_Piece_Vector()[1].length, 13);
+    EXPECT_EQ(table.get_Piece_Vector()[1].offset, 13);
+}
+
+TEST_F(PieceOfTableEraseMethod, SecondPieceFirstChar){
+    size_t piece_length = table.get_Piece_Vector()[0].length;
+    table.erase(text.length()/2);
+    table.erase(text.length()/2);
+    EXPECT_EQ(table.get_Piece_Table()->size(), 2);
+    EXPECT_EQ(table.get_Piece_Vector()[0].length, 12);
+    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 0);
+    EXPECT_EQ(table.get_Piece_Vector()[1].length, 13);
+    EXPECT_EQ(table.get_Piece_Vector()[1].offset, 14);
 }
