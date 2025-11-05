@@ -36,7 +36,7 @@ private:
 
     PieceOfTable*                                           text_data_structure;
 
-    uint32_t                                                first_visible_line = 0;
+    uint32_t                                                first_visible_line = 1;
 
     std::vector<int>                                        line_index_offset;
 

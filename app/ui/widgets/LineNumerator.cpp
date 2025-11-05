@@ -30,9 +30,15 @@ LineNumerator::paintEvent(QPaintEvent *event)
   //Widget background
   painter.fillRect(0, 0, width(), parent_widget_ui->height(), Constants::CODE_BACKGROUND_BRUSH);
 
-  uint32_t y = 0;
+  bool isRelative = false;
+  if(isRelative){
+
+
+   } else {
+  uint32_t y = 0; // y coordinate where line index placed
+  std::cout << text_engine->getFirstVisibleLine();
   uint32_t numeration_line = text_engine->getFirstVisibleLine();
-  uint32_t line_numerator_counter = 0;
+  uint32_t line_numerator_counter = 1;
   uint32_t all_lines_count = text_engine->get_Lines_Count();
   uint32_t selected_line = parent_widget_ui->get_Cursor()->get_Current_Line_Index();
 
@@ -53,9 +59,8 @@ LineNumerator::paintEvent(QPaintEvent *event)
     y += line_spacing + 2; //diffrence between line size and numerator size
     ++numeration_line;
     ++line_numerator_counter;
+   }
   }
-
-
 }
 
 void

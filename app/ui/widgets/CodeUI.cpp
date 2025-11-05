@@ -1,5 +1,6 @@
 #include "CodeUI.h"
 #include <cstdint>
+#include <iostream>
 
 
 CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
@@ -53,10 +54,11 @@ CodeUI::paintEvent(QPaintEvent* event)
   // -- First visible line one which is first in code area --
   float first_visible_line=scroll_offset_y / line_height;
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
-  uint32_t line_counter=first_visible_line;
-
+  //che eto 
+  uint32_t line_counter=first_visible_line < 1 ? 1 : first_visible_line;
+  std::cout << line_counter << "\n"; 
   // -- First visible line used also in LineNumerator --
-  text_engine->setFirstVisibleLine(first_visible_line);
+  text_engine->setFirstVisibleLine(line_counter);
 
   while (line_counter <= visible_line_count) {
     // -- Here we check if line exists, if not we dont have to print it --
