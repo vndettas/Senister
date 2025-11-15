@@ -1,4 +1,5 @@
 #include "PieceOfTable.h"
+#include <QDebug>
 #include "Piece.h"
 #include "TextEngine.h"
 #include <cstddef>
@@ -113,17 +114,16 @@ PieceOfTable::get_Char_At(size_t pos)
 
     if(pos > this->get_Text_Length()) return {};
 
-int global_offset = 0;
+int global_length = 0;
 int pos2 = pos;
  for(const Piece piece : piece_table){
-   if(pos >= global_offset && pos <= global_offset +  piece.length){
-       global_offset += piece.offset;
-       pos2 = (pos < global_offset)  ? 0 : (pos + global_offset);
+   if(pos >= global_length && pos < global_length +  piece.length){
+       pos2 = pos - global_length + piece.offset;
       return  piece.buffer_type == buffer::add_buffer ? add_buffer.at(pos2) : read_buffer.at(pos2);
-    } else {
-        //global_offset += piece.length;
    }
+   global_length += piece.length;
  }
+ qDebug() << "Index at " << pos << " was not found"; 
  return {};
 
 }
@@ -161,7 +161,7 @@ PieceOfTable::erase(size_t offset){
     Piece& piece = piece_table[itr];
     if(offset >= piece_table_global_offset && offset <= piece_table_global_offset + piece.length){
        if(offset == piece_table_global_offset) {
-        piece.shrink_Front();
+       piece.shrink_Front();
         break;
         } else if(offset == piece_table_global_offset + piece.length) {
           piece.shrink_Back();
@@ -175,6 +175,7 @@ PieceOfTable::erase(size_t offset){
       }
         piece_table_global_offset += piece.length;
     }
+  print_Logs();
 
 
 }

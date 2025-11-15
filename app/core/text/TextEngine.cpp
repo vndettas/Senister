@@ -5,6 +5,8 @@
 //
 
 #include "../text/TextEngine.h"
+#include <iostream>
+#include <QDebug>
 
 TextEngine::TextEngine(PieceOfTable* textDataStructure) : text_data_structure(textDataStructure)
 {
@@ -20,16 +22,11 @@ TextEngine::get_Line(size_t index)
 
 
   size_t line_index = index  > 0 ? (index - 1) : 0;
-  if(index == line_index_offset.size()){
-      return {};
-      //return text_data_structure->get_Line(line_index_offset[line_index], text_data_structure->get_Text_Length() - line_index_offset[line_index]);
-   } else if(index < line_index_offset.size()) {
+  if(index < line_index_offset.size()){
     return text_data_structure->get_Line(line_index_offset[line_index], line_index_offset[line_index + 1] - line_index_offset[line_index]);
-    } else {
+  } else {
     return {};
-  }
-
-
+  } 
 }
 
 void
@@ -50,8 +47,10 @@ TextEngine::calculate_Indexes()
     line_index_offset.clear();
     line_index_offset.push_back(0);
   for(size_t i = 0; i <= buffer_size; ++i){
+    //qDebug() <<  i << ": " << text_data_structure->get_Char_At(i);
      if(text_data_structure->get_Char_At(i) == '\n'){
       line_index_offset.push_back(i);
+      
     }
   }
 

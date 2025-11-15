@@ -56,7 +56,6 @@ CodeUI::paintEvent(QPaintEvent* event)
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
   //che eto 
   uint32_t line_counter=first_visible_line < 1 ? 1 : first_visible_line;
-  std::cout << line_counter << "\n"; 
   // -- First visible line used also in LineNumerator --
   text_engine->setFirstVisibleLine(line_counter);
 
@@ -141,31 +140,34 @@ CodeUI::draw_Rectangles(QPainter *painter)
 
   }
 
-  void CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font){
-    QTextCharFormat selected_char_format;
-    selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
-    selected_char_format.setFontWeight(QFont::Bold);
+void
+CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font)
+{
 
-    //Symbol highlighting
-    QTextLayout::FormatRange highlight;
-    highlight.start = cursor->get_Current_Symbol_Index();
-    highlight.length = 1;
-    highlight.format = selected_char_format;
-
-    QVector<QTextLayout::FormatRange> formats;
-    formats.append(highlight);
-    text_layout->setFormats(formats);
+  QTextCharFormat selected_char_format;
+  selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
+  selected_char_format.setFontWeight(QFont::Bold);
+  //Symbol highlighting
+  QTextLayout::FormatRange highlight;
+  highlight.start = cursor->get_Current_Symbol_Index();
+  qDebug() << cursor->get_Current_Symbol_Index();
+  highlight.length = 1;
+  highlight.format = selected_char_format;
+  QVector<QTextLayout::FormatRange> formats;
+  formats.append(highlight);
+  text_layout->setFormats(formats);
 
   }
-  void CodeUI::draw_Lines(QPainter *painter) {
-    painter->setPen(Constants::LINES_PEN);
+void 
+CodeUI::draw_Lines(QPainter *painter) 
+{
 
-    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
-    QPoint(Constants::CODE_LINES_X_OFFSET, height()));
-    painter->drawLine(QPoint(width() * 0.75, Constants::CODE_LINES_Y_OFFSET), QPoint(width() * 0.75, height()));
-    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
-    QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
-
+  painter->setPen(Constants::LINES_PEN);
+  painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
+  QPoint(Constants::CODE_LINES_X_OFFSET, height()));
+  painter->drawLine(QPoint(width() * 0.75, Constants::CODE_LINES_Y_OFFSET), QPoint(width() * 0.75, height()));
+  painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
+  QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
 
   }
 
@@ -184,39 +186,6 @@ CodeUI::keyPressEvent(QKeyEvent *event)
     input_engine->handle_Key(event);
 
 }
-
-void
-Cursor::move_Right()
-{
-
-    current_symbol_index += 1;
-
-}
-
-void
-Cursor::move_Left()
-{
-
-    current_symbol_index -= 1;
-
-}
-
-void
-Cursor::move_Up()
-{
-
-    current_line_index -= 1;
-
-}
-
-void
-Cursor::move_Down()
-{
-
-    current_line_index += 1;
-
-}
-
 void
 CodeUI::set_Current_File_Index(uint32_t index)
 {

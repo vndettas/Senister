@@ -36,6 +36,40 @@ std::pair<int, int>
 Cursor::get_Cursor_Position()
 {
 
-    return std::pair<int, int>(current_line_index, current_symbol_index);
+    return std::pair<int, int>(current_line_index - 1, current_symbol_index);
 
 }
+
+void
+Cursor::move_Right()
+{
+
+    current_symbol_index += 1;
+
+}
+
+void
+Cursor::move_Left()
+{
+
+    current_symbol_index -= 1;
+
+}
+
+void
+Cursor::move_Up()
+{
+
+    if(current_line_index > 1) current_line_index -= 1;
+
+}
+
+void
+Cursor::move_Down()
+{
+
+    current_line_index += 1;
+
+}
+
+
