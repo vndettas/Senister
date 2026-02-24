@@ -21,9 +21,19 @@ TextEngine::get_Line(size_t index)
 {
 
 
-  size_t line_index = index  > 0 ? (index - 1) : 0;
+  size_t line_index = index;
   if(index < line_index_offset.size()){
-    return text_data_structure->get_Line(line_index_offset[line_index], line_index_offset[line_index + 1] - line_index_offset[line_index]);
+    size_t start = line_index_offset[line_index];
+    size_t end;
+
+
+    if(line_index + 1 < line_index_offset.size()){
+      end = line_index_offset[line_index + 1];
+    } else {
+      end = text_data_structure->get_Text_Length();
+    }
+
+    return text_data_structure->get_Line(start, end - start);
   } else {
     return {};
   } 
@@ -46,10 +56,9 @@ TextEngine::calculate_Indexes()
     const size_t buffer_size = text_data_structure->get_Text_Length();
     line_index_offset.clear();
     line_index_offset.push_back(0);
-  for(size_t i = 0; i <= buffer_size; ++i){
-    //qDebug() <<  i << ": " << text_data_structure->get_Char_At(i);
-     if(text_data_structure->get_Char_At(i) == '\n'){
-      line_index_offset.push_back(i);
+  for(size_t i = 0; i < buffer_size; ++i && (i + 1) < buffer_size){
+     if(text_data_structure->get_Char_At(i) == '\n' ){
+      line_index_offset.push_back(i + 1);
       
     }
   }

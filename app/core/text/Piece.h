@@ -20,7 +20,7 @@ class Piece {
 public:
 
     Piece()=delete;
-
+  
     Piece                                            (size_t offset, size_t length, buffer bufferType);
 
     void                                             shrink_Front();

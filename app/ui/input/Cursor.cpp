@@ -1,4 +1,5 @@
 #include "Cursor.h"
+#include <QDebug>
 
 uint32_t
 Cursor::get_Current_Line_Index()
@@ -36,7 +37,7 @@ std::pair<int, int>
 Cursor::get_Cursor_Position()
 {
 
-    return std::pair<int, int>(current_line_index - 1, current_symbol_index);
+    return std::pair<int, int>(current_line_index , current_symbol_index);
 
 }
 
@@ -60,7 +61,7 @@ void
 Cursor::move_Up()
 {
 
-    if(current_line_index > 1) current_line_index -= 1;
+    if(current_line_index > 0) current_line_index -= 1;
 
 }
 

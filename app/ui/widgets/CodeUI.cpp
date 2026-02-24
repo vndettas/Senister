@@ -55,7 +55,7 @@ CodeUI::paintEvent(QPaintEvent* event)
   float first_visible_line=scroll_offset_y / line_height;
   float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
   //che eto 
-  uint32_t line_counter=first_visible_line < 1 ? 1 : first_visible_line;
+  uint32_t line_counter=first_visible_line < 1 ? 0 : first_visible_line;
   // -- First visible line used also in LineNumerator --
   text_engine->setFirstVisibleLine(line_counter);
 
@@ -147,10 +147,9 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   QTextCharFormat selected_char_format;
   selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
   selected_char_format.setFontWeight(QFont::Bold);
-  //Symbol highlighting
   QTextLayout::FormatRange highlight;
+  //Symbol highlighting
   highlight.start = cursor->get_Current_Symbol_Index();
-  qDebug() << cursor->get_Current_Symbol_Index();
   highlight.length = 1;
   highlight.format = selected_char_format;
   QVector<QTextLayout::FormatRange> formats;

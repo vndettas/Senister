@@ -159,14 +159,18 @@ PieceOfTable::erase(size_t offset){
   uint32_t piece_table_global_offset = 0;
   for(size_t itr = 0; itr <= piece_table.size(); ++itr){
     Piece& piece = piece_table[itr];
+    qDebug() << "looking for offset " << offset << " current offset pos: " << piece_table_global_offset; 
     if(offset >= piece_table_global_offset && offset <= piece_table_global_offset + piece.length){
        if(offset == piece_table_global_offset) {
+        qDebug() << "Delete first char in piece";
        piece.shrink_Front();
         break;
         } else if(offset == piece_table_global_offset + piece.length) {
+         qDebug() << "Delete last char in piece";
           piece.shrink_Back();
           break;
         } else {
+        qDebug() << "Deletion inside piece executed";
           auto iterator = piece_table.begin() + itr;
           piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
           piece_table[itr].set_Length(piece_table[itr + 1].offset - 1);
@@ -175,7 +179,6 @@ PieceOfTable::erase(size_t offset){
       }
         piece_table_global_offset += piece.length;
     }
-  print_Logs();
 
 
 }

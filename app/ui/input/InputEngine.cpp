@@ -51,8 +51,11 @@ InputEngine::move_Cursor_Right()
 void
 InputEngine::move_Cursor_Down()
 {
+    qDebug() << code_ui->Text_Engine()->get_Lines_Count();
 
+    if(cursor->get_Cursor_Position().first < code_ui->Text_Engine()->get_Lines_Count()){
     cursor->move_Down();
+  }
     update_ui();
 
 }
