@@ -88,7 +88,7 @@ TextEngine::get_Lines_Count()
 
   return line_index_offset.size();
 
-}
+} 
 
 void
 TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos)
@@ -98,4 +98,54 @@ TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos)
   text_data_structure->erase(offset);
   calculate_Indexes();
 
+}
+
+
+uint32_t
+TextEngine::get_Next_Line_End_Pos(uint32_t row)
+{
+
+  if(row + 1 < line_index_offset.size()){
+    return line_index_offset[row + 1];
+  } else {
+    return line_index_offset[line_index_offset.size() - 1];
+  }
+
+}
+
+
+uint32_t
+TextEngine::get_Prev_Line_Start_Pos(uint32_t row)
+{
+
+  return line_index_offset[row];
+
+}
+
+uint32_t
+TextEngine::get_Line_Size(uint32_t row)
+{
+
+  uint32_t start = line_index_offset[row];
+  uint32_t end = 0;
+
+  if(row + 1 < line_index_offset.size()){
+
+    end = line_index_offset[row + 1];
+
+  } else {
+
+    end = get_Text_Length();
+
+  }
+
+  return end - start;
+
+}
+
+uint32_t
+TextEngine::get_Text_Length()
+{
+
+  return text_data_structure->get_Text_Length();
 }

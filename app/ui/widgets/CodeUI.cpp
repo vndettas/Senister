@@ -144,7 +144,7 @@ void
 CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font)
 {
 
-  QTextCharFormat selected_char_format;
+   QTextCharFormat selected_char_format;
   selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
   selected_char_format.setFontWeight(QFont::Bold);
   QTextLayout::FormatRange highlight;
@@ -157,6 +157,7 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   text_layout->setFormats(formats);
 
   }
+
 void 
 CodeUI::draw_Lines(QPainter *painter) 
 {
@@ -227,5 +228,14 @@ CodeUI::Text_Engine()
 {
 
   return text_engine;
+
+}
+
+
+PieceOfTable*
+CodeUI::get_Piece_Table()
+{
+
+  return text_data_structure;
 
 }

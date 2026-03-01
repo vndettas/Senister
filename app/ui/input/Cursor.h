@@ -27,6 +27,8 @@ private:
 
     uint32_t                                            current_line_index = 0;
 
+    uint32_t                                            preferrable_symbol_index = 0;
+
     uint32_t                                            current_symbol_index = 0;
 
 };

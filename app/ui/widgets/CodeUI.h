@@ -53,6 +53,8 @@ public:
 
     Cursor*                                                                  get_Cursor();
 
+    PieceOfTable*                                                            get_Piece_Table();
+
     void                                                                     on_Scroll_Tick();
 
     void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);

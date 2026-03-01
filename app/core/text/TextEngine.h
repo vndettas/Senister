@@ -25,12 +25,19 @@ public:
 
     void                                                                            delete_Char_Cursor(std::pair<int, int> cursor_pos);
 
+    uint32_t                                                                        get_Line_Size(uint32_t row);
+
     size_t                                                                          get_Lines_Count();
+
+    uint32_t                                                                        get_Text_Length();
 
     [[nodiscard]] uint32_t                                                          getFirstVisibleLine() const;
 
     [[nodiscard]] std::optional<QString>                                            get_Line(size_t index);
 
+    [[nodiscartd]] uint32_t                                                         get_Next_Line_End_Pos(uint32_t row);
+
+    [[nodiscartd]] uint32_t                                                         get_Prev_Line_Start_Pos(uint32_t row);
 
 private:
 
