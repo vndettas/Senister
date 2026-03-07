@@ -6,9 +6,9 @@ void
 Piece::shrink_Front()
 {
 
-  if(this->length > 1){
+  if(this->length > 0){
   this->offset++;
-  this->shrink_Back();
+  this->length--;
   }
 
 }

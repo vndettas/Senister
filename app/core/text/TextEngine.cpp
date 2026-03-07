@@ -77,10 +77,11 @@ TextEngine::calculate_Indexes()
 {
 
 
-    const size_t buffer_size = text_data_structure->get_Text_Length();
-    line_index_offset.clear();
-    line_index_offset.push_back(0);
-  for(size_t i = 0; i < buffer_size; ++i && (i + 1) < buffer_size){
+  line_index_offset.clear();
+  const size_t buffer_size = text_data_structure->get_Text_Length();
+  line_index_offset.push_back(0);
+
+  for(size_t i = 0; i < buffer_size; ++i){
      if(text_data_structure->get_Char_At(i) == '\n' ){
       line_index_offset.push_back(i + 1);
       

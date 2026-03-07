@@ -112,73 +112,117 @@ QChar
 PieceOfTable::get_Char_At(size_t pos)
 {
 
-    if(pos > this->get_Text_Length()) return {};
+  if(pos > this->get_Text_Length()) return {};
 
-int global_length = 0;
-int pos2 = pos;
- for(const Piece piece : piece_table){
-   if(pos >= global_length && pos < global_length +  piece.length){
+  uint32_t global_length = 0;
+  uint32_t pos2 = pos;
+  for(const Piece piece : piece_table){
+    if(pos >= global_length && pos < global_length +  piece.length){
        pos2 = pos - global_length + piece.offset;
       return  piece.buffer_type == buffer::add_buffer ? add_buffer.at(pos2) : read_buffer.at(pos2);
    }
-   global_length += piece.length;
+    global_length += piece.length;
  }
- qDebug() << "Index at " << pos << " was not found"; 
  return {};
 
 }
 
-QString
-PieceOfTable::get_Line(size_t offset, size_t length) const
+
+QString PieceOfTable::get_Line(size_t offset, size_t length) const 
 {
+    if (length == 0) return "";
 
+    QString line = "";
+    uint32_t current_piece_global_start = 0;
+    uint32_t chars_needed = length;
+    uint32_t current_read_offset = offset;
 
-  size_t remaining_length = length;
-  size_t global_offset = offset;
-  QString line = "";
-  for(const Piece piece: piece_table) {
-    if(offset >= global_offset && offset <= global_offset + piece.length) {
-        size_t local_offset = offset+piece.offset;
-        size_t length_from_piece = remaining_length > piece.length ? piece.length : remaining_length;
-        line += piece.buffer_type == buffer::add_buffer ? add_buffer.mid(local_offset, length_from_piece) : read_buffer.mid(local_offset, remaining_length);
-        remaining_length -= length_from_piece;
-        global_offset += piece.length;
-     } else {
-         return line;
-     }
-   }
-   return line;
+    for (const Piece& piece : piece_table) {
+        uint32_t current_piece_global_end = current_piece_global_start + piece.length;
 
-
+        if (current_read_offset >= current_piece_global_start && current_read_offset < current_piece_global_end) {
+            
+            uint32_t rel_start = current_read_offset - current_piece_global_start;
+            
+            uint32_t chars_available = piece.length - rel_start;
+            uint32_t chars_to_take = std::min(chars_needed, chars_available);
+            
+            uint32_t buffer_index = piece.offset + rel_start;
+            
+            if (piece.buffer_type == buffer::add_buffer) {
+                line += add_buffer.mid(buffer_index, chars_to_take);
+            } else {
+                line += read_buffer.mid(buffer_index, chars_to_take); 
+            }
+            
+            chars_needed -= chars_to_take;
+            current_read_offset += chars_to_take; 
+            
+            if (chars_needed == 0) {
+                break; 
+            }
+        }
+        
+        current_piece_global_start += piece.length;
+    }
+    
+    return line;
 }
+
+
 
 void
-PieceOfTable::erase(size_t offset){
-
+PieceOfTable::erase(size_t offset)
+{
 
   uint32_t piece_table_global_offset = 0;
-  for(size_t itr = 0; itr <= piece_table.size(); ++itr){
+
+for(size_t itr = 0; itr < piece_table.size(); ++itr){
     Piece& piece = piece_table[itr];
-    qDebug() << "looking for offset " << offset << " current offset pos: " << piece_table_global_offset; 
-    if(offset >= piece_table_global_offset && offset <= piece_table_global_offset + piece.length){
-       if(offset == piece_table_global_offset) {
-        qDebug() << "Delete first char in piece";
-       piece.shrink_Front();
-        break;
-        } else if(offset == piece_table_global_offset + piece.length) {
-         qDebug() << "Delete last char in piece";
-          piece.shrink_Back();
-          break;
-        } else {
-        qDebug() << "Deletion inside piece executed";
-          auto iterator = piece_table.begin() + itr;
-          piece_table.insert(iterator+1, Piece(piece.offset + offset, piece.length - offset, piece.buffer_type == buffer::add_buffer ? buffer::add_buffer : buffer::read_only_buffer));
-          piece_table[itr].set_Length(piece_table[itr + 1].offset - 1);
-          break;
-        }
-      }
-        piece_table_global_offset += piece.length;
+
+if(offset >= piece_table_global_offset && offset < piece_table_global_offset + piece.length){
+    uint32_t position_in_piece = offset - piece_table_global_offset;
+
+    //First in piece 
+    //So just shrink piece from front
+    if(position_in_piece == 0){
+
+      piece.shrink_Front();
+
+    //Last in piece
+    //Shrink piece from back
+    } else if(position_in_piece == piece.length - 1){
+
+      piece.shrink_Back();
+    
+    } else {
+
+    //end of first piece
+    uint32_t right_offset = piece.offset + position_in_piece + 1; 
+    //length of right piece
+    //old length  - offset in piece - 1
+    uint32_t right_length = piece.length - position_in_piece - 1;
+    
+
+    //update left piece length
+    //now its equal to length before deleted symbol
+    piece.set_Length(position_in_piece);
+
+    auto right_iterator = piece_table.begin() + itr + 1;
+
+    piece_table.insert(right_iterator, Piece(right_offset, right_length, piece.buffer_type));
+      
+    
     }
 
+    break;
 
+    }
+
+    piece_table_global_offset += piece.length;
+
+  }
+  
 }
+
+
