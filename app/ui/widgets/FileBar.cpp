@@ -19,65 +19,43 @@ FileBar::paintEvent(QPaintEvent *event)
 
  assert(file_manager);
 
- draw_Rectangles(&painter);
  draw_Files(&painter);
+ draw_Lines(&painter);
 
  painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
 }
 
 
-void
-FileBar::draw_Files(QPainter *painter)
+void FileBar::draw_Files(QPainter *painter)
 {
+    uint32_t current_x = 0; 
+    const int char_width = QWidget::fontMetrics().averageCharWidth();
+    
+    std::vector<std::shared_ptr<File>> files = file_manager->files();
 
+    for(const std::shared_ptr<File>& file : files) {
 
-  uint32_t text_position_x = 3;
-  const int char_width = QWidget::fontMetrics().averageCharWidth();
-
-  std::vector<std::shared_ptr<File>> files = file_manager->files();
-  uint32_t msg_end_x = 0;
-
-  for(const std::shared_ptr<File> file : files){
-    // In order to calculate distance between vertical lines that separate file names i need width of the text and also i add some space between;
-    //Todo: add icons
     uint32_t msg_size = char_width * file->file_Name_Length();
+    uint32_t tab_width = msg_size + Constants::FILE_BAR_TAB_WIDTH; 
 
-    painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
+        if(file == file_manager->active_File()) {
+            painter->fillRect(current_x, 0, tab_width - 1, Constants::FILE_BAR_HEIGHT, QColor(50, 50, 50));
+        } else {
+            painter->fillRect(current_x, 0, tab_width - 1, Constants::FILE_BAR_HEIGHT, QColor(36, 36, 36));
+        }
 
+        painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
+        painter->drawText(current_x + 10, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
 
-    if(file == file_manager->active_File()){
-      // File that is open in current window
-      painter->fillRect(text_position_x, 0, text_position_x + msg_size + Constants::FILE_BAR_TAB_WIDTH, Constants::FILE_BAR_HEIGHT, QColor(50, 50, 50));
-      painter->drawText(text_position_x, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
-      painter->setPen(Constants::LINES_PEN);
-      painter->drawLine(msg_end_x, 0, msg_end_x, Constants::FILE_BAR_HEIGHT);
-      draw_Lines(painter);
-     }else if(file == nullptr){
+       painter->setPen(QPen(QColor(80, 80, 80), 1)); 
+        painter->drawLine(current_x + tab_width - 1, 0, current_x + tab_width - 1, Constants::FILE_BAR_HEIGHT);
 
-    } else {
-      //Other file Names
-      painter->fillRect(text_position_x, 0, msg_end_x, Constants::FILE_BAR_HEIGHT, QColor(36, 36, 36));
-      painter->drawText(text_position_x, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
-      painter->setPen(Constants::LINES_PEN);
-      painter->drawLine(msg_end_x, 0, msg_end_x, Constants::FILE_BAR_HEIGHT);
-      draw_Lines(painter);
+        current_x += tab_width;
     }
-    text_position_x += msg_size + Constants::FILE_BAR_TAB_WIDTH;
-     msg_end_x =+ text_position_x +  msg_size + Constants::FILE_BAR_TAB_WIDTH;
-  }
-
-
 }
 
 
-void
-FileBar::draw_Rectangles(QPainter *painter)
-{
-
-  painter->fillRect(0, 0, width(), Constants::FILE_BAR_HEIGHT, Constants::FILE_BAR_BACKGROUND_BRUSH);
-
-}
 
 void
 FileBar::draw_Lines(QPainter *painter)
@@ -94,9 +72,5 @@ FileBar::draw_Lines(QPainter *painter)
   text_files_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
   painter->setRenderHint(QPainter::Antialiasing, true);
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
-
-  // I get vector of available  files from file manager
-  std::vector<std::shared_ptr<File>> files = file_manager->files();
-
 
 }

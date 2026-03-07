@@ -13,10 +13,8 @@ uint32_t
 Cursor::get_Current_Symbol_Index(uint32_t row_size)
 {
 
-    qDebug() << "row_size: " << row_size;
-    qDebug() << "pref: " << preferrable_symbol_index;
-    qDebug() << "curr:" << current_symbol_index;
-    return current_symbol_index;
+   return current_symbol_index;
+
 }
 
 void
@@ -46,7 +44,6 @@ std::pair<int, int>
 Cursor::get_Cursor_Position()
 {
 
-    qDebug() << "line: " << current_line_index << " symbol: " << current_symbol_index;
     return std::pair<int, int>(current_line_index , current_symbol_index);
 
 }
