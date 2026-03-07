@@ -4,6 +4,7 @@
 #include "../../core/files/File.h"
 #include "../../HELPER/CONSTANTS.h"
 #include <QWidget>
+#include <QWheelEvent>
 #include <QPainter>
 #include <QFontMetrics>
 #include <QString>
@@ -35,6 +36,6 @@ protected:
 
     void                                                                paintEvent(QPaintEvent *event) override;
 
-    void                                                                void wheelEvent(QWheelEvent *event) override;
+    void                                                                wheelEvent(QWheelEvent *event) override;
 
 };

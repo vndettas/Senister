@@ -29,6 +29,10 @@ FileBar::paintEvent(QPaintEvent *event)
 
 void FileBar::draw_Files(QPainter *painter)
 {
+
+  painter->save();
+  painter->translate(x_scroll_offset, 0);
+  
     uint32_t current_x = 0; 
     const int char_width = QWidget::fontMetrics().averageCharWidth();
     
@@ -53,6 +57,8 @@ void FileBar::draw_Files(QPainter *painter)
 
         current_x += tab_width;
     }
+  painter->restore();
+
 }
 
 
@@ -73,4 +79,28 @@ FileBar::draw_Lines(QPainter *painter)
   painter->setRenderHint(QPainter::Antialiasing, true);
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
+}
+
+void
+FileBar::wheelEvent(QWheelEvent *event)
+{
+    // Узнаем, куда крутят колесико (y > 0 это вверх, y < 0 это вниз)
+    int delta = event->angleDelta().y();
+
+    // Скорость скролла (можешь поменять число 30, чтобы сделать быстрее или медленнее)
+    int scroll_speed = 30;
+
+    if (delta > 0) {
+        x_scroll_offset += scroll_speed; // Крутим вверх -> вкладки едут вправо
+    } else if (delta < 0) {
+        x_scroll_offset -= scroll_speed; // Крутим вниз -> вкладки едут влево
+    }
+
+    // Защита: не даем ускроллить левее первой вкладки (в пустоту)
+    if (x_scroll_offset > 0) {
+        x_scroll_offset = 0;
+    }
+
+    // Вызываем перерисовку виджета с новыми координатами
+    update(); 
 }
