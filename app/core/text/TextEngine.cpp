@@ -39,6 +39,30 @@ TextEngine::get_Line(size_t index)
   } 
 }
 
+[[nodiscard]] std::optional<QString>
+TextEngine::get_Line(std::pair<int,int> cursor_pos)
+{
+
+  uint32_t index = cursor_pos.first;
+  size_t line_index = index;
+  if(index < line_index_offset.size()){
+    size_t start = line_index_offset[line_index];
+    size_t end;
+
+
+    if(line_index + 1 < line_index_offset.size()){
+      end = line_index_offset[line_index + 1];
+    } else {
+      end = text_data_structure->get_Text_Length();
+    }
+
+    return text_data_structure->get_Line(start, end - start);
+  } else {
+    return {};
+  }
+
+}
+
 void
 TextEngine::set_Data_Structre(PieceOfTable* text_data_structure)
 {
@@ -128,6 +152,7 @@ TextEngine::get_Line_Size(uint32_t row)
 
   uint32_t start = line_index_offset[row];
   uint32_t end = 0;
+  std::optional<QString> line = get_Line(row);
 
   if(row + 1 < line_index_offset.size()){
 
@@ -139,8 +164,43 @@ TextEngine::get_Line_Size(uint32_t row)
 
   }
 
+  
+  if(line && !line.value().isEmpty()){
+    if(line.value().at(line.value().size() - 1) == '\n') return end - start - 1;
+
   return end - start;
 
+  }
+
+}
+
+uint32_t
+TextEngine::get_Line_Size(std::pair<int, int> cursor_pos)
+{
+
+  uint32_t row = cursor_pos.first;
+  uint32_t start = line_index_offset[row];
+  uint32_t end = 0;
+  std::optional<QString> line = get_Line(row);
+
+  if(row + 1 < line_index_offset.size()){
+
+    end = line_index_offset[row + 1];
+
+  } else {
+
+    end = get_Text_Length();
+
+  }
+
+  if(line){
+    if(line.value().at(line.value().size() - 1) == "/n") return end - start - 1;
+  } else {
+
+  return end - start;
+
+  }
+ 
 }
 
 uint32_t

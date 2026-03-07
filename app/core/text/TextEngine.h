@@ -27,6 +27,8 @@ public:
 
     uint32_t                                                                        get_Line_Size(uint32_t row);
 
+    uint32_t                                                                        get_Line_Size(std::pair<int,int> cursor_pos);
+
     size_t                                                                          get_Lines_Count();
 
     uint32_t                                                                        get_Text_Length();
@@ -34,6 +36,8 @@ public:
     [[nodiscard]] uint32_t                                                          getFirstVisibleLine() const;
 
     [[nodiscard]] std::optional<QString>                                            get_Line(size_t index);
+
+    [[nodiscard]] std::optional<QString>                                            get_Line(std::pair<int, int> cursor_pos);
 
     [[nodiscartd]] uint32_t                                                         get_Next_Line_End_Pos(uint32_t row);
 

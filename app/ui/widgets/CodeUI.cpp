@@ -149,7 +149,8 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   selected_char_format.setFontWeight(QFont::Bold);
   QTextLayout::FormatRange highlight;
   //Symbol highlighting
-  highlight.start = cursor->get_Current_Symbol_Index();
+  qDebug() << cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(cursor->get_Current_Line_Index()));
+  highlight.start = cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(cursor->get_Current_Line_Index()));
   highlight.length = 1;
   highlight.format = selected_char_format;
   QVector<QTextLayout::FormatRange> formats;
@@ -157,7 +158,6 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   text_layout->setFormats(formats);
 
   }
-
 void 
 CodeUI::draw_Lines(QPainter *painter) 
 {

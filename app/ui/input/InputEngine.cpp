@@ -44,10 +44,6 @@ InputEngine::move_Cursor_Right()
 {
 
   std::pair<int, int> cursor_pos = cursor->get_Cursor_Position();
-  //qDebug() << "cursor row:" << cursor_pos.first;
-  //qDebug() << "cursor symbol index: " << cursor_pos.second;
-  //qDebug() << "line size: "<< code_ui->Text_Engine()->get_Line_Size(cursor_pos.first);
-  //Last symbol in last row case
   if((cursor_pos.first == code_ui->Text_Engine()->get_Lines_Count() - 1) && cursor_pos.second + 1 == code_ui->Text_Engine()->get_Line_Size(cursor_pos.first)){
 
   }
@@ -59,8 +55,9 @@ InputEngine::move_Cursor_Right()
 
     //Last index in row case
   } else {
-    cursor->move_Down();
-    cursor->setCurrentSymbolIndex(0);
+    move_Cursor_Down();
+    cursor->set_Current_Symbol_Index(0);
+    cursor->set_Prefferable_Symbol_Index(0);
     update_ui();
   }
 
@@ -72,7 +69,7 @@ InputEngine::move_Cursor_Down()
 {
 
     if(cursor->get_Cursor_Position().first + 1 < code_ui->Text_Engine()->get_Lines_Count()){
-    cursor->move_Down();
+    cursor->move_Down(code_ui->Text_Engine()->get_Line_Size(cursor->get_Cursor_Position().first + 1));
   }
     update_ui();
 
@@ -81,10 +78,14 @@ InputEngine::move_Cursor_Down()
 void
 InputEngine::move_Cursor_Up()
 {
+    uint32_t current_line = cursor->get_Cursor_Position().first;
 
-    cursor->move_Up();
+  if(current_line > 0){            
+    uint32_t target_line_size = code_ui->Text_Engine()->get_Line_Size(cursor->get_Cursor_Position().first - 1); 
+    cursor->move_Up(target_line_size);
     update_ui();
 
+  }
 }
 
 void
@@ -96,9 +97,10 @@ InputEngine::move_Cursor_Left()
   if(cursor_pos.second == 0 && cursor_pos.first == 0){
   //First index in any row except first one
   } else if(cursor_pos.second == 0){
-    cursor->move_Up();
     //cursor->setCurrentSymbolIndex((code_ui->Text_Engine()->get_Next_Line_End_Pos(cursor->get_Cursor_Position().first) - 1) - 1);
-    cursor->setCurrentSymbolIndex(code_ui->Text_Engine()->get_Line_Size(cursor_pos.first - 1) - 2);
+    move_Cursor_Up();
+    cursor->set_Current_Symbol_Index(code_ui->Text_Engine()->get_Line_Size(cursor_pos.first - 1) - 1);
+    cursor->set_Prefferable_Symbol_Index(code_ui->Text_Engine()->get_Line_Size(cursor_pos.first - 1) - 1);
     update_ui();
     //Any index except first one 
   } else if(cursor_pos.second != 0){
