@@ -21,6 +21,8 @@ public:
 
     void                                                                 handle_Key(QKeyEvent *event);
 
+    void                                                                 set_Current_File(std::shared_ptr<File> file);
+
     void                                                                 open_File_Index(uint32_t index);
 
     void                                                                 move_Cursor_Right();

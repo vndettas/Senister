@@ -9,13 +9,13 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
 
   // --Widgets and window initialization
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
+  current_cursor = file_manager->active_File()->get_Cursor();
   timer = new QTimer(this);
-  cursor = std::make_unique<Cursor>();
   line_numerator = new LineNumerator(this, text_engine);
-  input_engine = std::make_unique<InputEngine>(cursor.get(),this);
+  input_engine = std::make_unique<InputEngine>(current_cursor,this);
+  set_Current_File(file_manager->active_File());
   file_bar = new FileBar(this, file_manager.get());
   // Todo : the editor should open with no active file and draw something like menu
-  set_Current_File(file_manager->active_File());
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
@@ -47,7 +47,7 @@ CodeUI::paintEvent(QPaintEvent* event)
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
   // -- Current line one on which cursor currently located --
-  size_t current_line_index = cursor->get_Current_Line_Index();
+  size_t current_line_index = current_cursor->get_Current_Line_Index();
   // --Position where code area starts--
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
 
@@ -149,8 +149,7 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   selected_char_format.setFontWeight(QFont::Bold);
   QTextLayout::FormatRange highlight;
   //Symbol highlighting
-  qDebug() << cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(cursor->get_Current_Line_Index()));
-  highlight.start = cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(cursor->get_Current_Line_Index()));
+  highlight.start = current_cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
   highlight.length = 1;
   highlight.format = selected_char_format;
   QVector<QTextLayout::FormatRange> formats;
@@ -158,6 +157,8 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_fon
   text_layout->setFormats(formats);
 
   }
+
+
 void 
 CodeUI::draw_Lines(QPainter *painter) 
 {
@@ -205,6 +206,9 @@ CodeUI::set_Current_File(std::shared_ptr<File> file)
 
 
     current_file = file;
+    input_engine->set_Current_File(file);
+    assert(current_file);
+    current_cursor = current_file->get_Cursor();
     text_engine = file_manager->active_File()->text_Engine();
     assert(line_numerator);
     assert(text_engine);
@@ -219,7 +223,7 @@ Cursor*
 CodeUI::get_Cursor()
 {
 
-  return cursor.get();
+  return current_cursor;
 
 }
 

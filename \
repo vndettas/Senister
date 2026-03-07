@@ -20,15 +20,6 @@ File::file_Name_Length() const
 
 }
 
-Cursor*
-File::get_Cursor()
-{
-
-  assert(cursor);
-  return cursor.get();
-
-}
-
 std::string
 File::file_Name() const
 {

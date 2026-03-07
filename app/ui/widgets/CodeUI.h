@@ -85,7 +85,7 @@ private :
 
     std::unique_ptr<InputEngine>                                input_engine;
 
-    std::unique_ptr<Cursor>                                     cursor;
+    Cursor*                                                     current_cursor = nullptr; 
 
     QTimer*                                                     timer = nullptr;
 

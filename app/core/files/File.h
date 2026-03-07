@@ -2,6 +2,7 @@
 #include <memory>
 #include <filesystem>
 #include "../text/TextEngine.h"
+#include "../../ui/input/Cursor.h"
 
 class TextEngine;
 
@@ -18,9 +19,13 @@ public:
 
     [[nodiscard]] TextEngine*                            text_Engine() const;
 
+    Cursor*                                              get_Cursor();
+
 private:
 
     std::string                         name;
+
+    std::unique_ptr<Cursor>             cursor;
 
     std::unique_ptr<PieceOfTable>       text_data_structure;
 

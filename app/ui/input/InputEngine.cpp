@@ -76,6 +76,13 @@ InputEngine::move_Cursor_Down()
 }
 
 void
+InputEngine::set_Current_File(std::shared_ptr<File> file)
+{
+
+  cursor = file->get_Cursor();
+}
+
+void
 InputEngine::move_Cursor_Up()
 {
     uint32_t current_line = cursor->get_Cursor_Position().first;
