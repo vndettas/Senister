@@ -84,23 +84,19 @@ FileBar::draw_Lines(QPainter *painter)
 void
 FileBar::wheelEvent(QWheelEvent *event)
 {
-    // Узнаем, куда крутят колесико (y > 0 это вверх, y < 0 это вниз)
-    int delta = event->angleDelta().y();
+   uint32_t delta = event->angleDelta().y();
 
-    // Скорость скролла (можешь поменять число 30, чтобы сделать быстрее или медленнее)
-    int scroll_speed = 30;
+    uint32_t scroll_speed = 30;
 
     if (delta > 0) {
-        x_scroll_offset += scroll_speed; // Крутим вверх -> вкладки едут вправо
+        x_scroll_offset += scroll_speed;
     } else if (delta < 0) {
-        x_scroll_offset -= scroll_speed; // Крутим вниз -> вкладки едут влево
+        x_scroll_offset -= scroll_speed;
     }
 
-    // Защита: не даем ускроллить левее первой вкладки (в пустоту)
     if (x_scroll_offset > 0) {
         x_scroll_offset = 0;
     }
 
-    // Вызываем перерисовку виджета с новыми координатами
     update(); 
 }

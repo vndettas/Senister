@@ -37,6 +37,8 @@ public:
 
     void                                                                 update_ui();
 
+    void                                                                 save_File();
+
 private:
 
     std::unique_ptr<InputStrategy>                           current_strategy;

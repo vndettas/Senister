@@ -210,3 +210,9 @@ TextEngine::get_Text_Length()
 
   return text_data_structure->get_Text_Length();
 }
+
+void
+TextEngine::save_File()
+{
+  text_data_structure->save_File();
+}

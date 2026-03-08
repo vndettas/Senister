@@ -10,7 +10,8 @@ PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{Q
 {
 
  //later reserve more but now vector reallocation should be tested
-  piece_table.reserve(1);
+  piece_table.reserve(20);
+  path = filepath;
   size_t size = read_buffer.size() - 1;
   piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
@@ -20,8 +21,7 @@ PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{Q
 PieceOfTable::PieceOfTable(const QString &_string) : read_buffer{_string}, add_buffer{}
 {
 
-
- piece_table.reserve(1);
+ piece_table.reserve(20);
  size_t size = read_buffer.size() - 1;
  piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
@@ -43,6 +43,32 @@ PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
 
 }
 
+
+void
+PieceOfTable::save_File(){
+
+  QFile file(path);
+
+  if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+  QTextStream out(&file);
+
+  for(const Piece& piece : piece_table){
+
+    if(piece.buffer_type == buffer::add_buffer){
+
+      out << add_buffer.mid(piece.offset, piece.length);
+
+    } else {
+
+      out << read_buffer.mid(piece.offset, piece.length);
+
+    }
+   }
+  }
+
+  file.close();
+
+}
 
 QString
 &PieceOfTable::get_Add_Buffer() const
@@ -214,6 +240,8 @@ if(offset >= piece_table_global_offset && offset < piece_table_global_offset + p
       
     
     }
+
+    if(piece_table[itr].length == 0) piece_table.erase(piece_table.begin() + itr); 
 
     break;
 

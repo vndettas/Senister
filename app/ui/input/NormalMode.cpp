@@ -34,6 +34,7 @@ NormalMode::init_Keys()
         Bind(Shortcut(Qt::Key_2, Qt::ControlModifier), engine->open_File_Index(1));
         Bind(Shortcut(Qt::Key_3, Qt::ControlModifier), engine->open_File_Index(2));
         Bind(Shortcut(Qt::Key_X), engine->delete_Char_Cursor());
+        Bind(Shortcut(Qt::Key_S, Qt::ControlModifier), engine->save_File());
 
 
 }

@@ -131,3 +131,11 @@ InputEngine::open_File_Index(uint32_t index)
     code_ui->set_Current_File_Index(index);
 
 }
+
+void
+InputEngine::save_File()
+{
+  code_ui->Text_Engine()->save_File();
+
+}
+

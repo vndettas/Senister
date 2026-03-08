@@ -6,6 +6,8 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <qt6/QtCore/QFile>
+#include <qt6/QtCore/QTextStream>
 #include <filesystem>
 #include <qt6/QtCore/QChar>
 #include <qt6/QtCore/QString>
@@ -21,6 +23,8 @@ public:
     PieceOfTable                                                        (const QString&);
 
     PieceOfTable                                                        (const std::filesystem::path);
+    
+    void                                                                save_File();
 
     void                                                                insert(size_t offset, const std::string&);
 
@@ -49,6 +53,8 @@ public:
 private:
 
     const QString                                        read_buffer;
+
+  std::filesystem::path                                  path;
 
     QString                                              add_buffer;
 

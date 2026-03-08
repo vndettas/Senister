@@ -21,6 +21,8 @@ public:
 
     void                                                                            calculate_Indexes();
 
+    void                                                                            save_File();
+
     void                                                                            set_Data_Structre(PieceOfTable* text_data_structure);
 
     void                                                                            delete_Char_Cursor(std::pair<int, int> cursor_pos);
