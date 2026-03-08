@@ -42,27 +42,24 @@ InputEngine::update_ui()
 void
 InputEngine::move_Cursor_Right()
 {
+    std::pair<int, int> cursor_pos = cursor->get_Cursor_Position();
+    uint32_t current_row = cursor_pos.first;
+    uint32_t current_col = cursor_pos.second;
+    
+    uint32_t total_lines = code_ui->Text_Engine()->get_Lines_Count();
+    uint32_t current_line_size = code_ui->Text_Engine()->get_Line_Size(current_row);
 
-  std::pair<int, int> cursor_pos = cursor->get_Cursor_Position();
-  if((cursor_pos.first == code_ui->Text_Engine()->get_Lines_Count() - 1) && cursor_pos.second + 1 == code_ui->Text_Engine()->get_Line_Size(cursor_pos.first)){
-
-  }
-  //Any index in row except last one
-  else if(code_ui->Text_Engine()->get_Prev_Line_Start_Pos(cursor_pos.first) + cursor_pos.second + 2 < code_ui->Text_Engine()->get_Next_Line_End_Pos(cursor->get_Cursor_Position().first))  {
-
-    cursor->move_Right();
-    update_ui();
-
-    //Last index in row case
-  } else {
-    move_Cursor_Down();
-    cursor->set_Current_Symbol_Index(0);
-    cursor->set_Prefferable_Symbol_Index(0);
-    update_ui();
-  }
-
+    if (current_col < current_line_size - 1) {
+        cursor->move_Right();
+        update_ui();
+    }
+    else if (current_row < total_lines - 1) {
+        move_Cursor_Down(); 
+        cursor->set_Current_Symbol_Index(0);
+        cursor->set_Prefferable_Symbol_Index(0);
+        update_ui();
+    }
 }
-
 
 void
 InputEngine::move_Cursor_Down()
