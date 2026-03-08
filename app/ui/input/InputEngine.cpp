@@ -26,6 +26,21 @@ InputEngine::delete_Char_Cursor()
 {
 
     code_ui->Text_Engine()->delete_Char_Cursor(code_ui->get_Cursor()->get_Cursor_Position());
+    uint32_t current_row = cursor->get_Cursor_Position().first;
+    uint32_t current_col = cursor->get_Cursor_Position().second;
+
+    uint32_t new_line_size = code_ui->Text_Engine()->get_Line_Size(current_row);
+
+if (new_line_size > 0 && current_col >= new_line_size) {
+    cursor->set_Current_Symbol_Index(new_line_size - 1);
+    
+    cursor->set_Prefferable_Symbol_Index(new_line_size - 1); 
+} 
+else if (new_line_size == 0) {
+    cursor->set_Current_Symbol_Index(0);
+    cursor->set_Prefferable_Symbol_Index(0);
+}
+
     update_ui();
 
 }
