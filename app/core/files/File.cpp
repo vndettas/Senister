@@ -12,6 +12,39 @@ File::File(const std::filesystem::path file_path)
 
 }
 
+float
+File::get_scroll_offset()
+{
+
+  return scroll_offset_y;
+
+}
+
+float
+File::get_scroll_velocity()
+{
+
+  return scroll_velocity;
+
+}
+
+void
+File::set_scroll_offset(float offset)
+{
+
+  scroll_offset_y = offset;
+
+}
+
+void
+File::set_scroll_velocity(float velocity)
+{
+
+  scroll_velocity = velocity;
+
+
+}
+
 size_t
 File::file_Name_Length() const
 {

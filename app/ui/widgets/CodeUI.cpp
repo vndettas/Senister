@@ -52,8 +52,8 @@ CodeUI::paintEvent(QPaintEvent* event)
   uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
 
   // -- First visible line one which is first in code area --
-  float first_visible_line=scroll_offset_y / line_height;
-  float y_offset_first_line=std::fmod(scroll_offset_y, line_height);
+  float first_visible_line=current_file->get_scroll_offset() / line_height;
+  float y_offset_first_line=std::fmod(current_file->get_scroll_offset(), line_height);
   //che eto 
   uint32_t line_counter=first_visible_line < 1 ? 0 : first_visible_line;
   // -- First visible line used also in LineNumerator --
@@ -107,7 +107,7 @@ CodeUI::wheelEvent(QWheelEvent *event)
 {
 
   QWidget::wheelEvent(event);
-  scroll_velocity -= event->angleDelta().y()/13;
+  current_file->set_scroll_velocity(current_file->get_scroll_velocity() - event->angleDelta().y()/13);
   if(!timer->isActive()) timer->start(1000/120);
   update();
 
@@ -117,12 +117,12 @@ void
 CodeUI::on_Scroll_Tick()
 {
     // Basic inertia algorithm
-  if((scroll_offset_y + scroll_velocity) > 0) scroll_offset_y += scroll_velocity;
+  if((current_file->get_scroll_offset() + current_file->get_scroll_velocity()) > 0) current_file->set_scroll_offset(current_file->get_scroll_offset() + current_file->get_scroll_velocity());
     // Every frame makes velocity smaller till very small
-  scroll_velocity = scroll_velocity * 0.96;
-  if (std::abs(scroll_velocity) < 0.01f) {
+  current_file->set_scroll_velocity(current_file->get_scroll_velocity() * 0.95);
+  if (std::abs(current_file->get_scroll_velocity()) < 0.01f) {
     timer->stop();
-    scroll_velocity = 0.0f;
+    current_file->set_scroll_velocity(0);
   }
   update();
 

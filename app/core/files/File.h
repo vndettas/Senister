@@ -19,11 +19,23 @@ public:
 
     [[nodiscard]] TextEngine*                            text_Engine() const;
 
+    float                                                get_scroll_offset();
+
+    float                                                get_scroll_velocity();
+
+    void                                                 set_scroll_offset(float offset);
+
+    void                                                 set_scroll_velocity(float velocity);
+
     Cursor*                                              get_Cursor();
 
 private:
 
     std::string                         name;
+
+    float                               scroll_offset_y = 0;
+
+    float                               scroll_velocity = 0;
 
     std::unique_ptr<Cursor>             cursor;
 

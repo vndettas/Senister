@@ -93,10 +93,6 @@ private :
 
     FileBar*                                                    file_bar = nullptr;
 
-    float                                                       scroll_offset_y = 0;
-
-    float                                                       scroll_velocity = 0;
-
     const uint32_t                                              line_spacing = fontMetrics().lineSpacing();
 
     const uint32_t                                              line_height = fontMetrics().height();
