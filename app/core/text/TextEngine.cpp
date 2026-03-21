@@ -64,6 +64,15 @@ TextEngine::get_Line(std::pair<int,int> cursor_pos)
 }
 
 void
+TextEngine::insert_Char(QString str, std::pair<int, int> cursor_pos)
+{
+
+    size_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
+    text_data_structure->insert(offset, str);
+    calculate_Indexes();
+
+}
+void
 TextEngine::set_Data_Structre(PieceOfTable* text_data_structure)
 {
 

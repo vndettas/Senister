@@ -4,11 +4,14 @@
 #include <memory>
 #include <QKeyEvent>
 #include "Cursor.h"
+#include <QDebug>
 #include "../widgets/CodeUI.h"
+#include <QString>
 
 class Cursor;
 class InputStrategy;
 class NormalMode;
+class InsertMode;
 class CodeUI;
 
 class InputEngine{
@@ -17,7 +20,15 @@ public:
 
     InputEngine                                                          (Cursor* cursor, CodeUI* code_ui);
 
-    void                                                                 set_Strategy(std::unique_ptr<InputStrategy> strategy);
+    ~InputEngine();
+
+    void                                                                 switch_To_Normal_Mode();
+
+    void                                                                 insert_Char(QString character);
+
+    void                                                                 switch_To_Insert_Mode();
+    
+    void                                                                 set_Strategy(InputStrategy* strategy);
 
     void                                                                 handle_Key(QKeyEvent *event);
 
@@ -41,7 +52,11 @@ public:
 
 private:
 
-    std::unique_ptr<InputStrategy>                           current_strategy;
+    InputStrategy*                                           current_strategy;
+
+    std::unique_ptr<NormalMode>                              normal_mode;
+
+    std::unique_ptr<InsertMode>                              insert_mode;
 
     CodeUI*                                                  code_ui = nullptr;
 

@@ -11,10 +11,9 @@ void
 NormalMode::handle_Key(QKeyEvent *event)
 {
 
-    //i should rename it xd
-    for( auto pox : key_bindings){
-        if(pox.first.get_Key() == event->key() && pox.first.get_Modifier() == event->modifiers()){
-            pox.second();
+    for(std::pair<Shortcut, function> action : key_bindings){
+        if(action.first.get_Key() == event->key() && action.first.get_Modifier() == event->modifiers()){
+            action.second();
         }
     }
 
@@ -35,6 +34,7 @@ NormalMode::init_Keys()
         Bind(Shortcut(Qt::Key_3, Qt::ControlModifier), engine->open_File_Index(2));
         Bind(Shortcut(Qt::Key_X), engine->delete_Char_Cursor());
         Bind(Shortcut(Qt::Key_S, Qt::ControlModifier), engine->save_File());
+        Bind(Shortcut(Qt::Key_I), engine->switch_To_Insert_Mode());
 
 
 }

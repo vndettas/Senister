@@ -1,6 +1,9 @@
 #pragma once
 #include "InputStrategy.h"
 
+
+class InputEngine;
+
 class NormalMode : public InputStrategy {
 
 public:

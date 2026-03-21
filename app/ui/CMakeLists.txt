@@ -1,6 +1,7 @@
 add_executable(senister_ui
 input/Cursor.cpp
 input/InputEngine.cpp
+input/InsertMode.cpp
 input/NormalMode.cpp
 input/Shortcut.cpp
 widgets/CodeUI.cpp

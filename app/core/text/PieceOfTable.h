@@ -26,7 +26,7 @@ public:
     
     void                                                                save_File();
 
-    void                                                                insert(size_t offset, const std::string&);
+    void                                                                insert(size_t offset, QString str);
 
     std::string                                                         read_To_Const_Buffer(const std::filesystem::path filepath);
 

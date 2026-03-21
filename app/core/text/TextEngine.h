@@ -27,6 +27,8 @@ public:
 
     void                                                                            delete_Char_Cursor(std::pair<int, int> cursor_pos);
 
+    void                                                                            insert_Char(QString str, std::pair<int, int> cursor_pos);
+
     uint32_t                                                                        get_Line_Size(uint32_t row);
 
     uint32_t                                                                        get_Line_Size(std::pair<int,int> cursor_pos);
@@ -35,15 +37,15 @@ public:
 
     uint32_t                                                                        get_Text_Length();
 
-    [[nodiscard]] uint32_t                                                          getFirstVisibleLine() const;
+    uint32_t                                                                        getFirstVisibleLine() const;
 
     [[nodiscard]] std::optional<QString>                                            get_Line(size_t index);
 
     [[nodiscard]] std::optional<QString>                                            get_Line(std::pair<int, int> cursor_pos);
 
-    [[nodiscartd]] uint32_t                                                         get_Next_Line_End_Pos(uint32_t row);
+    uint32_t                                                                        get_Next_Line_End_Pos(uint32_t row);
 
-    [[nodiscartd]] uint32_t                                                         get_Prev_Line_Start_Pos(uint32_t row);
+    uint32_t                                                                        get_Prev_Line_Start_Pos(uint32_t row);
 
 private:
 

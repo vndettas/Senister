@@ -1,13 +1,17 @@
 #include "InputEngine.h"
-#include <iostream>
 #include "NormalMode.h"
+#include "InsertMode.h"
+
+InputEngine::~InputEngine() = default;
 
 InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui)
 {
 
 
     code_ui = _code_ui;
-    current_strategy = std::make_unique<NormalMode>(this);
+    normal_mode = std::make_unique<NormalMode>(this);
+    current_strategy = normal_mode.get();
+    insert_mode = std::make_unique<InsertMode>(this);
     cursor = _cursor;
 
 
@@ -52,6 +56,14 @@ InputEngine::update_ui()
     assert(code_ui);
     code_ui->update();
 
+}
+
+void
+InputEngine::insert_Char(QString character)
+{
+  
+    code_ui->Text_Engine()->insert_Char(character, cursor->get_Cursor_Position());
+    update_ui();
 }
 
 void
@@ -130,9 +142,30 @@ InputEngine::move_Cursor_Left()
 
 } 
 
-void InputEngine::set_Strategy(std::unique_ptr<InputStrategy> strategy) {
-current_strategy = std::move(strategy);
+void
+InputEngine::set_Strategy(InputStrategy* strategy)
+{
 
+
+current_strategy = strategy;
+
+}
+
+void
+InputEngine::switch_To_Normal_Mode()
+{  
+  
+  qDebug() << "normal mode";
+  set_Strategy(normal_mode.get());
+
+}
+
+void
+InputEngine::switch_To_Insert_Mode()
+{
+
+  qDebug() << "insert mode";
+  set_Strategy(insert_mode.get());
 }
 
 

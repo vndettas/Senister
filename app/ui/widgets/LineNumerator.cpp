@@ -28,7 +28,7 @@ LineNumerator::paintEvent(QPaintEvent *event)
   painter.setFont(numeration_font);
 
   //Widget background
-  painter.fillRect(0, 0, width(), parent_widget_ui->height(), Constants::CODE_BACKGROUND_BRUSH);
+  painter.fillRect(0, 0, width(), parent_widget_ui->height() - Constants::CODE_BOTTOM_MARGIN, Constants::CODE_BACKGROUND_BRUSH);
 
   bool isRelative = false;
   if(isRelative){

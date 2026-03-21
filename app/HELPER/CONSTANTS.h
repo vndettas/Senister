@@ -19,6 +19,7 @@ namespace Constants {
     // --Code Area--
     inline constexpr uint32_t CODE_LINES_X_OFFSET = NUMERATION_X_OFFSET + NUMERATION_WIDTH;
     inline constexpr uint32_t CODE_LINES_Y_OFFSET = 50;
+    inline constexpr uint32_t CODE_BOTTOM_MARGIN = 200;
     inline constexpr uint32_t CODE_VIEWPORT_HEIGHT = WINDOW_HEIGHT - CODE_LINES_Y_OFFSET;
 
     // --File bar plugin--
