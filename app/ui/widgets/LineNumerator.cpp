@@ -5,7 +5,6 @@ LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::Wind
 {
 
   line_height = fontMetrics().height();
-  visible_line_count = (Constants::CODE_VIEWPORT_HEIGHT / line_height) + 1;
   setParent(parent);
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);
   line_spacing = parent_widget_ui->getLineSpacing();
@@ -28,7 +27,7 @@ LineNumerator::paintEvent(QPaintEvent *event)
   painter.setFont(numeration_font);
 
   //Widget background
-  painter.fillRect(0, 0, width(), parent_widget_ui->height() - Constants::CODE_BOTTOM_MARGIN, Constants::CODE_BACKGROUND_BRUSH);
+  painter.fillRect(0, 0, width(), parent_widget_ui->height(), Constants::CODE_BACKGROUND_BRUSH);
 
   bool isRelative = false;
   if(isRelative){
@@ -36,14 +35,13 @@ LineNumerator::paintEvent(QPaintEvent *event)
 
    } else {
   uint32_t y = 0; // y coordinate where line index placed
-  std::cout << text_engine->getFirstVisibleLine();
   uint32_t numeration_line = text_engine->getFirstVisibleLine();
   uint32_t line_numerator_counter = 1;
   uint32_t all_lines_count = text_engine->get_Lines_Count();
   uint32_t selected_line = parent_widget_ui->get_Cursor()->get_Current_Line_Index();
 
 
-  while (line_numerator_counter <= visible_line_count && numeration_line < all_lines_count)
+  while (numeration_line < all_lines_count)
   {
     QString line_str = QString::number(numeration_line);
     QTextLayout layout(line_str, numeration_font);

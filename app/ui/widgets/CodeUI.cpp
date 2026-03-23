@@ -46,11 +46,7 @@ CodeUI::paintEvent(QPaintEvent* event)
 
   draw_Rectangles(&painter);
   draw_Lines(&painter);
-  painter.setClipRect(Constants::CODE_LINES_X_OFFSET, 
-                    Constants::CODE_LINES_Y_OFFSET, 
-                    width(), 
-                    height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN);
-  //-- Text pen --
+    //-- Text pen --
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
   // -- Current line one on which cursor currently located --
