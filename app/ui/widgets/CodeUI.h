@@ -65,6 +65,8 @@ public:
 
     void                                                                     draw_Lines(QPainter *painter);
 
+    void                                                                     setup_Font();
+
     ~CodeUI(){};
 
 signals:
@@ -88,6 +90,8 @@ private :
     Cursor*                                                     current_cursor = nullptr; 
 
     QTimer*                                                     timer = nullptr;
+
+    QFont                                                       code_font;
 
     LineNumerator*                                              line_numerator = nullptr;
 

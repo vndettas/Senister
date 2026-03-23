@@ -26,6 +26,8 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
     
     // Пересчитываем количество строк
   visible_line_count = (actual_text_height / line_height) + 1;
+
+  setup_Font();
 }
 
 
@@ -39,10 +41,7 @@ CodeUI::paintEvent(QPaintEvent* event)
 
   QPainter painter(this);
 
-  QFont text_font("Lucida Sans Typewriter", 10);
-  text_font.setStyleStrategy(QFont::PreferAntialias);
-  painter.setRenderHint(QPainter::Antialiasing, true);
-  text_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
+    painter.setRenderHint(QPainter::Antialiasing, true);
 
   draw_Rectangles(&painter);
   draw_Lines(&painter);
@@ -78,7 +77,7 @@ CodeUI::paintEvent(QPaintEvent* event)
       continue;
     }
 
-    QTextLayout text_layout(line.value(), text_font);
+    QTextLayout text_layout(line.value(), code_font);
     text_layout.beginLayout();
     QTextLine text_line = text_layout.createLine();
     // -- Area where line can be --
@@ -87,7 +86,7 @@ CodeUI::paintEvent(QPaintEvent* event)
     text_layout.endLayout();
 
     if (line_counter == current_line_index) {
-      draw_Cursor(&painter, &text_layout, &text_font);
+      draw_Cursor(&painter, &text_layout, &code_font);
     }
 
     if (text_line.isValid()) {
@@ -98,6 +97,17 @@ CodeUI::paintEvent(QPaintEvent* event)
   }
   painter.end();
 
+
+}
+
+
+void
+CodeUI::setup_Font()
+{
+  code_font = QFont(Constants::CODE_FONT, Constants::CODE_FONT_SIZE);
+  code_font.setStyleStrategy(QFont::PreferAntialias);
+
+  code_font.setFixedPitch(true);
 
 }
 
@@ -161,11 +171,11 @@ void CodeUI::draw_Rectangles(QPainter *painter)
 }
 
 void
-CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font)
+CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_font)
 {
 
    QTextCharFormat selected_char_format;
-  selected_char_format.setFontPointSize(text_font->pointSizeF() + 1);
+  selected_char_format.setFontPointSize(code_font->pointSizeF() + 1);
   selected_char_format.setFontWeight(QFont::Bold);
   QTextLayout::FormatRange highlight;
   //Symbol highlighting
