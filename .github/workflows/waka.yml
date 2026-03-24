@@ -16,7 +16,4 @@ jobs:
           SECTION_NAME: waka
           BLOCKS: █▓▒░
           SHOW_TOTAL: true
-          SHOW_EDITORS: true
-          SHOW_OS: true
-          SHOW_PROJECTS: false
           WAKATIME_RANGE: all_time
