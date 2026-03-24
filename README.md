@@ -70,4 +70,13 @@ Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc
 
 
 <!--START_SECTION:waka-->
+
+```txt
+From: 16 March 2026 - To: 23 March 2026
+
+C++     8 hrs 23 mins         ░░░░░░░░░░░░░░░░░░░░░░░██   91.56 %
+CMake   34 mins               ░▒███████████████████████   06.24 %
+C       12 mins               ▒████████████████████████   02.21 %
+```
+
 <!--END_SECTION:waka-->
