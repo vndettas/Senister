@@ -2,7 +2,7 @@
 Inspired by vim and vim like code editors, project goal is to bring something new to UX experience on top of the efficient core and vim style coding
 
 ## Ideology and features
-- Reliable fast core (Piece of table) which supports huge files
+- Reliable fast core (Piece of table) which supports huge files (Read more about it below)
 
 - Vim smart cursor
 ![demo](https://github.com/user-attachments/assets/d0aa1c67-21db-47bc-9d3f-dad223a5ac18)
@@ -19,6 +19,8 @@ Inspired by vim and vim like code editors, project goal is to bring something ne
 
 - **Cmake 3.27** ++
 
+- Gtest (installed by building system from github repo)
+
 - Ccache (optional)
 
 ## Building
@@ -30,11 +32,21 @@ cd Senister
 
 mkdir build
 
-cmake .
-
 cd build
 
+cmake ..
+
 cmake --build . -j 8
+```
+
+## Testing
+
+
+Core is parially covered with tests
+```
+cd build
+cmake --build . --target gtest
+./PieceTableTest
 ```
 
 ## Manual
@@ -42,13 +54,13 @@ cmake --build . -j 8
 Currently you can open file only changing path in app.cpp
 
 **Normal Mode**  
-h, k, j, l - movement  
-i - switch to insert mode  
-x - delete single character  
-ctrl + number - open number file  
-ctrl + s - save file  
+<kbd>h</kbd>, <kbd>k</kbd>, <kbd>j</kbd>, <kbd>l</kbd> - movement  
+<kbd>i</kbd> - switch to insert mode  
+<kbd>x</kbd> - delete single character  
+<kbd>ctrl</kbd> + <kbd>number</kbd> - open number file  (Assuming file is already opened and appeared in file tab)
+<kbd>ctrl</kbd> + <kbd>s</kbd> - save file  
 
 
 **Insert Mode**  
-esc - switch to normal mode  
-Press any keyboard key to insert except ctrl, del etc  
+<kbd>esc</kbd> - switch to normal mode  
+Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc  
