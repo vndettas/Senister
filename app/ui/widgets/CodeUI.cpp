@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
+CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, SoundEngine* _sound_engine, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager), sound_engine{_sound_engine}
 {
 
 

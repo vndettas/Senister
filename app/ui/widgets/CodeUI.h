@@ -21,6 +21,7 @@
 #include <memory>
 #include <QGridLayout>
 #include <QLayout>
+#include "../input/SoundEngine.h"
 
 
 class InputEngine;
@@ -40,8 +41,7 @@ public:
 
     CodeUI()=delete;
 
-    CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
-                                                                                const Qt::WindowFlags& f = Qt::Widget);
+    CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, SoundEngine* sound_engine, QWidget *parent =nullptr, const Qt::WindowFlags& f = Qt::Widget);
 
     void                                                                     set_Current_File_Index(uint32_t index);
 
@@ -92,6 +92,8 @@ private :
     QTimer*                                                     timer = nullptr;
 
     QFont                                                       code_font;
+
+    SoundEngine*                                                sound_engine;
 
     LineNumerator*                                              line_numerator = nullptr;
 

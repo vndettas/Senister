@@ -1,5 +1,6 @@
 add_executable(senister_ui
 input/Cursor.cpp
+input/SoundEngine.cpp
 input/InputEngine.cpp
 input/InsertMode.cpp
 input/NormalMode.cpp
@@ -15,5 +16,5 @@ target_include_directories( senister_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(senister_ui
         PRIVATE senister_core
-        PRIVATE Qt6::Gui Qt6::Widgets
+        PRIVATE Qt6::Gui Qt6::Multimedia Qt6::Widgets
 )
