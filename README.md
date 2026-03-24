@@ -64,3 +64,10 @@ Currently you can open file only changing path in app.cpp
 **Insert Mode**  
 <kbd>esc</kbd> - switch to normal mode  
 Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc  
+
+
+## Statistics
+
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
