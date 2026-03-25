@@ -4,6 +4,7 @@ text/TextEngine.cpp
 text/Piece.cpp
 files/File.cpp
 files/FileManager.cpp
+profile/ProfileEngine.cpp
 )
 
 target_include_directories(senister_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
