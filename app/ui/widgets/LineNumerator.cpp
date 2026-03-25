@@ -9,12 +9,12 @@ LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::Wind
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);
   line_spacing = parent_widget_ui->getLineSpacing();
 
+
 }
 
 void
 LineNumerator::paintEvent(QPaintEvent *event)
 {
-
 
   assert(text_engine);
   QWidget::paintEvent(event);
@@ -59,6 +59,8 @@ LineNumerator::paintEvent(QPaintEvent *event)
     ++line_numerator_counter;
    }
   }
+
+
 }
 
 void
@@ -67,5 +69,6 @@ LineNumerator::set_Current_Text_Engine(TextEngine* _text_engine)
 
   text_engine = _text_engine;
   update();
+
 
 }

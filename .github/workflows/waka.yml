@@ -16,4 +16,3 @@ jobs:
           SECTION_NAME: waka
           BLOCKS: █▓▒░
           SHOW_TOTAL: true
-          TIME_RANGE: all_time

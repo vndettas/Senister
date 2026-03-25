@@ -7,6 +7,7 @@ FileBar::FileBar(QWidget *parent, FileManager* _file_manager, const Qt::WindowFl
     setParent(parent);
     file_manager = _file_manager;
 
+
 }
 
 void
@@ -23,6 +24,7 @@ FileBar::paintEvent(QPaintEvent *event)
  draw_Lines(&painter);
 
  painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
+
 
 }
 
@@ -59,31 +61,30 @@ void FileBar::draw_Files(QPainter *painter)
     }
   painter->restore();
 
+
 }
-
-
 
 void
 FileBar::draw_Lines(QPainter *painter)
 {
 
-
   painter->setPen(Constants::LINES_PEN);
   painter->drawLine(0, Constants::FILE_BAR_HEIGHT, 0, 0);
   painter->drawLine(width(), 0, 0, 0);
 
-  // -- Text font setup --
   QFont text_files_font("Lucida Sans Typewriter", 15);
   text_files_font.setStyleStrategy(QFont::PreferAntialias);
   text_files_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
   painter->setRenderHint(QPainter::Antialiasing, true);
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
+
 }
 
 void
 FileBar::wheelEvent(QWheelEvent *event)
 {
+
    uint32_t delta = event->angleDelta().y();
 
     uint32_t scroll_speed = 30;
@@ -99,4 +100,6 @@ FileBar::wheelEvent(QWheelEvent *event)
     }
 
     update(); 
+
+
 }
