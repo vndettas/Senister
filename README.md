@@ -72,15 +72,15 @@ Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc
 <!--START_SECTION:waka-->
 
 ```txt
-From: 17 March 2026 - To: 24 March 2026
+From: 18 March 2026 - To: 25 March 2026
 
-Total Time: 9 hrs 48 mins
+Total Time: 12 hrs 32 mins
 
-C++         8 hrs 40 mins         ░░░░░░░░░░░░░░░░░░░░░░███   88.40 %
-CMake       34 mins               ░▓███████████████████████   05.82 %
-YAML        21 mins               ░████████████████████████   03.65 %
-C           12 mins               ▒████████████████████████   02.06 %
-gitignore   0 secs                █████████████████████████   00.05 %
+C++         9 hrs 52 mins         ░░░░░░░░░░░░░░░░░░░▒█████   78.32 %
+YAML        38 mins               ░▓███████████████████████   05.11 %
+CMake       35 mins               ░████████████████████████   04.64 %
+Markdown    30 mins               ░████████████████████████   04.00 %
+JSON        27 mins               ░████████████████████████   03.64 %
 ```
 
 <!--END_SECTION:waka-->
