@@ -5,7 +5,7 @@
     "size": 11
   },
   "sfx": {
-    "background_music": "./default_bm.mp3",
+    "background_music": "default_bm.mp3",
     "insert": ["./sounds/key1.wav", "./sounds/key3.wav", "./sounds/key4.wav"],
     "enter": "./sounds/enter.wav",
     "space": "./sounds/space.wav"

@@ -6,7 +6,9 @@
 #include "Cursor.h"
 #include <QDebug>
 #include "../widgets/CodeUI.h"
+#include "../../core/profile/ProfileEngine.h"
 #include <QString>
+#include "SoundEngine.h"
 
 class Cursor;
 class InputStrategy;
@@ -14,11 +16,11 @@ class NormalMode;
 class InsertMode;
 class CodeUI;
 
-class InputEngine{
+class InputEngine {
 
 public:
 
-    InputEngine                                                          (Cursor* cursor, CodeUI* code_ui);
+    InputEngine                                                          (Cursor* cursor, CodeUI* code_ui, SoundEngine* engine);
 
     ~InputEngine();
 
@@ -55,6 +57,8 @@ private:
     InputStrategy*                                           current_strategy;
 
     std::unique_ptr<NormalMode>                              normal_mode;
+
+    SoundEngine*                                             sound_engine;
 
     std::unique_ptr<InsertMode>                              insert_mode;
 

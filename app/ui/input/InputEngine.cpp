@@ -4,10 +4,11 @@
 
 InputEngine::~InputEngine() = default;
 
-InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui)
+InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui, SoundEngine* engine)
 {
 
   code_ui = _code_ui;
+  sound_engine = engine;
   normal_mode = std::make_unique<NormalMode>(this);
   current_strategy = normal_mode.get();
   insert_mode = std::make_unique<InsertMode>(this);

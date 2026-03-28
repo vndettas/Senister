@@ -11,7 +11,7 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, SoundEngine* _sound_en
   current_cursor = file_manager->active_File()->get_Cursor();
   timer = new QTimer(this);
   line_numerator = new LineNumerator(this, text_engine);
-  input_engine = std::make_unique<InputEngine>(current_cursor,this);
+  input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
   set_Current_File(file_manager->active_File());
   file_bar = new FileBar(this, file_manager.get());
   // Todo : the editor should open with no active file and draw something like menu
