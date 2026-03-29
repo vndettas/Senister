@@ -6,6 +6,7 @@
 #include <QMediaPlayer>
 #include <QString>
 #include <QAudioOutput>
+#include <QRandomGenerator>
 
 enum class SoundAction{
   Insert_Key,
@@ -14,21 +15,33 @@ enum class SoundAction{
   Switch_To_Insert
 };
 
-class SoundEngine {
+class SoundEngine : public QObject{
+
+  Q_OBJECT
 
 public:
 
   SoundEngine                       (ProfileEngine* sound_engine);
 
-  void                              play_background_music(const QString& path);
+  void                              play_Background_Music(const QString& path);
+
+  //void                              update_Current_Profie();
+
+  void                              play_Interactive_Sound(SoundAction action);
+
+  void                              play_Interactive_Sound(const QString& path);
 
 private:
 
   ProfileEngine*                    profile_engine;
 
+  Profile                           current_profile;
+
   QMediaPlayer*                     media_player;
 
   QAudioOutput*                     audio_output;
+
+  QSoundEffect*                     sound_effect;
 
 
 };

@@ -18,7 +18,13 @@ public:
 
     QString                             background_music_path;
 
-    std::vector<QString>                interactive_sounds_path;
+    QString                             switch_normal_path;
+
+    QString                             switch_insert_path;
+
+    QString                             x_delete_path;
+
+    std::vector<QString>                insert_sounds_path;
  
 
 private:

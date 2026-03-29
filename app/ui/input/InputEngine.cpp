@@ -45,6 +45,7 @@ InputEngine::delete_Char_Cursor()
     cursor->set_Prefferable_Symbol_Index(0);
 }
 
+  sound_engine->play_Interactive_Sound(SoundAction::Delete_x);
   update_ui();
 
 
@@ -169,6 +170,7 @@ InputEngine::switch_To_Normal_Mode()
 {  
   
   qDebug() << "normal mode";
+  sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Normal);
   set_Strategy(normal_mode.get());
 
 
@@ -179,6 +181,7 @@ InputEngine::switch_To_Insert_Mode()
 {
 
   qDebug() << "insert mode";
+  sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Insert);
   set_Strategy(insert_mode.get());
 
 
@@ -202,3 +205,9 @@ InputEngine::save_File()
 
 }
 
+void
+InputEngine::play_Sound(SoundAction action)
+{
+
+  sound_engine->play_Interactive_Sound(action);
+}

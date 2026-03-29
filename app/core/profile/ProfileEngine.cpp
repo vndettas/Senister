@@ -44,10 +44,16 @@ ProfileEngine::create_Profile(QDir directory)
 
     profile.background_music_path = directory.absoluteFilePath(sfxObj["background_music"].toString());
 
+    profile.switch_insert_path = directory.absoluteFilePath(sfxObj["insert_mode"].toString());
+
+    profile.switch_normal_path = directory.absoluteFilePath(sfxObj["normal_mode"].toString());
+
+    profile.x_delete_path =  directory.absoluteFilePath(sfxObj["x"].toString());
+
     QJsonArray insertSounds = sfxObj["insert"].toArray();
     for (const QJsonValue &value : insertSounds) {
         QString relPath = value.toString();
-            profile.interactive_sounds_path.push_back(directory.absoluteFilePath(relPath));
+            profile.insert_sounds_path.push_back(directory.absoluteFilePath(relPath));
     }
 
     return profile;

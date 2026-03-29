@@ -28,6 +28,8 @@ public:
 
     void                                                                 insert_Char(QString character);
 
+    void                                                                 play_Sound(SoundAction action);
+
     void                                                                 switch_To_Insert_Mode();
     
     void                                                                 set_Strategy(InputStrategy* strategy);

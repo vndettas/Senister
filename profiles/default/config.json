@@ -6,8 +6,11 @@
   },
   "sfx": {
     "background_music": "default_bm.mp3",
-    "insert": ["./sounds/key1.wav", "./sounds/key3.wav", "./sounds/key4.wav"],
-    "enter": "./sounds/enter.wav",
-    "space": "./sounds/space.wav"
+    "insert": ["sounds/key1.wav", "sounds/key3.wav", "sounds/key4.wav"],
+    "enter": "sounds/enter.wav",
+    "space": "sounds/space.wav",
+    "insert_mode": "sounds/insert.wav",
+    "x": "sounds/x.wav",
+    "normal_mode": "sounds/normal.wav"
   }
 }
