@@ -50,6 +50,13 @@ ProfileEngine::create_Profile(QDir directory)
 
     profile.x_delete_path =  directory.absoluteFilePath(sfxObj["x"].toString());
 
+    QJsonObject fontObj = obj["font"].toObject();
+
+    profile.font = directory.absoluteFilePath(fontObj["family"].toString());
+
+    profile.font_size = fontObj["size"].toInt();
+
+
     QJsonArray insertSounds = sfxObj["insert"].toArray();
     for (const QJsonValue &value : insertSounds) {
         QString relPath = value.toString();

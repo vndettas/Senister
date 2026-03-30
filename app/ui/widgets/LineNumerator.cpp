@@ -12,6 +12,8 @@ LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::Wind
 
 }
 
+
+
 void
 LineNumerator::paintEvent(QPaintEvent *event)
 {

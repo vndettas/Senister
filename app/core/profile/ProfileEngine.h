@@ -14,7 +14,9 @@ public:
 
     QString                             profile_name;
 
-    //QFont                               profile_font;
+    QString                             font;
+    
+    int                                 font_size;
 
     QString                             background_music_path;
 

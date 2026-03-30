@@ -18,8 +18,6 @@ namespace Constants {
     inline constexpr uint32_t NUMERATION_X_OFFSET = 25;
 
     // --Code Area--
-    inline const QString CODE_FONT = "CaskaydiaCove Nerd Font Mono";
-    inline const uint32_t CODE_FONT_SIZE = 10;
     inline constexpr uint32_t CODE_LINES_X_OFFSET = NUMERATION_X_OFFSET + NUMERATION_WIDTH;
     inline constexpr uint32_t CODE_LINES_Y_OFFSET = 50;
     inline constexpr uint32_t CODE_BOTTOM_MARGIN = 0;
