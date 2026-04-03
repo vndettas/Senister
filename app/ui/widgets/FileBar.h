@@ -9,6 +9,7 @@
 #include <QFontMetrics>
 #include <QString>
 #include <QColor>
+#include "../../core/profile/ProfileEngine.h"
 
 class File;
 class FileManager;
@@ -19,16 +20,17 @@ class FileBar : public QWidget {
 
 public:
 
-    FileBar                                                             (QWidget *parent, FileManager* file_manager, const Qt::WindowFlags& f = Qt::Widget);
+    FileBar                                                             (QWidget *parent, FileManager* file_manager, ProfileEngine* _profile_engine, const Qt::WindowFlags& f = Qt::Widget);
 
 private:
-
 
     void                                                                draw_Lines(QPainter *painter);
 
     void                                                                draw_Files(QPainter *painter);
 
-    FileManager*                                                        file_manager = nullptr;
+    FileManager*                                                        file_manager;
+  
+    ProfileEngine*                                                      profile_engine;
 
     uint32_t                                                            x_scroll_offset = 0;
 

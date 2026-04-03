@@ -1,17 +1,18 @@
 #include <QInternal>
 #include "LineNumerator.h"
 
-LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, const Qt::WindowFlags &f): text_engine(engine)
+LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, ProfileEngine* _profile_engine, const Qt::WindowFlags &f): text_engine(engine)
 {
 
   line_height = fontMetrics().height();
+  profile_engine = _profile_engine;
   setParent(parent);
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);
   line_spacing = parent_widget_ui->getLineSpacing();
+  setup_Font();
 
 
 }
-
 
 
 void
@@ -21,12 +22,11 @@ LineNumerator::paintEvent(QPaintEvent *event)
   assert(text_engine);
   QWidget::paintEvent(event);
   QPainter painter(this);
-  QPen numerator_pen(Constants::TEXT_COLOR_WHITE_PURE);
-  QFont numeration_font("Lucida Sans Typewriter", 8);
-  QFont numeration_font_highlighter("Lucida Sans Typewriter", 9);
+  QPen numerator_pen(Constants::TEXT_GRAY_MID);
+  QPen numerator_highlighter_pen(QColor(235, 219, 178));
 
   painter.setPen(numerator_pen);
-  painter.setFont(numeration_font);
+  painter.setFont(numerator_font);
 
   //Widget background
   painter.fillRect(0, 0, width(), parent_widget_ui->height(), Constants::CODE_BACKGROUND_BRUSH);
@@ -46,15 +46,18 @@ LineNumerator::paintEvent(QPaintEvent *event)
   while (numeration_line < all_lines_count)
   {
     QString line_str = QString::number(numeration_line);
-    QTextLayout layout(line_str, numeration_font);
+    QTextLayout layout(line_str, numerator_font);
     layout.beginLayout();
     QTextLine line = layout.createLine();
     layout.endLayout();
-    line.draw(&painter, QPoint( 5, y));
+    line.draw(&painter, QPoint( 19, y));
     if(numeration_line == selected_line)
     {
-      layout.setFont(numeration_font_highlighter);
-      line.draw(&painter, QPoint( 5, y));
+      layout.setFont(numerator_highlighter_font);
+      painter.setPen(numerator_highlighter_pen);
+      line.draw(&painter, QPoint( 19, y));
+      painter.setPen(numerator_pen);
+
     }
     y += line_spacing + 2; //diffrence between line size and numerator size
     ++numeration_line;
@@ -72,5 +75,14 @@ LineNumerator::set_Current_Text_Engine(TextEngine* _text_engine)
   text_engine = _text_engine;
   update();
 
+
+}
+
+void
+LineNumerator::setup_Font()
+{
+
+  numerator_font = QFont(profile_engine->get_Current_Profile().font, 9);
+  numerator_highlighter_font = QFont(profile_engine->get_Current_Profile().font, 10);
 
 }

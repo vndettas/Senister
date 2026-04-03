@@ -11,22 +11,16 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, SoundEngine* _sound_en
   current_cursor = file_manager->active_File()->get_Cursor();
   profile_engine = _profile_engine;
   timer = new QTimer(this);
-  line_numerator = new LineNumerator(this, text_engine);
+  line_numerator = new LineNumerator(this, text_engine, _profile_engine);
   input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
   set_Current_File(file_manager->active_File());
-  file_bar = new FileBar(this, file_manager.get());
+  file_bar = new FileBar(this, file_manager.get(), _profile_engine);
   // Todo : the editor should open with no active file and draw something like menu
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
-  //visible_line_count = Constants::CODE_VIEWPORT_HEIGHT / line_height) + 20;
-  uint32_t actual_text_height = height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN; 
-    
-    // Пересчитываем количество строк
-  visible_line_count = (actual_text_height / line_height) + 1;
-
   setup_Font();
 
 
@@ -40,7 +34,7 @@ CodeUI::paintEvent(QPaintEvent* event)
 
   QPainter painter(this);
 
-    painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.setRenderHint(QPainter::Antialiasing, true);
 
   draw_Rectangles(&painter);
   draw_Lines(&painter);
@@ -54,8 +48,11 @@ CodeUI::paintEvent(QPaintEvent* event)
 
   // -- First visible line one which is first in code area --
   float first_visible_line=current_file->get_scroll_offset() / line_height;
+  qDebug() << "first_visible_line: " << first_visible_line << "\n";
   float y_offset_first_line=std::fmod(current_file->get_scroll_offset(), line_height);
+  qDebug() << "y_offset_first_visible_line: " << y_offset_first_line << "\n";
   uint32_t last_line_to_draw = first_visible_line + visible_line_count;
+  qDebug() << "last line to draw: " << last_line_to_draw << "\n";
   //che eto 
   uint32_t line_counter= first_visible_line;
   // -- First visible line used also in LineNumerator --
@@ -64,7 +61,6 @@ CodeUI::paintEvent(QPaintEvent* event)
   while (line_counter <= last_line_to_draw) {
 
 
-    // ВАЖНАЯ ПРОВЕРКА: чтобы не пытаться нарисовать 300-ю строку, если в файле их всего 248
     if (line_counter >= text_engine->get_Lines_Count()) { // Подставь свой метод получения кол-ва строк
         break; // Выходим из цикла, если файл закончился
     }
@@ -90,6 +86,7 @@ CodeUI::paintEvent(QPaintEvent* event)
 
     if (text_line.isValid()) {
       text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y_offset));
+      painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
     }
     ++line_counter;
     y_offset += line_spacing + 2;
@@ -117,10 +114,12 @@ void
 CodeUI::resizeEvent(QResizeEvent *event)
 {
 
-  uint32_t actual_text_height = height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN; 
+  uint32_t actual_text_height = height() - 150; 
     
     // Пересчитываем количество строк
-  visible_line_count = (actual_text_height / line_height) + 1;
+  qDebug() << "actual text height: " << actual_text_height << "\n";
+  qDebug() << "line height: " << line_height << "\n";
+  visible_line_count = (actual_text_height / line_height);
 
   QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
@@ -168,10 +167,12 @@ void CodeUI::draw_Rectangles(QPainter *painter)
                       height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN, 
                       Constants::CODE_BACKGROUND_BRUSH);
                       
+    // Space below the file tab
     painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, 
                       height() - Constants::CODE_BOTTOM_MARGIN, 
                       Constants::MENU_BACKGROUND_BRUSH);
 
+    // Space on the bottom under the editor 
     painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
 
 
@@ -181,13 +182,14 @@ void
 CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_font)
 {
 
-   QTextCharFormat selected_char_format;
+  QTextCharFormat selected_char_format;
   selected_char_format.setFontPointSize(code_font->pointSizeF() + 1);
   selected_char_format.setFontWeight(QFont::Bold);
   QTextLayout::FormatRange highlight;
   //Symbol highlighting
   highlight.start = current_cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
   highlight.length = 1;
+  selected_char_format.setForeground(QBrush(QColor(235, 219, 178)));
   highlight.format = selected_char_format;
   QVector<QTextLayout::FormatRange> formats;
   formats.append(highlight);
@@ -200,17 +202,7 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_fon
 void CodeUI::draw_Lines(QPainter *painter)
 {
 
-    painter->setPen(Constants::LINES_PEN);
-    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
-                      QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
-                      
-    painter->drawLine(QPoint(width() * 0.75, Constants::CODE_LINES_Y_OFFSET), 
-                      QPoint(width() * 0.75, height() - Constants::CODE_BOTTOM_MARGIN));
-                      
-    painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET), 
-                      QPoint(Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_BOTTOM_MARGIN));
-
-
+   
 }
 
 

@@ -11,7 +11,7 @@ SoundEngine::SoundEngine(ProfileEngine* engine)
   audio_output = new QAudioOutput(this);
   sound_effect = new QSoundEffect(this);
   media_player->setAudioOutput(audio_output);
-  audio_output->setVolume(0.3);
+  audio_output->setVolume(0.1);
   
   play_Background_Music(current_profile.background_music_path);
 
