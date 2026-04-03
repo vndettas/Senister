@@ -1,0 +1,47 @@
+BasedOnStyle: LLVM
+Language: Cpp
+
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+
+# std::return_type
+# function_name(parameters);
+AlwaysBreakAfterReturnType: AllDefinitions
+EmptyLineAfterAccessModifier: Always
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterStruct: false
+  AfterControlStatement: false
+  BeforeElse: false
+  AfterFunction: true
+  #function_name
+  #{
+  #
+  #}
+MaxEmptyLinesToKeep: 3
+KeepEmptyLinesAtEOF: true
+
+# Class class_name {
+#public:
+AccessModifierOffset: -2
+EmptyLineBeforeAccessModifier: Always
+
+# Before: 
+# Cursor::Cursor(uint32_t line) : 
+#  current_line_index(line),
+#  current_symbol_index(0),
+#  preferrable_symbol_index(0) {}
+# After:
+# Cursor::Cursor(uint32_t line) 
+#  : current_line_index(line)
+#  , current_symbol_index(0)
+#  , preferrable_symbol_index(0) {}
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerIndentWidth: 4
+
+SortIncludes: false
+
+ColumnLimit: 120

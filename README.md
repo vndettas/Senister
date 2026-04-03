@@ -1,33 +1,73 @@
-# **Project Description**
+## Senister
+Inspired by vim and vim like code editors, project goal is to bring something new to UX experience on top of the efficient core and vim style coding
 
-Lightweight, custom IDE.
-Written in C++ using the Qt 6 framework and a custom Piece Table text data structure.
+## Ideology and features
+- Reliable fast core (Piece of table) which supports huge files (Read more about it below)
 
-# **Tested On**
-**v 0.1.1**
+- Vim smart cursor
+![demo](https://github.com/user-attachments/assets/d0aa1c67-21db-47bc-9d3f-dad223a5ac18)
 
-Windows — MinGW (11.0, g++), Qt 6.8.2, CMake 3.27.8
+- Mouse free experience
 
-Linux (Ubuntu) — g++ 13.3.0, Qt 6 (installed via package manager), CMake 3.28.3
+- Advanced ui and sound design to improve ux
 
-# **Building the Project**
+## Dependencies
 
-**Windows**
+- **C++ 20**
 
-If you installed Qt manually (e.g. via the Qt Installer), you must specify the path to the Qt CMake configuration in CMakeLists.txt.
+- **Qt 6**
 
-```cmake
-set(CMAKE_PREFIX_PATH "D:/Qt/6.8.2/mingw_64/lib/cmake") # ← CHANGE THIS LINE
-find_package(Qt6 REQUIRED COMPONENTS Gui Core Widgets)
+- **Cmake 3.27** ++
+
+- Gtest (installed by building system from github repo)
+
+- Ccache (optional)
+
+## Building
+
 ```
-Make sure that the Qt version matches your compiler (e.g. MinGW build of Qt for MinGW).
+git clone https://github.com/vndettas/Senister.git
 
-**Linux**
+cd Senister
 
-If you installed Qt using a package manager (e.g. apt), no changes are usually required.
+mkdir build
 
-Install Qt6 using apt :
+cd build
 
-```bash
-sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools
+cmake ..
+
+cmake --build . -j 8
 ```
+
+## Testing
+
+
+Core is parially covered with tests
+```
+cd build
+cmake --build . --target gtest
+./PieceTableTest
+```
+
+## Manual
+
+Currently you can open file only changing path in app.cpp
+
+**Normal Mode**  
+<kbd>h</kbd>, <kbd>k</kbd>, <kbd>j</kbd>, <kbd>l</kbd> - movement  
+<kbd>i</kbd> - switch to insert mode  
+<kbd>x</kbd> - delete single character  
+<kbd>ctrl</kbd> + <kbd>number</kbd> - open number file  (Assuming file is already opened and appeared in file tab)
+<kbd>ctrl</kbd> + <kbd>s</kbd> - save file  
+
+
+**Insert Mode**  
+<kbd>esc</kbd> - switch to normal mode  
+Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc  
+
+
+## Statistics
+
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->

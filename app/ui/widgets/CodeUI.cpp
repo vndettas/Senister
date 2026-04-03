@@ -3,9 +3,8 @@
 #include <iostream>
 
 
-CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager)
+CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, SoundEngine* _sound_engine, QWidget* parent, const Qt::WindowFlags &f): QWidget(parent, f), file_manager(file_manager), sound_engine{_sound_engine}
 {
-
 
   // --Widgets and window initialization
   window()->setMinimumSize(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
@@ -28,14 +27,13 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, QWidget* parent, const
   visible_line_count = (actual_text_height / line_height) + 1;
 
   setup_Font();
+
+
 }
-
-
 
 void
 CodeUI::paintEvent(QPaintEvent* event)
 {
-
 
   QWidget::paintEvent(event);
 
@@ -104,10 +102,12 @@ CodeUI::paintEvent(QPaintEvent* event)
 void
 CodeUI::setup_Font()
 {
+
   code_font = QFont(Constants::CODE_FONT, Constants::CODE_FONT_SIZE);
   code_font.setStyleStrategy(QFont::PreferAntialias);
 
   code_font.setFixedPitch(true);
+
 
 }
 
@@ -115,7 +115,6 @@ CodeUI::setup_Font()
 void
 CodeUI::resizeEvent(QResizeEvent *event)
 {
-
 
   uint32_t actual_text_height = height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN; 
     
@@ -125,6 +124,7 @@ CodeUI::resizeEvent(QResizeEvent *event)
   QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
+
 
 }
 
@@ -137,11 +137,13 @@ CodeUI::wheelEvent(QWheelEvent *event)
   if(!timer->isActive()) timer->start(1000/120);
   update();
 
+
 }
 
 void
 CodeUI::on_Scroll_Tick()
 {
+
     // Basic inertia algorithm
   if((current_file->get_scroll_offset() + current_file->get_scroll_velocity()) > 0) current_file->set_scroll_offset(current_file->get_scroll_offset() + current_file->get_scroll_velocity());
     // Every frame makes velocity smaller till very small
@@ -152,10 +154,12 @@ CodeUI::on_Scroll_Tick()
   }
   update();
 
+
 }
 
 void CodeUI::draw_Rectangles(QPainter *painter)
 {
+
     painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
     
     painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, 
@@ -168,6 +172,8 @@ void CodeUI::draw_Rectangles(QPainter *painter)
                       Constants::MENU_BACKGROUND_BRUSH);
 
     painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
+
+
 }
 
 void
@@ -186,11 +192,13 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_fon
   formats.append(highlight);
   text_layout->setFormats(formats);
 
-  }
+
+ }
 
 
 void CodeUI::draw_Lines(QPainter *painter)
 {
+
     painter->setPen(Constants::LINES_PEN);
     painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET),
                       QPoint(width(), Constants::CODE_LINES_Y_OFFSET));
@@ -200,6 +208,8 @@ void CodeUI::draw_Lines(QPainter *painter)
                       
     painter->drawLine(QPoint(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET), 
                       QPoint(Constants::CODE_LINES_X_OFFSET, height() - Constants::CODE_BOTTOM_MARGIN));
+
+
 }
 
 
@@ -209,6 +219,7 @@ CodeUI::getLineSpacing() const
 
     return line_spacing;
 
+
 }
 
 void
@@ -217,7 +228,9 @@ CodeUI::keyPressEvent(QKeyEvent *event)
 
     input_engine->handle_Key(event);
 
+
 }
+
 void
 CodeUI::set_Current_File_Index(uint32_t index)
 {
@@ -234,7 +247,6 @@ CodeUI::set_Current_File_Index(uint32_t index)
 void
 CodeUI::set_Current_File(std::shared_ptr<File> file)
 {
-
 
     current_file = file;
     input_engine->set_Current_File(file);
@@ -256,6 +268,7 @@ CodeUI::get_Cursor()
 
   return current_cursor;
 
+
 }
 
 TextEngine*
@@ -263,6 +276,7 @@ CodeUI::Text_Engine()
 {
 
   return text_engine;
+
 
 }
 

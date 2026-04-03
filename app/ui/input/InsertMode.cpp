@@ -2,7 +2,8 @@
 InsertMode::InsertMode(InputEngine *engine) : InputStrategy(engine)
 {
 
-    init_Keys();
+  init_Keys();
+
 
 }
 
@@ -31,6 +32,7 @@ void
 InsertMode::init_Keys()
 {
 
-    Bind(Qt::Key_Escape, engine->switch_To_Normal_Mode());
+  Bind(Qt::Key_Escape, engine->switch_To_Normal_Mode());
+
 
 }

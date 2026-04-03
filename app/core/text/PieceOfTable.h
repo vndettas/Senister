@@ -54,7 +54,7 @@ private:
 
     const QString                                        read_buffer;
 
-  std::filesystem::path                                  path;
+    std::filesystem::path                                  path;
 
     QString                                              add_buffer;
 
