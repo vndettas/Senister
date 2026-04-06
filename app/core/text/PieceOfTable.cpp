@@ -9,12 +9,19 @@
 PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{QString::fromStdString((read_To_Const_Buffer(filepath)))}, add_buffer{}
 {
 
- //later reserve more but now vector reallocation should be tested
   piece_table.reserve(20);
   path = filepath;
   size_t size = read_buffer.size() - 1;
   piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
+
+}
+
+PieceOfTable::PieceOfTable()
+{
+  piece_table.reserve(20);
+  piece_table.emplace_back(Piece{0, 0, buffer::read_only_buffer});
+  
 
 }
 
@@ -31,7 +38,6 @@ PieceOfTable::PieceOfTable(const QString &_string) : read_buffer{_string}, add_b
 std::string
 PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
 {
-
 
   std::ifstream istream(filepath);
   if(!istream){
@@ -96,9 +102,9 @@ PieceOfTable::insert(size_t offset, QString str)
   //end of first piece
   uint32_t right_offset = piece->offset + position_in_piece; 
   //length of right piece
-  //old length  - offset in piece - 1
+//old length  - offset in piece - 1
   uint32_t right_length = piece->length - position_in_piece;
-  buffer buff = piece->buffer_type;
+buffer buff = piece->buffer_type;
     
 
   //update left piece length
@@ -116,7 +122,8 @@ PieceOfTable::insert(size_t offset, QString str)
 }
 
 void
-PieceOfTable::save_File(){
+PieceOfTable::save_File()
+{
 
   QFile file(path);
 
@@ -141,6 +148,35 @@ PieceOfTable::save_File(){
 
 
 }
+
+QString
+PieceOfTable::get_Whole_Text()
+{
+
+  QString result;
+
+  result.reserve(get_Text_Length());
+
+  for(const Piece& piece : piece_table){
+
+    if(piece.buffer_type == buffer::add_buffer){
+
+      result.append(add_buffer.mid(piece.offset, piece.length));
+
+    } else {
+
+      result.append(read_buffer.mid(piece.offset, piece.length));
+
+    }
+
+   }
+  return result;
+
+
+}
+
+  
+
 
 QString
 &PieceOfTable::get_Add_Buffer() const
@@ -171,9 +207,9 @@ PieceOfTable::get_Read_Buffer() const
 const std::vector<Piece>*
 PieceOfTable::get_Piece_Table() const
 {
+
   return &piece_table;
 
- 
 }
 
 uint32_t
@@ -184,6 +220,7 @@ PieceOfTable::get_Text_Length()
  for(const Piece& piece : piece_table){
    length += piece.length;
  }
+
   return length;
 
 
