@@ -16,7 +16,7 @@ private:
 
     std::unique_ptr<CodeUI>                        window;
 
-    std::shared_ptr<FileManager>                   file_manager;
+    std::unique_ptr<FileManager>                   file_manager;
 
     std::unique_ptr<SoundEngine>                   sound_engine;
 

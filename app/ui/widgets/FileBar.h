@@ -20,7 +20,12 @@ class FileBar : public QWidget {
 
 public:
 
-    FileBar                                                             (QWidget *parent, FileManager* file_manager, ProfileEngine* _profile_engine, const Qt::WindowFlags& f = Qt::Widget);
+    FileBar                                                             (QWidget *parent, FileManager* file_manager, 
+                                                                         const Qt::WindowFlags& f = Qt::Widget);
+
+public slots:
+
+    void                                                                set_Active_Profile(Profile profile);
 
 private:
 
@@ -30,9 +35,9 @@ private:
 
     FileManager*                                                        file_manager;
   
-    ProfileEngine*                                                      profile_engine;
-
     uint32_t                                                            x_scroll_offset = 0;
+
+    Profile                                                             profile;
 
 protected:
 

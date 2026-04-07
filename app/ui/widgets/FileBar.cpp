@@ -61,7 +61,7 @@ void FileBar::draw_Files(QPainter *painter)
 
         current_x += tab_width;
     }
-  austrian_painter->restore();
+  painter->restore();
 
 
 }

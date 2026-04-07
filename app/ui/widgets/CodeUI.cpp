@@ -11,10 +11,11 @@ CodeUI::CodeUI(std::shared_ptr<FileManager> file_manager, SoundEngine* _sound_en
   current_cursor = file_manager->active_File()->get_Cursor();
   profile_engine = _profile_engine;
   timer = new QTimer(this);
-  line_numerator = new LineNumerator(this, text_engine, _profile_engine);
+  line_numerator = new LineNumerator(this, text_engine);
+  QObject::connect(&profile_engine, &ProfileEngine::update_Active_Profile, &line_numerator, &LineNumerator::set_Active_Profile);
   input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
   set_Current_File(file_manager->active_File());
-  file_bar = new FileBar(this, file_manager.get(), _profile_engine);
+  file_bar = new FileBar(this, file_manager.get());
   // Todo : the editor should open with no active file and draw something like menu
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());

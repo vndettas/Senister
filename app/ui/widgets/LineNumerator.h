@@ -19,19 +19,25 @@ public:
 
     LineNumerator()=delete;
 
-    LineNumerator                                                           (QWidget *parent, TextEngine* engine, ProfileEngine* profile_engine, const Qt::WindowFlags &f = Qt::Widget);
+    LineNumerator                                                           (QWidget *parent,  
+                                                                             TextEngine* engine, 
+                                                                             const Qt::WindowFlags &f = Qt::Widget);
 
     void                                                                    set_Current_Text_Engine(TextEngine* text_engine);
 
     void                                                                    setup_Font();
 
+public slots:
+
+    void                                                                    set_Active_Profile(Profile profile);
+
 private:
 
     TextEngine*                     text_engine;
 
-    ProfileEngine*                  profile_engine;
-
     CodeUI*                         parent_widget_ui = nullptr;
+
+    Profile                         active_profile;
 
     uint32_t                        line_spacing = 0;
 

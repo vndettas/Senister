@@ -1,11 +1,10 @@
 #include <QInternal>
 #include "LineNumerator.h"
 
-LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, ProfileEngine* _profile_engine, const Qt::WindowFlags &f): text_engine(engine)
+LineNumerator::LineNumerator(QWidget *parent, ProfileEngine* _profile_engine, const Qt::WindowFlags &f): text_engine(engine)
 {
 
   line_height = fontMetrics().height();
-  profile_engine = _profile_engine;
   setParent(parent);
   parent_widget_ui = dynamic_cast<CodeUI *>(parent);
   line_spacing = parent_widget_ui->getLineSpacing();
@@ -14,6 +13,14 @@ LineNumerator::LineNumerator(QWidget *parent, TextEngine* engine, ProfileEngine*
 
 }
 
+void
+LineNumerator::set_Active_Profile(Profile profile)
+{
+
+  active_profile = profile;
+
+
+}
 
 void
 LineNumerator::paintEvent(QPaintEvent *event)

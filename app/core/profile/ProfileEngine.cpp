@@ -16,9 +16,7 @@ ProfileEngine::ProfileEngine(const QString& path)
     profiles[directory.dirName()] = profile;
    }
 
-  set_Current_Profile(profiles["default"]);
-
-  qDebug() << "total profiles loaded:" << profiles.size();
+  set_Active_Profile("default");
 
 
 }
@@ -69,20 +67,19 @@ ProfileEngine::create_Profile(QDir directory)
 }
 
 void
-ProfileEngine::set_Current_Profile(Profile profile)
+ProfileEngine::set_Active_Profile(QString name)
 {
 
-  current_profile = profile;
+  if(profiles.contains(name)){
+    
+    active_profile = profiles[name];
+    emit update_Active_Profile(active_profile);
+
+  } else {
+
+    qDebug() << "No profile with such name";
+    
+  }
 
 
 }
-
-Profile
-ProfileEngine::get_Current_Profile()
-{
-
-  return current_profile;
-
-
-}
-

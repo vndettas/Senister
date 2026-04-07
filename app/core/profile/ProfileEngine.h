@@ -39,7 +39,10 @@ private:
 };
 
 
-class ProfileEngine {
+class ProfileEngine : public QObject {
+
+  Q_OBJECT
+
 public:
 
   ProfileEngine()=delete;
@@ -47,16 +50,20 @@ public:
   //Profile engine takes path to directory that stores profiles to initiliaze them
   ProfileEngine                         (const QString& dir_path);
 
-  void                                  set_Current_Profile(Profile name);
-
-  Profile                               get_Current_Profile();
-
   Profile                               create_Profile(QDir directory);
+
+public slots:
+
+  void                                  set_Active_Profile(QString profile_name);
+
+signals:
+
+  void                                  update_Active_Profile(Profile profile);
 
 private:
 
   std::map<QString, Profile>            profiles;
 
-  Profile                               current_profile;
+  Profile                               active_profile;
 
 };
