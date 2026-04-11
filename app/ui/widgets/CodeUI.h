@@ -41,7 +41,11 @@ public:
 
     CodeUI()=delete;
 
-    CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, SoundEngine* sound_engine, ProfileEngine* _profile_engine, QWidget *parent =nullptr, const Qt::WindowFlags& f = Qt::Widget);
+    CodeUI                                                                   (FileManager* file_manager
+                                                                              , SoundEngine* sound_engine
+                                                                              , ProfileEngine* _profile_engine
+                                                                              , QWidget *parent =nullptr
+                                                                              , const Qt::WindowFlags& f = Qt::Widget);
 
     void                                                                     set_Current_File_Index(uint32_t index);
 
@@ -77,7 +81,7 @@ signals:
 
 private :
 
-    std::shared_ptr<FileManager>                                file_manager;
+    FileManager*                                                file_manager;
 
     std::shared_ptr<File>                                       current_file;
 

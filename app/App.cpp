@@ -13,7 +13,7 @@ App::App()
   file_manager->add_File(second_file);
   std::shared_ptr<File> fourth_file = std::make_shared<File>("/home/vendetta/github/Senister/test/test.cpp");
   file_manager->add_File(fourth_file);
-  window = std::make_unique<CodeUI>(file_manager, sound_engine.get(), profile_manager.get());
+  window = std::make_unique<CodeUI>(file_manager.get(), sound_engine.get(), profile_manager.get());
 
   window->show();
 
