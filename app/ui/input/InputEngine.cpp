@@ -4,10 +4,11 @@
 
 InputEngine::~InputEngine() = default;
 
-InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui)
+InputEngine::InputEngine(Cursor* _cursor, CodeUI* _code_ui, SoundEngine* engine)
 {
 
   code_ui = _code_ui;
+  sound_engine = engine;
   normal_mode = std::make_unique<NormalMode>(this);
   current_strategy = normal_mode.get();
   insert_mode = std::make_unique<InsertMode>(this);
@@ -170,6 +171,7 @@ InputEngine::switch_To_Normal_Mode()
 {  
   
   qDebug() << "normal mode";
+  sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Normal);
   set_Strategy(normal_mode.get());
 
 
@@ -180,6 +182,7 @@ InputEngine::switch_To_Insert_Mode()
 {
 
   qDebug() << "insert mode";
+  sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Insert);
   set_Strategy(insert_mode.get());
 
 
@@ -203,3 +206,9 @@ InputEngine::save_File()
 
 }
 
+void
+InputEngine::play_Sound(SoundAction action)
+{
+
+  sound_engine->play_Interactive_Sound(action);
+}

@@ -45,9 +45,13 @@ cmake --build . -j 8
 Core is parially covered with tests
 ```
 cd build
+<<<<<<< HEAD
+cmake --build . --target gtest
+=======
 
 cmake --build . -j 8
 
+>>>>>>> main
 ./PieceTableTest
 ```
 

@@ -1,6 +1,6 @@
 fjdkgfdjkghdjhgdeManager.h"
-#include "../../core/files/File.h"
-#include "../../HELPER/CONSTANTS.h"
+#include "../../hsdfgsdjfkhsdfhsdjkfhsdjkfsds/File.h"
+#include "../../ER/Ch"
 #include <QWidget>
 ##include "CodeUI.h"
 #include <cstdint>
@@ -246,4 +246,4 @@ CodeUI::get_Piece_Table()
 
   return text_data_structure;
 
-}include <QPainter>
+}include <QPainter

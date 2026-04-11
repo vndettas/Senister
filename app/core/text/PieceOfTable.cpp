@@ -102,9 +102,9 @@ PieceOfTable::insert(size_t offset, QString str)
   //end of first piece
   uint32_t right_offset = piece->offset + position_in_piece; 
   //length of right piece
-//old length  - offset in piece - 1
+  //old length  - offset in piece - 1
   uint32_t right_length = piece->length - position_in_piece;
-buffer buff = piece->buffer_type;
+  buffer buff = piece->buffer_type;
     
 
   //update left piece length
@@ -210,6 +210,7 @@ PieceOfTable::get_Piece_Table() const
 
   return &piece_table;
 
+ 
 }
 
 uint32_t
