@@ -17,12 +17,15 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
   set_Current_File(file_manager->active_File());
   file_bar = new FileBar(this, file_manager.get());
-  // Todo : the editor should open with no active file and draw something like menu
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
+  actual_text_height = height() + Constants::CODE_LINES_Y_OFFSET + Constants::CODE_BOTTOM_MARGIN; 
+  visible_line_count = (actual_text_height/ line_height);
+  qDebug() << visible_line_count;
+
   setup_Font();
 
 
@@ -43,28 +46,42 @@ CodeUI::paintEvent(QPaintEvent* event)
     //-- Text pen --
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
-  // -- Current line one on which cursor currently located --
   size_t current_line_index = current_cursor->get_Current_Line_Index();
   // --Position where code area starts--
-  uint32_t y_offset=Constants::CODE_LINES_Y_OFFSET;
+  float y_offset=Constants::CODE_LINES_Y_OFFSET;
 
   // -- First visible line one which is first in code area --
-  float first_visible_line=current_file->get_scroll_offset() / line_height;
-  qDebug() << "first_visible_line: " << first_visible_line << "\n";
-  float y_offset_first_line=std::fmod(current_file->get_scroll_offset(), line_height);
-  qDebug() << "y_offset_first_visible_line: " << y_offset_first_line << "\n";
-  uint32_t last_line_to_draw = first_visible_line + visible_line_count;
-  qDebug() << "last line to draw: " << last_line_to_draw << "\n";
+ first_visible_line=current_file->get_scroll_offset() / line_height;
+  last_line_to_draw = first_visible_line + visible_line_count;
+  if(current_line_index <= first_visible_line){
+    current_cursor->set_Current_Line(first_visible_line);
+    //current_cursor->move_Down(text_engine->get_Line_Size(current_cursor->get_Cursor_Position().first + 1));
+    current_line_index = current_cursor->get_Current_Line_Index();
+
+  } else if(current_line_index >= last_line_to_draw){
+
+    current_cursor->set_Current_Line(last_line_to_draw);
+    //current_cursor->move_Up(text_engine->get_Line_Size(current_cursor->get_Cursor_Position().first - 1));
+    current_line_index = current_cursor->get_Current_Line_Index();
+
+
+  }
+  float trash = 0;
+  float rem = std::modf(first_visible_line, &trash);
+  //qDebug() << rem;
+  //qDebug() << line_height * rem;
   //che eto 
   uint32_t line_counter= first_visible_line;
   // -- First visible line used also in LineNumerator --
   text_engine->setFirstVisibleLine(line_counter);
 
+  y_offset-= line_height * rem;
+
   while (line_counter <= last_line_to_draw) {
 
 
-    if (line_counter >= text_engine->get_Lines_Count()) { // Подставь свой метод получения кол-ва строк
-        break; // Выходим из цикла, если файл закончился
+   if (line_counter >= text_engine->get_Lines_Count()) {
+        break; 
     }
     // -- Here we check if line exists, if not we dont have to print it --
     // -- So our file contains 10 lines of code but on the screen can be shown 42 we will print only 10 and wont print empty lines --
@@ -91,9 +108,10 @@ CodeUI::paintEvent(QPaintEvent* event)
       painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
     }
     ++line_counter;
-    y_offset += line_spacing + 2;
+    y_offset += line_spacing;
   }
   painter.end();
+
 
 
 }
@@ -116,12 +134,7 @@ void
 CodeUI::resizeEvent(QResizeEvent *event)
 {
 
-  uint32_t actual_text_height = height() - 150; 
-    
-    // Пересчитываем количество строк
-  qDebug() << "actual text height: " << actual_text_height << "\n";
-  qDebug() << "line height: " << line_height << "\n";
-  visible_line_count = (actual_text_height / line_height);
+ visible_line_count = (actual_text_height / line_height);
 
   QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
@@ -137,7 +150,26 @@ CodeUI::wheelEvent(QWheelEvent *event)
   QWidget::wheelEvent(event);
   current_file->set_scroll_velocity(current_file->get_scroll_velocity() - event->angleDelta().y()/13);
   if(!timer->isActive()) timer->start(1000/120);
-  update();
+
+
+}
+
+void
+CodeUI::scroll_File_Up(float value)
+{
+  current_file->set_scroll_velocity(current_file->get_scroll_velocity() - 5);
+  if(!timer->isActive()) timer->start(1000/120);
+
+
+}
+
+void
+CodeUI::scroll_File_Down(float value)
+{
+
+  current_file->set_scroll_velocity(current_file->get_scroll_velocity() + 5);
+  if(!timer->isActive()) timer->start(1000/120);
+
 
 
 }
@@ -146,11 +178,9 @@ void
 CodeUI::on_Scroll_Tick()
 {
 
-    // Basic inertia algorithm
   if((current_file->get_scroll_offset() + current_file->get_scroll_velocity()) > 0) current_file->set_scroll_offset(current_file->get_scroll_offset() + current_file->get_scroll_velocity());
-    // Every frame makes velocity smaller till very small
-  current_file->set_scroll_velocity(current_file->get_scroll_velocity() * 0.95);
-  if (std::abs(current_file->get_scroll_velocity()) < 0.01f) {
+  current_file->set_scroll_velocity((current_file->get_scroll_velocity()) * 0.96);
+  if (std::abs(current_file->get_scroll_velocity()) < 0.0001f) {
     timer->stop();
     current_file->set_scroll_velocity(0);
   }
@@ -201,11 +231,6 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_fon
  }
 
 
-void CodeUI::draw_Lines(QPainter *painter)
-{
-
-   
-}
 
 
 const uint32_t

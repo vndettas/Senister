@@ -43,5 +43,4 @@ private:
 
   QSoundEffect*                     sound_effect;
 
-
 };

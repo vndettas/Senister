@@ -9,6 +9,7 @@ FileBar::FileBar(QWidget *parent, FileManager* _file_manager, ProfileEngine* _pr
   profile_engine = _profile_engine; 
 
 
+
 }
 
 void

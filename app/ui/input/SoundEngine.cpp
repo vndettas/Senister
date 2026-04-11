@@ -1,4 +1,5 @@
 #include "SoundEngine.h"
+<<<<<<< HEAD
 #include <QDebug>
 
 SoundEngine::SoundEngine(ProfileEngine* engine)

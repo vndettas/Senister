@@ -45,7 +45,13 @@ cmake --build . -j 8
 Core is parially covered with tests
 ```
 cd build
+<<<<<<< HEAD
 cmake --build . --target gtest
+=======
+
+cmake --build . -j 8
+
+>>>>>>> main
 ./PieceTableTest
 ```
 
@@ -72,15 +78,14 @@ Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc
 <!--START_SECTION:waka-->
 
 ```txt
-From: 17 November 2024 - To: 24 March 2026
+From: 02 April 2026 - To: 09 April 2026
 
-Total Time: 242 hrs 36 mins
+Total Time: 5 hrs 35 mins
 
-C++              160 hrs 40 mins       ░░░░░░░░░░░░░░░░▒████████   66.18 %
-Java             52 hrs 50 mins        ░░░░░▓███████████████████   21.77 %
-ObjectiveC       9 hrs 12 mins         ░████████████████████████   03.79 %
-CMake            9 hrs                 ░████████████████████████   03.71 %
-C                1 hr 49 mins          ▓████████████████████████   00.76 %
+C++         4 hrs 50 mins         ░░░░░░░░░░░░░░░░░░░░░▒███   86.64 %
+YAML        30 mins               ░░▓██████████████████████   09.11 %
+gitignore   8 mins                ▒████████████████████████   02.39 %
+hyprlang    6 mins                ▓████████████████████████   01.86 %
 ```
 
 <!--END_SECTION:waka-->

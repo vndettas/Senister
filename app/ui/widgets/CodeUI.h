@@ -61,6 +61,10 @@ public:
 
     void                                                                     on_Scroll_Tick();
 
+    void                                                                     scroll_File_Down(float value);
+
+    void                                                                     scroll_File_Up(float value);
+
     void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
 
     void                                                                     paintEvent(QPaintEvent *event) override;
@@ -105,11 +109,17 @@ private :
 
     FileBar*                                                    file_bar = nullptr;
 
-    const uint32_t                                              line_spacing = fontMetrics().lineSpacing();
+    const uint32_t                                              line_spacing = fontMetrics().lineSpacing() + 2;
+
+    uint32_t                                                    actual_text_height;
 
     const uint32_t                                              line_height = fontMetrics().height();
 
     uint32_t                                                    visible_line_count;
+
+    float                                                       first_visible_line;
+
+    float                                                       last_line_to_draw;
 
 protected:
     void                                                                            resizeEvent(QResizeEvent *event) override;

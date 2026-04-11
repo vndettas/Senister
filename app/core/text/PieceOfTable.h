@@ -18,7 +18,7 @@ class QString;
    class PieceOfTable {
 public:
 
-    PieceOfTable()=delete;
+    PieceOfTable();
 
     PieceOfTable                                                        (const QString&);
 
@@ -39,6 +39,8 @@ public:
     QString                                                             get_Line(size_t offset, size_t length) const;
 
     uint32_t                                                            get_Text_Length();
+
+    QString                                                             get_Whole_Text();       
 
     void                                                                print_Logs();
 
