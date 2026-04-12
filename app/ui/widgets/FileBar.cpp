@@ -1,11 +1,14 @@
 #include "FileBar.h"
 #include "../HELPER/CONSTANTS.h"
 
-FileBar::FileBar(QWidget *parent, FileManager* _file_manager, const Qt::WindowFlags &f)
+FileBar::FileBar(QWidget *parent, FileManager* _file_manager, ProfileEngine* _profile_engine, const Qt::WindowFlags &f)
 {
 
-    setParent(parent);
-    file_manager = _file_manager;
+  setParent(parent);
+  file_manager = _file_manager;
+  profile_engine = _profile_engine; 
+
+
 
 }
 
@@ -23,6 +26,7 @@ FileBar::paintEvent(QPaintEvent *event)
  draw_Lines(&painter);
 
  painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
+
 
 }
 
@@ -45,12 +49,13 @@ void FileBar::draw_Files(QPainter *painter)
 
         if(file == file_manager->active_File()) {
             painter->fillRect(current_x, 0, tab_width - 1, Constants::FILE_BAR_HEIGHT, QColor(50, 50, 50));
+            painter->drawText(current_x + 10, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
         } else {
             painter->fillRect(current_x, 0, tab_width - 1, Constants::FILE_BAR_HEIGHT, QColor(36, 36, 36));
+            painter->drawText(current_x + 10, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
         }
 
         painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
-        painter->drawText(current_x + 10, Constants::FILE_BAR_TEXT_HEIGHT, QString::fromStdString(file->file_Name()));
 
        painter->setPen(QPen(QColor(80, 80, 80), 1)); 
         painter->drawLine(current_x + tab_width - 1, 0, current_x + tab_width - 1, Constants::FILE_BAR_HEIGHT);
@@ -59,31 +64,27 @@ void FileBar::draw_Files(QPainter *painter)
     }
   painter->restore();
 
+
 }
-
-
 
 void
 FileBar::draw_Lines(QPainter *painter)
 {
 
-
   painter->setPen(Constants::LINES_PEN);
-  painter->drawLine(0, Constants::FILE_BAR_HEIGHT, 0, 0);
+ // painter->drawLine(0, Constants::FILE_BAR_HEIGHT, 0, 0);
   painter->drawLine(width(), 0, 0, 0);
 
-  // -- Text font setup --
-  QFont text_files_font("Lucida Sans Typewriter", 15);
-  text_files_font.setStyleStrategy(QFont::PreferAntialias);
-  text_files_font.setHintingPreference(QFont::HintingPreference::PreferFullHinting);
-  painter->setRenderHint(QPainter::Antialiasing, true);
+  QFont text_files_font = QFont(profile_engine->get_Current_Profile().font, profile_engine->get_Current_Profile().font_size);
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
+
 
 }
 
 void
 FileBar::wheelEvent(QWheelEvent *event)
 {
+
    uint32_t delta = event->angleDelta().y();
 
     uint32_t scroll_speed = 30;
@@ -99,4 +100,6 @@ FileBar::wheelEvent(QWheelEvent *event)
     }
 
     update(); 
+
+
 }

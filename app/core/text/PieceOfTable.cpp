@@ -9,12 +9,19 @@
 PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{QString::fromStdString((read_To_Const_Buffer(filepath)))}, add_buffer{}
 {
 
- //later reserve more but now vector reallocation should be tested
   piece_table.reserve(20);
   path = filepath;
   size_t size = read_buffer.size() - 1;
   piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
+
+}
+
+PieceOfTable::PieceOfTable()
+{
+  piece_table.reserve(20);
+  piece_table.emplace_back(Piece{0, 0, buffer::read_only_buffer});
+  
 
 }
 
@@ -32,7 +39,6 @@ std::string
 PieceOfTable::read_To_Const_Buffer(const std::filesystem::path filepath)
 {
 
-
   std::ifstream istream(filepath);
   if(!istream){
     throw std::runtime_error("Failed to open file");
@@ -48,74 +54,76 @@ void
 PieceOfTable::insert(size_t offset, QString str)
 {
     
-    size_t buffer_offset = add_buffer.length();
-    //Initally all inserted characters stored in second buffer and piece that points to this character added
-    add_buffer.append(str);
+  size_t buffer_offset = add_buffer.length();
+  //Initally all inserted characters stored in second buffer and piece that points to this character added
+  add_buffer.append(str);
 
-    //Inserting at the end of text
-    if(offset >= get_Text_Length()){
-    piece_table.push_back(Piece(buffer_offset, str.length(), buffer::add_buffer));
-    return;
-    }
+  //Inserting at the end of text
+  if(offset >= get_Text_Length()){
+  piece_table.push_back(Piece(buffer_offset, str.length(), buffer::add_buffer));
+  return;
+  }
 
     
-    uint32_t piece_table_global_offset = 0;
-    size_t itr = 0;
+  uint32_t piece_table_global_offset = 0;
+  size_t itr = 0;
 
-    //Looking for piece in which or after each character inserted
-    while(itr < piece_table.size() && piece_table_global_offset  + piece_table[itr].length <  offset){ 
+  //Looking for piece in which or after each character inserted
+  while(itr < piece_table.size() && piece_table_global_offset  + piece_table[itr].length <  offset){ 
 
-    piece_table_global_offset += piece_table[itr].length;
-    itr++;
+  piece_table_global_offset += piece_table[itr].length;
+  itr++;
 
     }
 
     //Bound check
-    if (itr >= piece_table.size()) itr = piece_table.size() - 1; 
+  if (itr >= piece_table.size()) itr = piece_table.size() - 1; 
 
-    Piece* piece = &piece_table[itr];
+  Piece* piece = &piece_table[itr];
 
-    uint32_t position_in_piece = offset - piece_table_global_offset;
+  uint32_t position_in_piece = offset - piece_table_global_offset;
 
     // character inserted before current piece
-    if(position_in_piece == 0){
-    auto piece_pos = piece_table.begin() + itr;
-      piece_table.insert(piece_pos, Piece(buffer_offset, str.length(), buffer::add_buffer));
-      return;
+  if(position_in_piece == 0){
+  auto piece_pos = piece_table.begin() + itr;
+    piece_table.insert(piece_pos, Piece(buffer_offset, str.length(), buffer::add_buffer));
+    return;
 
-      // character inserted after current piece
-    } else if(position_in_piece == piece->length){
+    // character inserted after current piece
+  } else if(position_in_piece == piece->length){
 
-      auto piece_pos = piece_table.begin() + itr + 1;
-      piece_table.insert(piece_pos, Piece(buffer_offset, str.length(), buffer::add_buffer));
+    auto piece_pos = piece_table.begin() + itr + 1;
+    piece_table.insert(piece_pos, Piece(buffer_offset, str.length(), buffer::add_buffer));
 
-      // character inserted inside piece
-      // first piece is splitted and than new piece inserted between those two
-    } else {
+    // character inserted inside piece
+    // first piece is splitted and than new piece inserted between those two
+  } else {
 
-    //end of first piece
-    uint32_t right_offset = piece->offset + position_in_piece; 
-    //length of right piece
-    //old length  - offset in piece - 1
-    uint32_t right_length = piece->length - position_in_piece;
-    buffer buff = piece->buffer_type;
+  //end of first piece
+  uint32_t right_offset = piece->offset + position_in_piece; 
+  //length of right piece
+  //old length  - offset in piece - 1
+  uint32_t right_length = piece->length - position_in_piece;
+  buffer buff = piece->buffer_type;
     
 
-    //update left piece length
-    piece->set_Length(position_in_piece);
+  //update left piece length
+  piece->set_Length(position_in_piece);
 
-    auto right_iterator = piece_table.begin() + itr + 1;
-    auto left_iterator = piece_table.begin() + itr;
+  auto right_iterator = piece_table.begin() + itr + 1;
+  auto left_iterator = piece_table.begin() + itr;
 
-    piece_table.insert(right_iterator, Piece(right_offset, right_length, buff)); 
-    piece_table.insert(left_iterator, Piece(buffer_offset, str.length(), buffer::add_buffer));
-      
+  piece_table.insert(right_iterator, Piece(right_offset, right_length, buff)); 
+  piece_table.insert(left_iterator, Piece(buffer_offset, str.length(), buffer::add_buffer));
     
-    }
+  }
+  
+
 }
 
 void
-PieceOfTable::save_File(){
+PieceOfTable::save_File()
+{
 
   QFile file(path);
 
@@ -138,13 +146,44 @@ PieceOfTable::save_File(){
 
   file.close();
 
+
 }
+
+QString
+PieceOfTable::get_Whole_Text()
+{
+
+  QString result;
+
+  result.reserve(get_Text_Length());
+
+  for(const Piece& piece : piece_table){
+
+    if(piece.buffer_type == buffer::add_buffer){
+
+      result.append(add_buffer.mid(piece.offset, piece.length));
+
+    } else {
+
+      result.append(read_buffer.mid(piece.offset, piece.length));
+
+    }
+
+   }
+  return result;
+
+
+}
+
+  
+
 
 QString
 &PieceOfTable::get_Add_Buffer() const
 {
 
   return (QString &) add_buffer;
+
 
 }
 
@@ -161,25 +200,28 @@ PieceOfTable::get_Read_Buffer() const
 {
 
   return const_cast<QString *>(&read_buffer);
-
+ 
+ 
 }
 
 const std::vector<Piece>*
 PieceOfTable::get_Piece_Table() const
 {
+
   return &piece_table;
 
+ 
 }
 
 uint32_t
 PieceOfTable::get_Text_Length()
 {
 
-
   uint32_t length = 0;
  for(const Piece& piece : piece_table){
    length += piece.length;
  }
+
   return length;
 
 
@@ -188,7 +230,6 @@ PieceOfTable::get_Text_Length()
 void
 PieceOfTable::print_Logs()
 {
-
 
   size_t itr = 0;
   for( const Piece piece : piece_table){
@@ -221,48 +262,52 @@ PieceOfTable::get_Char_At(size_t pos)
  }
  return {};
 
+
 }
 
 
 QString PieceOfTable::get_Line(size_t offset, size_t length) const 
 {
-    if (length == 0) return "";
 
-    QString line = "";
-    uint32_t current_piece_global_start = 0;
-    uint32_t chars_needed = length;
-    uint32_t current_read_offset = offset;
+  if (length == 0) return "";
 
-    for (const Piece& piece : piece_table) {
-        uint32_t current_piece_global_end = current_piece_global_start + piece.length;
+  QString line = "";
+  uint32_t current_piece_global_start = 0;
+  uint32_t chars_needed = length;
+  uint32_t current_read_offset = offset;
 
-        if (current_read_offset >= current_piece_global_start && current_read_offset < current_piece_global_end) {
+  for (const Piece& piece : piece_table) {
+      uint32_t current_piece_global_end = current_piece_global_start + piece.length;
+
+      if (current_read_offset >= current_piece_global_start && current_read_offset < current_piece_global_end) {
             
-            uint32_t rel_start = current_read_offset - current_piece_global_start;
+          uint32_t rel_start = current_read_offset - current_piece_global_start;
             
-            uint32_t chars_available = piece.length - rel_start;
-            uint32_t chars_to_take = std::min(chars_needed, chars_available);
+          uint32_t chars_available = piece.length - rel_start;
+          uint32_t chars_to_take = std::min(chars_needed, chars_available);
             
-            uint32_t buffer_index = piece.offset + rel_start;
+          uint32_t buffer_index = piece.offset + rel_start;
             
-            if (piece.buffer_type == buffer::add_buffer) {
-                line += add_buffer.mid(buffer_index, chars_to_take);
-            } else {
-                line += read_buffer.mid(buffer_index, chars_to_take); 
-            }
+          if (piece.buffer_type == buffer::add_buffer) {
+              line += add_buffer.mid(buffer_index, chars_to_take);
+          } else {
+              line += read_buffer.mid(buffer_index, chars_to_take); 
+          }
             
-            chars_needed -= chars_to_take;
-            current_read_offset += chars_to_take; 
+          chars_needed -= chars_to_take;
+          current_read_offset += chars_to_take; 
             
-            if (chars_needed == 0) {
-                break; 
-            }
-        }
+          if (chars_needed == 0) {
+              break; 
+          }
+      }
         
-        current_piece_global_start += piece.length;
-    }
+      current_piece_global_start += piece.length;
+  }
     
-    return line;
+  return line;
+
+
 }
 
 
@@ -321,6 +366,7 @@ if(offset >= piece_table_global_offset && offset < piece_table_global_offset + p
 
   }
   
+
 }
 
 

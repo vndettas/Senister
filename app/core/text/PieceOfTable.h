@@ -18,7 +18,7 @@ class QString;
    class PieceOfTable {
 public:
 
-    PieceOfTable()=delete;
+    PieceOfTable();
 
     PieceOfTable                                                        (const QString&);
 
@@ -40,6 +40,8 @@ public:
 
     uint32_t                                                            get_Text_Length();
 
+    QString                                                             get_Whole_Text();       
+
     void                                                                print_Logs();
 
     [[nodiscard]] const std::vector<Piece>*                             get_Piece_Table() const;
@@ -54,7 +56,7 @@ private:
 
     const QString                                        read_buffer;
 
-  std::filesystem::path                                  path;
+    std::filesystem::path                                  path;
 
     QString                                              add_buffer;
 

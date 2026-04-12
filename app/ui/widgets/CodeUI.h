@@ -21,6 +21,7 @@
 #include <memory>
 #include <QGridLayout>
 #include <QLayout>
+#include "../input/SoundEngine.h"
 
 
 class InputEngine;
@@ -40,8 +41,11 @@ public:
 
     CodeUI()=delete;
 
-    CodeUI                                                                   (std::shared_ptr<FileManager> file_manager, QWidget *parent =nullptr,
-                                                                                const Qt::WindowFlags& f = Qt::Widget);
+    CodeUI                                                                   (FileManager* file_manager
+                                                                              , SoundEngine* sound_engine
+                                                                              , ProfileEngine* _profile_engine
+                                                                              , QWidget *parent =nullptr
+                                                                              , const Qt::WindowFlags& f = Qt::Widget);
 
     void                                                                     set_Current_File_Index(uint32_t index);
 
@@ -56,6 +60,10 @@ public:
     PieceOfTable*                                                            get_Piece_Table();
 
     void                                                                     on_Scroll_Tick();
+
+    void                                                                     scroll_File_Down(float value);
+
+    void                                                                     scroll_File_Up(float value);
 
     void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
 
@@ -77,7 +85,7 @@ signals:
 
 private :
 
-    std::shared_ptr<FileManager>                                file_manager;
+    FileManager*                                                file_manager;
 
     std::shared_ptr<File>                                       current_file;
 
@@ -89,19 +97,29 @@ private :
 
     Cursor*                                                     current_cursor = nullptr; 
 
+    ProfileEngine*                                              profile_engine;
+
     QTimer*                                                     timer = nullptr;
 
     QFont                                                       code_font;
+
+    SoundEngine*                                                sound_engine;
 
     LineNumerator*                                              line_numerator = nullptr;
 
     FileBar*                                                    file_bar = nullptr;
 
-    const uint32_t                                              line_spacing = fontMetrics().lineSpacing();
+    const uint32_t                                              line_spacing = fontMetrics().lineSpacing() + 2;
+
+    uint32_t                                                    actual_text_height;
 
     const uint32_t                                              line_height = fontMetrics().height();
 
     uint32_t                                                    visible_line_count;
+
+    float                                                       first_visible_line;
+
+    float                                                       last_line_to_draw;
 
 protected:
     void                                                                            resizeEvent(QResizeEvent *event) override;

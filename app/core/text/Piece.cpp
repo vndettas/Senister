@@ -11,6 +11,7 @@ Piece::shrink_Front()
   this->length--;
   }
 
+
 }
 
 void
@@ -20,6 +21,7 @@ Piece::shrink_Back()
   if(this->length > 0){
   this->length--;
   }
+
 
 }
 
@@ -33,6 +35,7 @@ Piece::shrink_Back(size_t _length)
       this->length -= _length;
   }
 
+
 }
 
 void
@@ -41,16 +44,18 @@ Piece::set_Length(size_t _length)
 
   this->length = _length;
 
+
 }
 
 void
 Piece::shrink_Front(size_t _length)
 {
-    if(_length > this->length){
-        this->length = 0;
-    } else{
-        this->offset += _length;
-        this->shrink_Back(_length);
-    }
+  if(_length > this->length){
+      this->length = 0;
+  } else{
+      this->offset += _length;
+      this->shrink_Back(_length);
+  }
+
 
 }

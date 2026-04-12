@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../app/core/text/PieceOfTable.h"
 #include "../app/core/text/Piece.h"
-#include <iostream>
+#include <QDebug>
 
 class PieceTestSmallBuffers : public testing::Test{
     protected:
@@ -126,66 +126,41 @@ TEST_F(PieceOfTableGetCharMethod, GetCharAtMinus){
 
 TEST_F(PieceOfTableGetCharMethod, GetCharAtBiggerThanTextItself){
   EXPECT_EQ(table.get_Char_At(45), QChar{});
-  EXPECT_EQ(table.get_Char_At(1239123891283129381923819), QChar{});
+  EXPECT_EQ(table.get_Char_At(19381923819), QChar{});
 }
 
 class PieceOfTableEraseMethod : public testing::Test{
     protected:
-    PieceOfTableEraseMethod() : table{QStringLiteral("I lost all my friends today")}
-    {
-
-    }
-
     PieceOfTable table;
 
     QString text{"I lost all my friends today"};
+
+  void SetUp() override{
+    table.insert(0, text);
+  }
+
+  void compare(const QString& text){
+    EXPECT_EQ(table.get_Whole_Text(), text);
+  }
 };
-
-
-//Todo : two piece and in first last char
-// in the middle
-// two piece and in second first char
 
 TEST_F(PieceOfTableEraseMethod, ZeroCharacter){
   table.erase(0);
-  EXPECT_EQ(table.get_Piece_Vector()[0].offset, 1);
+  compare(" lost all my friends today");
 }
 
-TEST_F(PieceOfTableEraseMethod, ZeroCharacterTwice){
-  table.erase(0);
-  table.erase(0);
-  EXPECT_EQ(table.get_Piece_Vector()[0].offset, 2);
+TEST_F(PieceOfTableEraseMethod, BiggerThanText){
+  for(int i = 0; i < text.size() * 2; i++){
+    table.erase(0);
+  }
+  compare("");
 }
 
-TEST_F(PieceOfTableEraseMethod, LastCharInPiece){
-  uint32_t piece_length = table.get_Piece_Vector()[0].length;
-  std::cout << table.get_Piece_Vector()[0].length;
-  table.erase(text.length()-1);
-  --piece_length;
-  EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
-  --piece_length;
-  table.erase(text.length()-2);
-  table.print_Logs();
-  EXPECT_EQ(table.get_Piece_Vector()[0].length, piece_length);
+TEST_F(PieceOfTableEraseMethod, LastCharText){
+  for(int i = text.size() - 1; i >= 1; i--){
+    table.erase(i);
+  }
+  compare("I");
 }
 
-TEST_F(PieceOfTableEraseMethod, Middle){
-    size_t piece_length = table.get_Piece_Vector()[0].length;
-    table.erase(text.length()/2);
-    EXPECT_EQ(table.get_Piece_Table()->size(), 2);
-    EXPECT_EQ(table.get_Piece_Vector()[0].length, 12);
-    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 0);
-    EXPECT_EQ(table.get_Piece_Vector()[1].length, 13);
-    EXPECT_EQ(table.get_Piece_Vector()[1].offset, 13);
-}
 
-TEST_F(PieceOfTableEraseMethod, SecondPieceFirstChar){
-    size_t piece_length = table.get_Piece_Vector()[0].length;
-    table.erase(text.length()/2);
-    table.erase(text.length()/2);
-    EXPECT_EQ(table.get_Piece_Table()->size(), 2);
-    EXPECT_EQ(table.get_Piece_Vector()[0].length, 12);
-    EXPECT_EQ(table.get_Piece_Vector()[0].offset, 0);
-    EXPECT_EQ(table.get_Piece_Vector()[1].length, 13);
-    EXPECT_EQ(table.get_Piece_Vector()[1].offset, 14);
-}

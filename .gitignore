@@ -25,8 +25,20 @@ CMakeCache
 cmake_install.cmake
 compile_commands.json
 CTestTestfile.cmake
+_deps/
+*.cmake
+!CMakeLists.txt
 
-# Ninja
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+PieceTableTest*
+gtest*
+
+*.user
 build.ninja
 .ninja_deps
 .ninja_log

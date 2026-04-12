@@ -13,6 +13,7 @@ TextEngine::TextEngine(PieceOfTable* textDataStructure) : text_data_structure(te
 
   calculate_Indexes();
 
+
 }
 
 
@@ -37,6 +38,8 @@ TextEngine::get_Line(size_t index)
   } else {
     return {};
   } 
+
+
 }
 
 [[nodiscard]] std::optional<QString>
@@ -61,23 +64,27 @@ TextEngine::get_Line(std::pair<int,int> cursor_pos)
     return {};
   }
 
+
 }
 
 void
 TextEngine::insert_Char(QString str, std::pair<int, int> cursor_pos)
 {
 
-    size_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
-    text_data_structure->insert(offset, str);
-    calculate_Indexes();
+  size_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
+  text_data_structure->insert(offset, str);
+  calculate_Indexes();
+
 
 }
+
 void
 TextEngine::set_Data_Structre(PieceOfTable* text_data_structure)
 {
 
   this->text_data_structure = text_data_structure;
   calculate_Indexes();
+
 
 }
 
@@ -106,6 +113,7 @@ TextEngine::getFirstVisibleLine() const
 
   return first_visible_line;
 
+
 }
 
 void
@@ -114,6 +122,7 @@ TextEngine::setFirstVisibleLine(uint32_t firstVisibleLine)
 
   first_visible_line=firstVisibleLine;
 
+
 }
 
 size_t
@@ -121,6 +130,7 @@ TextEngine::get_Lines_Count()
 {
 
   return line_index_offset.size();
+
 
 } 
 
@@ -131,6 +141,7 @@ TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos)
   uint32_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
   text_data_structure->erase(offset);
   calculate_Indexes();
+
 
 }
 
@@ -145,6 +156,7 @@ TextEngine::get_Next_Line_End_Pos(uint32_t row)
     return line_index_offset[line_index_offset.size() - 1];
   }
 
+
 }
 
 
@@ -154,30 +166,36 @@ TextEngine::get_Prev_Line_Start_Pos(uint32_t row)
 
   return line_index_offset[row];
 
+
 }
 
 uint32_t
 TextEngine::get_Line_Size(uint32_t row)
 {
-    if (row >= line_index_offset.size()) return 0;
 
-    uint32_t start = line_index_offset[row];
-    uint32_t end = (row + 1 < line_index_offset.size()) ? line_index_offset[row + 1] : text_data_structure->get_Text_Length();
+  if (row >= line_index_offset.size()) return 0;
 
-    if (end <= start) return 0;
+  uint32_t start = line_index_offset[row];
+  uint32_t end = (row + 1 < line_index_offset.size()) ? line_index_offset[row + 1] : text_data_structure->get_Text_Length();
 
-    // Спрашиваем напрямую у таблицы, не выделяя память под строку!
-    if (text_data_structure->get_Char_At(end - 1) == '\n') {
-        return end - start - 1;
-    }
+  if (end <= start) return 0;
 
-    return end - start;
+  if (text_data_structure->get_Char_At(end - 1) == '\n') {
+      return end - start - 1;
+  }
+
+  return end - start;
+
+
 }
 
 uint32_t
 TextEngine::get_Line_Size(std::pair<int, int> cursor_pos)
 {
-    return get_Line_Size(cursor_pos.first);
+
+  return get_Line_Size(cursor_pos.first);
+
+
 }
 
 uint32_t
@@ -185,10 +203,15 @@ TextEngine::get_Text_Length()
 {
 
   return text_data_structure->get_Text_Length();
+
+
 }
 
 void
 TextEngine::save_File()
 {
+
   text_data_structure->save_File();
+
+
 }

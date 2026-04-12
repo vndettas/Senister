@@ -2,10 +2,10 @@
 Inspired by vim and vim like code editors, project goal is to bring something new to UX experience on top of the efficient core and vim style coding
 
 ## Ideology and features
-- Reliable fast core (Piece of table) which supports huge files
+- Reliable fast core (Piece of table) which supports huge files (Read more about it below)
 
 - Vim smart cursor
-![Дизайн без назви](https://github.com/user-attachments/assets/fe1492ef-8c54-49dd-86ca-44c573f379d6)
+![demo](https://github.com/user-attachments/assets/d0aa1c67-21db-47bc-9d3f-dad223a5ac18)
 
 - Mouse free experience
 
@@ -19,6 +19,8 @@ Inspired by vim and vim like code editors, project goal is to bring something ne
 
 - **Cmake 3.27** ++
 
+- Gtest (installed by building system from github repo)
+
 - Ccache (optional)
 
 ## Building
@@ -30,23 +32,60 @@ cd Senister
 
 mkdir build
 
-cmake .
-
 cd build
+
+cmake ..
 
 cmake --build . -j 8
 ```
 
+## Testing
+
+
+Core is parially covered with tests
+```
+cd build
+<<<<<<< HEAD
+cmake --build . --target gtest
+=======
+
+cmake --build . -j 8
+
+>>>>>>> main
+./PieceTableTest
+```
+
 ## Manual
 
-Currently you can open file only changin path in app.cpp
+Currently you can open file only changing path in app.cpp
 
-**Normal Mode**
-h, k, j, l - movement
-i - switch to insert mode
-x - delete single character
-ctrl + number - open number file
-ctrl + s - save file
-**Insert Mode**
-esc - switch to normal mode
-Press any keyboard key to insert except ctrl, del etc.
+**Normal Mode**  
+<kbd>h</kbd>, <kbd>k</kbd>, <kbd>j</kbd>, <kbd>l</kbd> - movement  
+<kbd>i</kbd> - switch to insert mode  
+<kbd>x</kbd> - delete single character  
+<kbd>ctrl</kbd> + <kbd>number</kbd> - open number file  (Assuming file is already opened and appeared in file tab)
+<kbd>ctrl</kbd> + <kbd>s</kbd> - save file  
+
+
+**Insert Mode**  
+<kbd>esc</kbd> - switch to normal mode  
+Press any keyboard key to insert except <kbd>ctrl</kbd>, <kbd>del</kbd> etc  
+
+
+## Statistics
+
+
+<!--START_SECTION:waka-->
+
+```txt
+From: 04 April 2026 - To: 11 April 2026
+
+Total Time: 4 hrs 39 mins
+
+C++        4 hrs 31 mins         ░░░░░░░░░░░░░░░░░░░░░░░░▓   97.20 %
+hyprlang   6 mins                ▒████████████████████████   02.24 %
+Markdown   0 secs                █████████████████████████   00.35 %
+YAML       0 secs                █████████████████████████   00.21 %
+```
+
+<!--END_SECTION:waka-->

@@ -17,7 +17,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
-find_package(Qt6 6.9.2 REQUIRED COMPONENTS Gui Core Widgets)
+find_package(Qt6 6.9.2 REQUIRED COMPONENTS Multimedia Gui Core Widgets)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
