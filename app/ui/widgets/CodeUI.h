@@ -77,6 +77,11 @@ public:
 
     ~CodeUI(){};
 
+public slots:
+
+    void                                                                    set_Active_Profile(Profile profile);
+
+
 signals:
 
   void                                                                      key_Pressed(QKeyEvent* event);
@@ -98,6 +103,8 @@ private :
     Cursor*                                                     current_cursor = nullptr; 
 
     ProfileEngine*                                              profile_engine;
+
+    Profile                                                     active_profile; 
 
     QTimer*                                                     timer = nullptr;
 

@@ -1,20 +1,16 @@
 #include "SoundEngine.h"
-<<<<<<< HEAD
 #include <QDebug>
 
-SoundEngine::SoundEngine(ProfileEngine* engine)
+SoundEngine::SoundEngine()
 {
 
-  profile_engine = engine; 
-  current_profile = profile_engine->get_Current_Profile();
-  //update_Current_Profie();
   media_player = new QMediaPlayer(this);
   audio_output = new QAudioOutput(this);
   sound_effect = new QSoundEffect(this);
   media_player->setAudioOutput(audio_output);
   audio_output->setVolume(0.1);
   
-  play_Background_Music(current_profile.background_music_path);
+  play_Background_Music(active_profile.background_music_path);
 
 
 }
@@ -30,15 +26,15 @@ SoundEngine::play_Background_Music(const QString& path)
 
 }
 
-//void
-//SoundEngine::update_Current_Profile()
-//{
+void
+SoundEngine::set_Active_Profile(Profile profile)
+{
 
-//  current_profile = profile_engine->get_Current_Profile();
-//  play_background_music(current_profile.background_music_path);
+  active_profile = profile;
 
 
-//}
+}
+
 
 void
 SoundEngine::play_Interactive_Sound(const QString& path)
@@ -58,27 +54,27 @@ SoundEngine::play_Interactive_Sound(SoundAction action)
     case SoundAction::Insert_Key:
       {
 
-      uint32_t insert_variations_count = current_profile.insert_sounds_path.size();
-      QString sound_path = current_profile.insert_sounds_path[QRandomGenerator::global()->bounded(insert_variations_count - 1)];
+      uint32_t insert_variations_count = active_profile.insert_sounds_path.size();
+      QString sound_path = active_profile.insert_sounds_path[QRandomGenerator::global()->bounded(insert_variations_count - 1)];
       play_Interactive_Sound(sound_path);
       break;
       }
 
     case SoundAction::Switch_To_Normal:
       {
-      play_Interactive_Sound(current_profile.switch_normal_path);
+      play_Interactive_Sound(active_profile.switch_normal_path);
       break;
       }
 
     case SoundAction::Switch_To_Insert:
       {
-      play_Interactive_Sound(current_profile.switch_insert_path);
+      play_Interactive_Sound(active_profile.switch_insert_path);
       break;
       }
 
     case SoundAction::Delete_x:
       {
-      play_Interactive_Sound(current_profile.x_delete_path);
+      play_Interactive_Sound(active_profile.x_delete_path);
       break;
       }
 

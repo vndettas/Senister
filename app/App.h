@@ -2,10 +2,7 @@
 #include "ui/widgets/CodeUI.h"
 #include "core/files/FileManager.h"
 #include "ui/input/SoundEngine.h"
-<<<<<<< HEAD
 #include "core/profile/ProfileEngine.h"
-=======
->>>>>>> main
 
 
 class App {

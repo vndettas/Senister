@@ -21,21 +21,23 @@ class SoundEngine : public QObject{
 
 public:
 
-  SoundEngine                       (ProfileEngine* sound_engine);
+  SoundEngine                       ();
 
   void                              play_Background_Music(const QString& path);
-
-  //void                              update_Current_Profie();
 
   void                              play_Interactive_Sound(SoundAction action);
 
   void                              play_Interactive_Sound(const QString& path);
 
+public slots:
+
+    void                                                                    set_Active_Profile(Profile profile);
+
 private:
 
   ProfileEngine*                    profile_engine;
 
-  Profile                           current_profile;
+  Profile                           active_profile;
 
   QMediaPlayer*                     media_player;
 

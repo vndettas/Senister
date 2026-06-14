@@ -1,13 +1,11 @@
 #include "FileBar.h"
 #include "../HELPER/CONSTANTS.h"
 
-FileBar::FileBar(QWidget *parent, FileManager* _file_manager, ProfileEngine* _profile_engine, const Qt::WindowFlags &f)
+FileBar::FileBar(QWidget *parent, FileManager* _file_manager,const Qt::WindowFlags &f)
 {
 
   setParent(parent);
   file_manager = _file_manager;
-  profile_engine = _profile_engine; 
-
 
 
 }
@@ -75,7 +73,7 @@ FileBar::draw_Lines(QPainter *painter)
  // painter->drawLine(0, Constants::FILE_BAR_HEIGHT, 0, 0);
   painter->drawLine(width(), 0, 0, 0);
 
-  QFont text_files_font = QFont(profile_engine->get_Current_Profile().font, profile_engine->get_Current_Profile().font_size);
+  QFont text_files_font = QFont(active_profile.font, active_profile.font_size);
   painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
 
@@ -100,6 +98,14 @@ FileBar::wheelEvent(QWheelEvent *event)
     }
 
     update(); 
+
+
+}
+void
+FileBar::set_Active_Profile(Profile profile)
+{
+
+  active_profile = profile;
 
 
 }

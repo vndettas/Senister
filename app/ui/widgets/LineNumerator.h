@@ -20,7 +20,7 @@ public:
     LineNumerator()=delete;
 
     LineNumerator                                                           (QWidget *parent,  
-                                                                             TextEngine* engine, 
+                                                                             TextEngine* engine,
                                                                              const Qt::WindowFlags &f = Qt::Widget);
 
     void                                                                    set_Current_Text_Engine(TextEngine* text_engine);

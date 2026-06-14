@@ -13,10 +13,13 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   profile_engine = _profile_engine;
   timer = new QTimer(this);
   line_numerator = new LineNumerator(this, text_engine);
-  QObject::connect(&profile_engine, &ProfileEngine::update_Active_Profile, &line_numerator, &LineNumerator::set_Active_Profile);
+  QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, line_numerator, &LineNumerator::set_Active_Profile);
+  QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, this , &CodeUI::set_Active_Profile);
   input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
   set_Current_File(file_manager->active_File());
-  file_bar = new FileBar(this, file_manager.get());
+  file_bar = new FileBar(this, file_manager);
+  QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, file_bar, &FileBar::set_Active_Profile);
+  QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, sound_engine , &SoundEngine::set_Active_Profile);
   // --Children widgets geometry setup--
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
@@ -26,6 +29,8 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   visible_line_count = (actual_text_height/ line_height);
   qDebug() << visible_line_count;
 
+  
+  profile_engine->set_Active_Profile("default");
   setup_Font();
 
 
@@ -42,7 +47,6 @@ CodeUI::paintEvent(QPaintEvent* event)
   painter.setRenderHint(QPainter::Antialiasing, true);
 
   draw_Rectangles(&painter);
-  draw_Lines(&painter);
     //-- Text pen --
   painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
 
@@ -121,9 +125,8 @@ void
 CodeUI::setup_Font()
 {
 
-  code_font = QFont(profile_engine->get_Current_Profile().font, profile_engine->get_Current_Profile().font_size);
+  code_font = QFont(active_profile.font, active_profile.font_size);
   code_font.setStyleStrategy(QFont::PreferAntialias);
-
   code_font.setFixedPitch(true);
 
 
@@ -179,8 +182,8 @@ CodeUI::on_Scroll_Tick()
 {
 
   if((current_file->get_scroll_offset() + current_file->get_scroll_velocity()) > 0) current_file->set_scroll_offset(current_file->get_scroll_offset() + current_file->get_scroll_velocity());
-  current_file->set_scroll_velocity((current_file->get_scroll_velocity()) * 0.96);
-  if (std::abs(current_file->get_scroll_velocity()) < 0.0001f) {
+  current_file->set_scroll_velocity((current_file->get_scroll_velocity()) * 0.93);
+  if (std::abs(current_file->get_scroll_velocity()) < 0.01f) {
     timer->stop();
     current_file->set_scroll_velocity(0);
   }
@@ -306,5 +309,14 @@ CodeUI::get_Piece_Table()
 {
 
   return text_data_structure;
+
+}
+
+void
+CodeUI::set_Active_Profile(Profile profile)
+{
+
+  active_profile = profile;
+
 
 }

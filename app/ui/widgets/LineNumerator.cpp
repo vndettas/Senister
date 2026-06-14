@@ -1,7 +1,7 @@
 #include <QInternal>
 #include "LineNumerator.h"
 
-LineNumerator::LineNumerator(QWidget *parent, ProfileEngine* _profile_engine, const Qt::WindowFlags &f): text_engine(engine)
+LineNumerator::LineNumerator(QWidget *parent, TextEngine* text_engine, const Qt::WindowFlags &f): text_engine{text_engine} 
 {
 
   line_height = fontMetrics().height();
@@ -18,7 +18,6 @@ LineNumerator::set_Active_Profile(Profile profile)
 {
 
   active_profile = profile;
-
 
 
 }
@@ -90,7 +89,7 @@ void
 LineNumerator::setup_Font()
 {
 
-  numerator_font = QFont(profile_engine->get_Current_Profile().font, 9);
-  numerator_highlighter_font = QFont(profile_engine->get_Current_Profile().font, 10);
+  numerator_font = QFont(active_profile.font, 9);
+  numerator_highlighter_font = QFont(active_profile.font, 10);
 
 }

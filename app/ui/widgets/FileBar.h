@@ -33,6 +33,8 @@ private:
 
     void                                                                draw_Files(QPainter *painter);
 
+    Profile                                                             active_profile;
+
     FileManager*                                                        file_manager;
   
     uint32_t                                                            x_scroll_offset = 0;
