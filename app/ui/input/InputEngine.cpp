@@ -101,8 +101,8 @@ InputEngine::move_Cursor_Down()
   if(cursor->get_Cursor_Position().first + 1 < code_ui->Text_Engine()->get_Lines_Count()){
   cursor->move_Down(code_ui->Text_Engine()->get_Line_Size(cursor->get_Cursor_Position().first + 1));
   }
-  code_ui->scroll_File_Down(0);
-  update_ui();
+
+  code_ui->on_Cursor_Moved(); 
 
 
 }
@@ -125,9 +125,8 @@ InputEngine::move_Cursor_Up()
   if(current_line > 0){            
     uint32_t target_line_size = code_ui->Text_Engine()->get_Line_Size(cursor->get_Cursor_Position().first - 1); 
     cursor->move_Up(target_line_size);
-    code_ui->scroll_File_Up(0);
-    update_ui();
 
+  code_ui->on_Cursor_Moved();
   }
 
 

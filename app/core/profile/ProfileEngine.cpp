@@ -50,7 +50,7 @@ ProfileEngine::create_Profile(QDir directory)
 
     QJsonObject fontObj = obj["font"].toObject();
 
-    profile.font = directory.absoluteFilePath(fontObj["family"].toString());
+    profile.font = fontObj["family"].toString();
 
     profile.font_size = fontObj["size"].toInt();
 

@@ -39,7 +39,7 @@ private:
 
     Profile                         active_profile;
 
-    uint32_t                        line_spacing = 0;
+    float                           line_spacing;
 
     QFont                           numerator_font;
 

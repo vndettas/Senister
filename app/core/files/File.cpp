@@ -92,3 +92,21 @@ File::text_Engine() const
 
 
 }
+
+void
+File::set_Target_Scroll(float target_scroll)
+{
+
+  scroll_target = target_scroll;
+  
+
+}
+
+float
+File::get_Target_Scroll()
+{
+
+  return scroll_target;
+
+
+}

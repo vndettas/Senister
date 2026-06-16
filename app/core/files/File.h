@@ -23,6 +23,10 @@ public:
 
     float                                                get_scroll_velocity();
 
+    float                                                get_Target_Scroll();
+
+    void                                                 set_Target_Scroll(float target_scroll);
+
     void                                                 set_scroll_offset(float offset);
 
     void                                                 set_scroll_velocity(float velocity);
@@ -33,9 +37,11 @@ private:
 
     std::string                         name;
 
-    float                               scroll_offset_y = 0;
+    float                               scroll_offset_y = 0.0f;
 
-    float                               scroll_velocity = 0;
+    float                               scroll_velocity = 0.0f;
+
+    float                               scroll_target = 0.0f;
 
     std::unique_ptr<Cursor>             cursor;
 

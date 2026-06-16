@@ -51,7 +51,7 @@ public:
 
     void                                                                     set_Current_File(std::shared_ptr<File> file);
 
-    const uint32_t                                                           getLineSpacing() const;
+    float                                                                    get_Line_Spacing() const;
 
     TextEngine*                                                              Text_Engine();
 
@@ -60,6 +60,10 @@ public:
     PieceOfTable*                                                            get_Piece_Table();
 
     void                                                                     on_Scroll_Tick();
+
+    std::shared_ptr<File>                                                    get_Current_File();    
+
+    void                                                                     update_Target_Scroll();
 
     void                                                                     scroll_File_Down(float value);
 
@@ -74,6 +78,8 @@ public:
     void                                                                     draw_Lines(QPainter *painter);
 
     void                                                                     setup_Font();
+
+    void                                                                     on_Cursor_Moved();
 
     ~CodeUI(){};
 
@@ -116,11 +122,11 @@ private :
 
     FileBar*                                                    file_bar = nullptr;
 
-    const uint32_t                                              line_spacing = fontMetrics().lineSpacing() + 2;
+    uint32_t                                                    line_spacing = fontMetrics().lineSpacing();
 
     uint32_t                                                    actual_text_height;
 
-    const uint32_t                                              line_height = fontMetrics().height();
+    uint32_t                                                    line_height = fontMetrics().height();
 
     uint32_t                                                    visible_line_count;
 

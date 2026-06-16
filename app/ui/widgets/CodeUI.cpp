@@ -1,4 +1,5 @@
 #include "CodeUI.h"
+#include <QFontInfo>
 #include <cstdint>
 #include <iostream>
 
@@ -25,10 +26,6 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
-  actual_text_height = height() + Constants::CODE_LINES_Y_OFFSET + Constants::CODE_BOTTOM_MARGIN; 
-  visible_line_count = (actual_text_height/ line_height);
-  qDebug() << visible_line_count;
-
   
   profile_engine->set_Active_Profile("default");
   setup_Font();
@@ -55,9 +52,9 @@ CodeUI::paintEvent(QPaintEvent* event)
   float y_offset=Constants::CODE_LINES_Y_OFFSET;
 
   // -- First visible line one which is first in code area --
- first_visible_line=current_file->get_scroll_offset() / line_height;
-  last_line_to_draw = first_visible_line + visible_line_count;
-  if(current_line_index <= first_visible_line){
+ first_visible_line=current_file->get_scroll_offset() / line_spacing;
+ last_line_to_draw = first_visible_line + visible_line_count;
+ if(current_line_index <= first_visible_line){
     current_cursor->set_Current_Line(first_visible_line);
     //current_cursor->move_Down(text_engine->get_Line_Size(current_cursor->get_Cursor_Position().first + 1));
     current_line_index = current_cursor->get_Current_Line_Index();
@@ -72,14 +69,12 @@ CodeUI::paintEvent(QPaintEvent* event)
   }
   float trash = 0;
   float rem = std::modf(first_visible_line, &trash);
-  //qDebug() << rem;
-  //qDebug() << line_height * rem;
   //che eto 
   uint32_t line_counter= first_visible_line;
   // -- First visible line used also in LineNumerator --
   text_engine->setFirstVisibleLine(line_counter);
 
-  y_offset-= line_height * rem;
+  y_offset-= line_spacing * rem;
 
   while (line_counter <= last_line_to_draw) {
 
@@ -108,7 +103,7 @@ CodeUI::paintEvent(QPaintEvent* event)
     }
 
     if (text_line.isValid()) {
-      text_line.draw(&painter, QPoint(Constants::CODE_LINES_X_OFFSET, y_offset));
+      text_line.draw(&painter, QPointF(Constants::CODE_LINES_X_OFFSET, y_offset));
       painter.setPen(Constants::TEXT_COLOR_WHITE_PURE);
     }
     ++line_counter;
@@ -128,6 +123,11 @@ CodeUI::setup_Font()
   code_font = QFont(active_profile.font, active_profile.font_size);
   code_font.setStyleStrategy(QFont::PreferAntialias);
   code_font.setFixedPitch(true);
+  line_spacing = QFontMetrics(code_font).lineSpacing() + 2;
+  QFontInfo info(code_font);
+  qDebug() << "CodeUi font setup";
+  qDebug() << "Requested font:" << code_font.family();
+  qDebug() << "Actual used font:" << info.family(); 
 
 
 }
@@ -137,8 +137,12 @@ void
 CodeUI::resizeEvent(QResizeEvent *event)
 {
 
- visible_line_count = (actual_text_height / line_height);
 
+  line_spacing = fontMetrics().lineSpacing() + 1;
+
+  uint32_t actual_text_height = height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN;
+
+  visible_line_count = (actual_text_height / line_spacing) + 3;
   QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
@@ -157,36 +161,26 @@ CodeUI::wheelEvent(QWheelEvent *event)
 
 }
 
-void
-CodeUI::scroll_File_Up(float value)
-{
-  current_file->set_scroll_velocity(current_file->get_scroll_velocity() - 5);
-  if(!timer->isActive()) timer->start(1000/120);
 
-
-}
-
-void
-CodeUI::scroll_File_Down(float value)
-{
-
-  current_file->set_scroll_velocity(current_file->get_scroll_velocity() + 5);
-  if(!timer->isActive()) timer->start(1000/120);
-
-
-
-}
 
 void
 CodeUI::on_Scroll_Tick()
 {
 
-  if((current_file->get_scroll_offset() + current_file->get_scroll_velocity()) > 0) current_file->set_scroll_offset(current_file->get_scroll_offset() + current_file->get_scroll_velocity());
-  current_file->set_scroll_velocity((current_file->get_scroll_velocity()) * 0.93);
-  if (std::abs(current_file->get_scroll_velocity()) < 0.01f) {
-    timer->stop();
-    current_file->set_scroll_velocity(0);
+  float current_offset = current_file->get_scroll_offset();
+  float target_offset = current_file->get_Target_Scroll();
+    
+  float distance = target_offset - current_offset;
+
+  float step = distance * 0.15f; 
+  current_offset += step;
+
+  if (std::abs(distance) < 0.5f) {
+      current_offset = target_offset;
+      timer->stop();
   }
+
+  current_file->set_scroll_offset(current_offset);
   update();
 
 
@@ -195,17 +189,18 @@ CodeUI::on_Scroll_Tick()
 void CodeUI::draw_Rectangles(QPainter *painter)
 {
 
+    //upper background
     painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
-    
+    // Code area background
     painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, 
                       width() - Constants::CODE_LINES_X_OFFSET, 
                       height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN, 
                       Constants::CODE_BACKGROUND_BRUSH);
                       
     // Space below the file tab
-    painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, 
-                      height() - Constants::CODE_BOTTOM_MARGIN, 
-                      Constants::MENU_BACKGROUND_BRUSH);
+    //painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, 
+    //                  height() - Constants::CODE_BOTTOM_MARGIN, 
+    //                  Constants::MENU_BACKGROUND_BRUSH);
 
     // Space on the bottom under the editor 
     painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
@@ -233,11 +228,8 @@ CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_fon
 
  }
 
-
-
-
-const uint32_t
-CodeUI::getLineSpacing() const
+float
+CodeUI::get_Line_Spacing() const
 {
 
     return line_spacing;
@@ -317,6 +309,47 @@ CodeUI::set_Active_Profile(Profile profile)
 {
 
   active_profile = profile;
+
+
+}
+
+void
+CodeUI::update_Target_Scroll()
+{
+
+  uint32_t cursror_line = current_cursor->get_Cursor_Position().first;
+
+  float cursor_pos_y = cursror_line * line_height;
+
+  float ideal_scroll = cursor_pos_y- (this->height() / 2.0f);
+
+  if (ideal_scroll < 0.0f){
+    ideal_scroll = 0.0f;
+  }
+  current_file->set_Target_Scroll(ideal_scroll);
+  
+}
+
+void
+CodeUI::on_Cursor_Moved()
+{
+
+  update_Target_Scroll(); 
+
+  if (!timer->isActive()){
+      timer->start(1000 / 120);
+  }
+    
+  update();
+
+
+}
+
+std::shared_ptr<File>
+CodeUI::get_Current_File()
+{
+
+  return current_file;
 
 
 }

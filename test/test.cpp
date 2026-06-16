@@ -1,4 +1,4 @@
-fjdkgfdjkghdjhgdeManager.h"
+gfdjkghdjhgdeManager.h"
 #include "../../hsdfgsdjfkhsdfhsdjkfhsdjkfsds/File.h"
 #include "../../ER/Ch"
 #include <QWidget>
@@ -246,4 +246,4 @@ CodeUI::get_Piece_Table()
 
   return text_data_structure;
 
-}include <QPainter
+}include <QPainte
