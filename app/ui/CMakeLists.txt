@@ -1,4 +1,5 @@
 add_executable(senister_ui
+widgets/FooterBar.cpp
 input/Cursor.cpp
 input/SoundEngine.cpp
 input/InputEngine.cpp

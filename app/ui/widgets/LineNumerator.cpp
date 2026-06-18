@@ -68,10 +68,10 @@ LineNumerator::paintEvent(QPaintEvent *event)
       if(numeration_line == selected_line) {
           text_layout.setFont(numerator_highlighter_font);
           painter.setPen(numerator_highlighter_pen);
-          line.draw(&painter, QPointF(10, y));
+          line.draw(&painter, QPointF(9, y));
           painter.setPen(numerator_pen);
       } else {
-          line.draw(&painter, QPointF(19, y));
+          line.draw(&painter, QPointF(20, y));
       }
       
       y += line_spacing;

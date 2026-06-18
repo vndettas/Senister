@@ -29,8 +29,6 @@ public slots:
 
 private:
 
-    void                                                                draw_Lines(QPainter *painter);
-
     void                                                                draw_Files(QPainter *painter);
 
     Profile                                                             active_profile;

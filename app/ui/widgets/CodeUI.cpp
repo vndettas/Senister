@@ -14,6 +14,7 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   profile_engine = _profile_engine;
   timer = new QTimer(this);
   line_numerator = new LineNumerator(this, text_engine);
+  footer_bar = new FooterBar(this);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, line_numerator, &LineNumerator::set_Active_Profile);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, this , &CodeUI::set_Active_Profile);
   input_engine = std::make_unique<InputEngine>(current_cursor,this, _sound_engine);
@@ -21,9 +22,6 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   file_bar = new FileBar(this, file_manager);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, file_bar, &FileBar::set_Active_Profile);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, sound_engine , &SoundEngine::set_Active_Profile);
-  // --Children widgets geometry setup--
-  line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
-  file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET, this->width(), Constants::FILE_BAR_Y_OFFSET + Constants::FILE_BAR_HEIGHT);
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
   
@@ -143,10 +141,10 @@ CodeUI::resizeEvent(QResizeEvent *event)
   uint32_t actual_text_height = height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN;
 
   visible_line_count = (actual_text_height / line_spacing) + 3;
-  QWidget::resizeEvent(event);
   line_numerator->setGeometry(Constants::NUMERATION_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, Constants::NUMERATION_WIDTH, this->height());
+  QWidget::resizeEvent(event);
   file_bar->setGeometry(Constants::FILE_BAR_X_OFFSET, Constants::FILE_BAR_Y_OFFSET-Constants::FILE_BAR_HEIGHT, this->width(), Constants::FILE_BAR_Y_OFFSET);
-
+  footer_bar->setGeometry(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN);
 
 }
 
@@ -197,12 +195,6 @@ void CodeUI::draw_Rectangles(QPainter *painter)
                       height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN, 
                       Constants::CODE_BACKGROUND_BRUSH);
                       
-    // Space below the file tab
-    //painter->fillRect(0, 0, Constants::CODE_LINES_X_OFFSET, 
-    //                  height() - Constants::CODE_BOTTOM_MARGIN, 
-    //                  Constants::MENU_BACKGROUND_BRUSH);
-
-    // Space on the bottom under the editor 
     painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
 
 

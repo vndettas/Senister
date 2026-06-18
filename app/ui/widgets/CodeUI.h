@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../core/text/TextEngine.h"
+#include "FooterBar.h"
 #include "../../core/text/PieceOfTable.h"
 #include "../HELPER/CONSTANTS.h"
 #include "../../core/files/FileManager.h"
@@ -121,6 +122,8 @@ private :
     LineNumerator*                                              line_numerator = nullptr;
 
     FileBar*                                                    file_bar = nullptr;
+    
+    FooterBar*                                                  footer_bar = nullptr;
 
     uint32_t                                                    line_spacing = fontMetrics().lineSpacing();
 
