@@ -171,6 +171,7 @@ InputEngine::switch_To_Normal_Mode()
   
   qDebug() << "normal mode";
   sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Normal);
+  cursor->set_Cursor_Mode(CursorState::Normal_Mode);
   set_Strategy(normal_mode.get());
 
 
@@ -182,6 +183,7 @@ InputEngine::switch_To_Insert_Mode()
 
   qDebug() << "insert mode";
   sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Insert);
+  cursor->set_Cursor_Mode(CursorState::Insert_Mode);
   set_Strategy(insert_mode.get());
 
 

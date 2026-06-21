@@ -22,6 +22,9 @@ CodeUI::CodeUI(FileManager* _file_manager, SoundEngine* _sound_engine, ProfileEn
   file_bar = new FileBar(this, file_manager);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, file_bar, &FileBar::set_Active_Profile);
   QObject::connect(profile_engine, &ProfileEngine::update_Active_Profile, sound_engine , &SoundEngine::set_Active_Profile);
+  refresh_timer = new QTimer(this);
+  connect(refresh_timer, &QTimer::timeout, this, QOverload<>::of(&CodeUI::update));
+  refresh_timer->start(32);
   // --Signals--
   connect(timer, &QTimer::timeout, this, &CodeUI::on_Scroll_Tick);
   
@@ -97,7 +100,7 @@ CodeUI::paintEvent(QPaintEvent* event)
     text_layout.endLayout();
 
     if (line_counter == current_line_index) {
-      draw_Cursor(&painter, &text_layout, &code_font);
+      draw_Cursor(&painter, &text_layout, &code_font, y_offset);
     }
 
     if (text_line.isValid()) {
@@ -200,25 +203,83 @@ void CodeUI::draw_Rectangles(QPainter *painter)
 
 }
 
-void
-CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_font)
+void CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *code_font, float y_offset)
 {
 
   QTextCharFormat selected_char_format;
-  selected_char_format.setFontPointSize(code_font->pointSizeF() + 1);
+  selected_char_format.setFontPointSize(code_font->pointSizeF() + 0.2);
   selected_char_format.setFontWeight(QFont::Bold);
+  
   QTextLayout::FormatRange highlight;
-  //Symbol highlighting
-  highlight.start = current_cursor->get_Current_Symbol_Index(text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
-  highlight.length = 1;
-  selected_char_format.setForeground(QBrush(QColor(235, 219, 178)));
-  highlight.format = selected_char_format;
-  QVector<QTextLayout::FormatRange> formats;
-  formats.append(highlight);
-  text_layout->setFormats(formats);
+    
+  CursorState cursor_state = current_cursor->get_Cursor_Mode();
+  uint32_t col = current_cursor->get_Cursor_Position().second; 
+  
+  switch (cursor_state) {
+    case CursorState::Normal_Mode: 
+      {
+      QString line = text_layout->text();
+      QChar cursor_char = (col < line.length()) ? line.at(col) : QChar('\n');
+            
+      if (cursor_char != ' ' && cursor_char != '\n') {
+        highlight.start = current_cursor->get_Current_Symbol_Index(
+        text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
+        highlight.length = 1;
+        QColor base_text_color = Constants::TEXT_COLOR_WHITE_PURE;
+        QColor cursor_yellow(236, 219, 178);
+
+        float op = current_cursor->get_Cursor_Opacity();
+    
+        int r = base_text_color.red() * (1 - op) + cursor_yellow.red() * op;
+        int g = base_text_color.green() * (1 - op) + cursor_yellow.green() * op;
+        int b = base_text_color.blue() * (1 - op) + cursor_yellow.blue() * op;
+
+        selected_char_format.setForeground(QBrush(QColor(r, g, b)));
+        selected_char_format.clearBackground();               
+
+        highlight.format = selected_char_format;
+        QVector<QTextLayout::FormatRange> formats;
+        formats.append(highlight);
+        text_layout->setFormats(formats);
+                
+        } else {
+        text_layout->setFormats(QVector<QTextLayout::FormatRange>());
+
+        QTextLine text_line = text_layout->lineAt(0);
+        float cursor_x = text_line.cursorToX(col) + Constants::CODE_LINES_X_OFFSET;
+
+        QFontMetrics fm(*code_font);
+        int char_width = fm.horizontalAdvance(' ');
+
+        painter->setPen(Qt::NoPen);
+                
+        QColor dot_color = QColor(236, 219, 178);
+        dot_color.setAlphaF(current_cursor->get_Cursor_Opacity());
+        painter->setBrush(dot_color);
+
+        int dot_size = 3;
+        int dot_x = cursor_x + (char_width / 2) - (dot_size / 2);
+        int vertical_padding = 8; 
+        int dot_y = y_offset + vertical_padding;
+
+        painter->drawEllipse(dot_x, dot_y, dot_size, dot_size);
+                
+        painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
+        }
+            break;
+        }
+        case CursorState::Insert_Mode: 
+        {
+            break;
+        }
+        case CursorState::Visual_Mode: 
+        {
+            break;
+        }
+    }
 
 
- }
+}
 
 float
 CodeUI::get_Line_Spacing() const

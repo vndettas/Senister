@@ -9,7 +9,6 @@
 #include "../input/InputEngine.h"
 #include "LineNumerator.h"
 #include "FileBar.h"
-#include <string>
 #include <QString>
 #include <QPaintEvent>
 #include <QWidget>
@@ -70,7 +69,7 @@ public:
 
     void                                                                     scroll_File_Up(float value);
 
-    void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font);
+    void                                                                     draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *text_font, float y_offset);
 
     void                                                                     paintEvent(QPaintEvent *event) override;
 
@@ -98,6 +97,8 @@ signals:
 private :
 
     FileManager*                                                file_manager;
+
+    QTimer*                                                     refresh_timer;
 
     std::shared_ptr<File>                                       current_file;
 
@@ -138,6 +139,7 @@ private :
     float                                                       last_line_to_draw;
 
 protected:
+
     void                                                                            resizeEvent(QResizeEvent *event) override;
 
     void                                                                            wheelEvent(QWheelEvent *event) override;

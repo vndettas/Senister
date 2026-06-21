@@ -12,6 +12,8 @@ if(CCACHE_PROGRAM)
 endif()
 
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 #building in debug unless specified
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)

@@ -1,11 +1,44 @@
 #include "Cursor.h"
 #include <QDebug>
 
+Cursor::Cursor()
+{
+
+  cursor_fading = new QPropertyAnimation(this, "cursor_opacity");
+  cursor_fading->setDuration(1300);
+  cursor_fading->setKeyValueAt(0.0, 0.0f);
+  cursor_fading->setKeyValueAt(0.5, 1.5f);
+  cursor_fading->setKeyValueAt(1.5, 0.0f);
+  cursor_fading->setEasingCurve(QEasingCurve::InOutQuad);
+  cursor_fading->setLoopCount(-1);
+  cursor_fading->start();
+
+
+}
+
 uint32_t
 Cursor::get_Current_Line_Index()
 {
 
   return current_line_index;
+
+
+}
+
+void
+Cursor::set_Cursor_Mode(CursorState state)
+{
+
+  cursor_state = state;
+
+
+}
+
+CursorState
+Cursor::get_Cursor_Mode()
+{
+
+  return cursor_state;
 
 
 }
@@ -98,13 +131,31 @@ void
 Cursor::move_Down(uint32_t line_size)
 {
 
-    current_line_index += 1;
+  current_line_index += 1;
   if(preferrable_symbol_index > line_size){
     current_symbol_index = line_size - 1;
   } else {
   current_symbol_index = preferrable_symbol_index;
 
 }
+
+
+}
+
+float
+Cursor::get_Cursor_Opacity()
+{
+
+  return cursor_opacity;
+
+
+}
+
+void
+Cursor::set_Cursor_Opacity(float opacity)
+{
+
+  cursor_opacity = opacity;
 
 
 }
