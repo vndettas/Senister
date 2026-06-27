@@ -190,15 +190,14 @@ CodeUI::on_Scroll_Tick()
 void CodeUI::draw_Rectangles(QPainter *painter)
 {
 
-    //upper background
-    painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
-    // Code area background
-    painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, 
-                      width() - Constants::CODE_LINES_X_OFFSET, 
-                      height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN, 
-                      Constants::CODE_BACKGROUND_BRUSH);
-                      
-    painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
+ //upper background
+  painter->fillRect(0, 0, width(), Constants::CODE_LINES_Y_OFFSET, Constants::MENU_BACKGROUND_BRUSH);
+  // Code area background
+  painter->fillRect(Constants::CODE_LINES_X_OFFSET, Constants::CODE_LINES_Y_OFFSET, 
+  width() - Constants::CODE_LINES_X_OFFSET, 
+  height() - Constants::CODE_LINES_Y_OFFSET - Constants::CODE_BOTTOM_MARGIN, 
+  Constants::CODE_BACKGROUND_BRUSH);
+  painter->fillRect(0, height() - Constants::CODE_BOTTOM_MARGIN, width(), Constants::CODE_BOTTOM_MARGIN, Constants::MENU_BACKGROUND_BRUSH);
 
 
 }
@@ -214,69 +213,73 @@ void CodeUI::draw_Cursor(QPainter *painter, QTextLayout *text_layout, QFont *cod
     
   CursorState cursor_state = current_cursor->get_Cursor_Mode();
   uint32_t col = current_cursor->get_Cursor_Position().second; 
-  
+  QTextLine text_line = text_layout->lineAt(0);
+  float cursor_x = text_line.cursorToX(col) + Constants::CODE_LINES_X_OFFSET;
+  float opacity = current_cursor->get_Cursor_Opacity();
+  QColor white_text_color = Constants::TEXT_COLOR_WHITE_PURE;
+  QFontMetrics font_metrics(*code_font);
+
   switch (cursor_state) {
-    case CursorState::Normal_Mode: 
-      {
-      QString line = text_layout->text();
-      QChar cursor_char = (col < line.length()) ? line.at(col) : QChar('\n');
-            
-      if (cursor_char != ' ' && cursor_char != '\n') {
-        highlight.start = current_cursor->get_Current_Symbol_Index(
-        text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
-        highlight.length = 1;
-        QColor base_text_color = Constants::TEXT_COLOR_WHITE_PURE;
-        QColor cursor_yellow(236, 219, 178);
+  case CursorState::Normal_Mode: 
+  {
+  //in normal mode we either highlight the selected character or draw dot on empty places
+  QString line = text_layout->text();
+  QChar cursor_char = (col < line.length()) ? line.at(col) : QChar('\n');
+  if (cursor_char != ' ' && cursor_char != '\n') {
+    highlight.start = current_cursor->get_Current_Symbol_Index(
+    text_engine->get_Line_Size(current_cursor->get_Current_Line_Index()));
+    highlight.length = 1;
+    QColor cursor_yellow(236, 219, 178);
+    // Emulation animation of blinking between yellow and white colors
+    int r = white_text_color.red() * (1 - opacity) + cursor_yellow.red() * opacity;
+    int g = white_text_color.green() * (1 - opacity) + cursor_yellow.green() * opacity;
+    int b = white_text_color.blue() * (1 - opacity) + cursor_yellow.blue() * opacity;
 
-        float op = current_cursor->get_Cursor_Opacity();
-    
-        int r = base_text_color.red() * (1 - op) + cursor_yellow.red() * op;
-        int g = base_text_color.green() * (1 - op) + cursor_yellow.green() * op;
-        int b = base_text_color.blue() * (1 - op) + cursor_yellow.blue() * op;
+    selected_char_format.setForeground(QBrush(QColor(r, g, b)));
+    selected_char_format.clearBackground();               
 
-        selected_char_format.setForeground(QBrush(QColor(r, g, b)));
-        selected_char_format.clearBackground();               
-
-        highlight.format = selected_char_format;
-        QVector<QTextLayout::FormatRange> formats;
-        formats.append(highlight);
-        text_layout->setFormats(formats);
+    highlight.format = selected_char_format;
+    QVector<QTextLayout::FormatRange> formats;
+    formats.append(highlight);
+    text_layout->setFormats(formats);
                 
-        } else {
-        text_layout->setFormats(QVector<QTextLayout::FormatRange>());
-
-        QTextLine text_line = text_layout->lineAt(0);
-        float cursor_x = text_line.cursorToX(col) + Constants::CODE_LINES_X_OFFSET;
-
-        QFontMetrics fm(*code_font);
-        int char_width = fm.horizontalAdvance(' ');
-
-        painter->setPen(Qt::NoPen);
+  } else {
+    text_layout->setFormats(QVector<QTextLayout::FormatRange>());
+    int char_width = font_metrics.horizontalAdvance(' ');
+    painter->setPen(Qt::NoPen);
                 
-        QColor dot_color = QColor(236, 219, 178);
-        dot_color.setAlphaF(current_cursor->get_Cursor_Opacity());
-        painter->setBrush(dot_color);
+    QColor dot_color = QColor(236, 219, 178);
+    dot_color.setAlphaF(current_cursor->get_Cursor_Opacity());
+    painter->setBrush(dot_color);
 
-        int dot_size = 3;
-        int dot_x = cursor_x + (char_width / 2) - (dot_size / 2);
-        int vertical_padding = 8; 
-        int dot_y = y_offset + vertical_padding;
+    int dot_size = 3;
+    int dot_x = cursor_x + (char_width / 2) - (dot_size / 2);
+    int vertical_padding = 8; 
+    int dot_y = y_offset + vertical_padding;
 
-        painter->drawEllipse(dot_x, dot_y, dot_size, dot_size);
-                
-        painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
-        }
-            break;
-        }
-        case CursorState::Insert_Mode: 
-        {
-            break;
-        }
-        case CursorState::Visual_Mode: 
-        {
-            break;
-        }
-    }
+    painter->drawEllipse(dot_x, dot_y, dot_size, dot_size);
+    painter->setPen(Constants::TEXT_COLOR_WHITE_PURE);
+  }
+  break;
+  }
+
+  case CursorState::Insert_Mode: 
+  {
+  //Caret animation
+  uint32_t line_spacing = font_metrics.ascent();
+  white_text_color.setAlphaF(opacity);
+  painter->setBrush(white_text_color);
+  //Shifting y_offset by 2 to make caret appear at a level of text, not higher
+  painter->fillRect(cursor_x, y_offset + 2, 1, line_spacing, white_text_color);
+  break;
+  }
+
+  case CursorState::Visual_Mode: 
+  {
+  break;
+  }
+
+  }
 
 
 }
