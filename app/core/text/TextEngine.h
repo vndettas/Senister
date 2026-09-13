@@ -1,4 +1,5 @@
 #pragma once
+#include <stack>
 #include <vector>
 #include <optional>
 #include "PieceOfTable.h"
@@ -9,6 +10,16 @@
 class Cursor;
 class QString;
 class PieceOfTable;
+
+struct BufferState{
+
+  std::pair<int, int> cursor_state;
+
+  std::vector<Piece> buffer_state;
+
+  BufferState(std::vector<Piece> buffer_state, std::pair<int, int> cursor_state);
+
+};
 
 class TextEngine {
 public:
@@ -23,7 +34,13 @@ public:
 
     void                                                                            save_File();
 
+    void                                                                            undo_Text();
+
+    void                                                                            redo_Text();
+
     void                                                                            set_Data_Structre(PieceOfTable* text_data_structure);
+
+    std::optional<BufferState>                                                      get_Undo_Buffer_Top();
 
     void                                                                            delete_Char_Cursor(std::pair<int, int> cursor_pos);
 
@@ -50,6 +67,10 @@ public:
 private:
 
     PieceOfTable*                                           text_data_structure;
+
+    std::stack<BufferState>                                 undo_stack;
+
+    std::stack<BufferState>                                 redo_stack;
 
     uint32_t                                                first_visible_line = 1;
 

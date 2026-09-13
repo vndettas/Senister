@@ -1,9 +1,3 @@
-//
-// SPDX-License-Identifier: MIT
-// /file  : TextEngine.cpp
-// Last modified: 2025-08-12 17:40
-//
-
 #include "../text/TextEngine.h"
 #include <iostream>
 #include <QDebug>
@@ -29,6 +23,7 @@ TextEngine::get_Line(size_t index)
 
 
     if(line_index + 1 < line_index_offset.size()){
+    
       end = line_index_offset[line_index + 1];
     } else {
       end = text_data_structure->get_Text_Length();
@@ -74,6 +69,7 @@ TextEngine::insert_Char(QString str, std::pair<int, int> cursor_pos)
   size_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
   text_data_structure->insert(offset, str);
   calculate_Indexes();
+  undo_stack.push(BufferState(text_data_structure->get_Piece_Vector(), cursor_pos));
 
 
 }
@@ -141,6 +137,7 @@ TextEngine::delete_Char_Cursor(std::pair<int, int> cursor_pos)
   uint32_t offset = line_index_offset[cursor_pos.first] + cursor_pos.second;
   text_data_structure->erase(offset);
   calculate_Indexes();
+  undo_stack.push(BufferState(*(text_data_structure->get_Piece_Table()), cursor_pos));
 
 
 }
@@ -213,5 +210,44 @@ TextEngine::save_File()
 
   text_data_structure->save_File();
 
+
+}
+
+void
+TextEngine::undo_Text()
+{
+
+  if(!undo_stack.empty()){
+  text_data_structure->recover_State(undo_stack.top());
+  redo_stack.push(undo_stack.top());
+  undo_stack.pop();
+  calculate_Indexes();
+    }
+
+
+}
+
+void
+TextEngine::redo_Text()
+{
+  if(!redo_stack.empty()){
+  undo_stack.push(redo_stack.top());
+  text_data_structure->recover_State(redo_stack.top());
+  redo_stack.pop();
+  }
+
+}
+
+BufferState::BufferState(std::vector<Piece> _buffer_state, std::pair<int, int> _cursor_state) : buffer_state(_buffer_state), cursor_state(_cursor_state) {}
+
+std::optional<BufferState>
+TextEngine::get_Undo_Buffer_Top()
+{
+  
+  if (!undo_stack.empty()) {
+    return undo_stack.top();
+  } else {
+    return std::nullopt;
+  }
 
 }

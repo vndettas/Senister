@@ -27,6 +27,10 @@ public:
     void                                                                 switch_To_Normal_Mode();
 
     void                                                                 insert_Char(QString character);
+  
+    void                                                                 undo_Text();
+
+    void                                                                 redo_Text();
 
     void                                                                 play_Sound(SoundAction action);
 
@@ -57,7 +61,7 @@ public:
 private:
 
     InputStrategy*                                           current_strategy;
-
+    
     std::unique_ptr<NormalMode>                              normal_mode;
 
     SoundEngine*                                             sound_engine;

@@ -30,6 +30,8 @@ public:
     void                                                                                set_Current_Symbol_Index(uint32_t _current_symbol_index);
     
     float                                                                               get_Cursor_Opacity();
+    
+    void                                                                                set_Cursor(std::pair<int, int> cursor_state);
 
     void                                                                                set_Cursor_Opacity(float opacity);
     

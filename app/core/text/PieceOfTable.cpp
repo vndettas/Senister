@@ -97,26 +97,18 @@ PieceOfTable::insert(size_t offset, QString str)
 
     // character inserted inside piece
     // first piece is splitted and than new piece inserted between those two
-  } else {
-
-  //end of first piece
-  uint32_t right_offset = piece->offset + position_in_piece; 
-  //length of right piece
-  //old length  - offset in piece - 1
-  uint32_t right_length = piece->length - position_in_piece;
-  buffer buff = piece->buffer_type;
+    } else {
+    // calculate right piece
+    uint32_t right_offset = piece->offset + position_in_piece; 
+    uint32_t right_length = piece->length - position_in_piece;
+    buffer buff = piece->buffer_type;
     
+    piece->set_Length(position_in_piece);
 
-  //update left piece length
-  piece->set_Length(position_in_piece);
-
-  auto right_iterator = piece_table.begin() + itr + 1;
-  auto left_iterator = piece_table.begin() + itr;
-
-  piece_table.insert(right_iterator, Piece(right_offset, right_length, buff)); 
-  piece_table.insert(left_iterator, Piece(buffer_offset, str.length(), buffer::add_buffer));
+    piece_table.insert(piece_table.begin() + itr + 1, Piece(right_offset, right_length, buff)); 
     
-  }
+    piece_table.insert(piece_table.begin() + itr + 1, Piece(buffer_offset, str.length(), buffer::add_buffer));
+    }
   
 
 }
@@ -369,4 +361,18 @@ if(offset >= piece_table_global_offset && offset < piece_table_global_offset + p
 
 }
 
+void
+PieceOfTable::set_Piece_Table(std::vector<Piece> _piece_table)
+{
+
+  piece_table = _piece_table;
+  
+}
+
+void
+PieceOfTable::recover_State(BufferState state){
+
+  piece_table = state.buffer_state;
+
+}
 

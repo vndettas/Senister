@@ -13,6 +13,7 @@
 #include <qt6/QtCore/QString>
 
 class Piece;
+class BufferState;
 class QString;
 
    class PieceOfTable {
@@ -25,6 +26,10 @@ public:
     PieceOfTable                                                        (const std::filesystem::path);
     
     void                                                                save_File();
+
+    void                                                                set_Piece_Table(std::vector<Piece>);
+
+    void                                                                recover_State(BufferState state);
 
     void                                                                insert(size_t offset, QString str);
 
@@ -56,7 +61,7 @@ private:
 
     const QString                                        read_buffer;
 
-    std::filesystem::path                                  path;
+    std::filesystem::path                                path;
 
     QString                                              add_buffer;
 

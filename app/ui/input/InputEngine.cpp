@@ -181,7 +181,6 @@ void
 InputEngine::switch_To_Insert_Mode()
 {
 
-  qDebug() << "insert mode";
   sound_engine->play_Interactive_Sound(SoundAction::Switch_To_Insert);
   cursor->set_Cursor_Mode(CursorState::Insert_Mode);
   set_Strategy(insert_mode.get());
@@ -212,4 +211,26 @@ InputEngine::play_Sound(SoundAction action)
 {
 
   sound_engine->play_Interactive_Sound(action);
+}
+
+void
+InputEngine::undo_Text()
+{
+
+  std::optional<BufferState> state = code_ui->Text_Engine()->get_Undo_Buffer_Top();
+  code_ui->Text_Engine()->undo_Text();
+  if(state.has_value()){
+  std::pair<int, int> cursor_state = state.value().cursor_state; 
+  cursor->set_Cursor(cursor_state);
+  }
+
+}
+
+void
+InputEngine::redo_Text()
+{
+
+  code_ui->Text_Engine()->redo_Text();
+
+
 }

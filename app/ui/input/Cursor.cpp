@@ -159,3 +159,11 @@ Cursor::set_Cursor_Opacity(float opacity)
 
 
 }
+
+void
+Cursor::set_Cursor(std::pair<int, int> cursor_state)
+{
+
+  this->set_Current_Line(cursor_state.first);
+  this->set_Current_Symbol_Index(cursor_state.second);
+}
