@@ -11,7 +11,7 @@ PieceOfTable::PieceOfTable(const std::filesystem::path filepath) : read_buffer{Q
 
   piece_table.reserve(20);
   path = filepath;
-  size_t size = read_buffer.size() - 1;
+  size_t size = read_buffer.size();
   piece_table.emplace_back(Piece{0, size, buffer::read_only_buffer});
 
 
